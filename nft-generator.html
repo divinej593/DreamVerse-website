@@ -1,0 +1,274 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DREAMVERSE NFT Studio</title>
+    <link rel="stylesheet" href="nft-generator.css" />
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header class="studio-header">
+      <a href="index.html" class="logo">
+        <img src="dreamverse-logo.png" alt="DREAMVERSE" />
+        <span>DREAMVERSE NFT STUDIO</span>
+      </a>
+
+      <a href="index.html">← Back</a>
+    </header>
+    <!-- TOP AD -->
+    <div class="ad-slot">
+      <!-- AdSense -->
+    </div>
+    <main>
+      <!-- TITLE -->
+
+      <section class="studio-title">
+        <p>NFT CREATOR</p>
+
+        <h1>Create Your Collection</h1>
+
+        <p>
+          Build unique NFTs with layers, traits, rarity, metadata and automatic
+          generation.
+        </p>
+      </section>
+
+      <!-- GENERATOR -->
+
+      <section class="generator">
+        <!-- STEPS -->
+
+        <div class="steps">
+          <span class="active">1. Setup</span>
+          <span>2. Layers</span>
+          <span>3. Traits</span>
+          <span>4. Generate</span>
+          <span>5. Export</span>
+        </div>
+
+        <!-- STEP 1: SETUP -->
+
+        <div class="panel" id="setup">
+          <h2>Collection Setup</h2>
+
+          <label for="collection-name"> Collection Name </label>
+
+          <input id="collection-name" type="text" placeholder="DREAMVERSE" />
+
+          <label for="collection-description"> Description </label>
+
+          <textarea
+            id="collection-description"
+            placeholder="Describe your NFT collection"
+          ></textarea>
+
+          <label for="nft-count"> Number of NFTs </label>
+
+          <input id="nft-count" type="number" min="1" max="4000" value="10" />
+
+          <small>Maximum 4,000 NFTs</small>
+
+          <label for="external-url"> Collection Website </label>
+
+          <input
+            id="external-url"
+            type="url"
+            placeholder="https://yourwebsite.com"
+          />
+
+          <label for="image-base-uri"> Image Base URI </label>
+
+          <input
+            id="image-base-uri"
+            type="text"
+            placeholder="ipfs://YOUR_CID/"
+          />
+
+          <small>
+            You can add your IPFS URI after uploading your collection.
+          </small>
+
+          <button type="button" id="continue-layers">Continue →</button>
+        </div>
+
+        <!-- STEP 2: LAYERS -->
+
+        <div class="panel hidden" id="layers">
+          <h2>Layers</h2>
+
+          <p>Create the image categories that will build your NFTs.</p>
+
+          <button type="button" id="add-layer">+ Add Layer</button>
+
+          <div id="layer-list" class="layer-list"></div>
+
+          <div class="button-row">
+            <button type="button" id="back-setup">← Back</button>
+
+            <button type="button" id="continue-traits">Continue →</button>
+          </div>
+        </div>
+
+        <!-- STEP 3: TRAITS & RARITY -->
+
+        <div class="panel hidden" id="traits">
+          <h2>Traits & Rarity</h2>
+
+          <p>
+            Upload traits for each layer and control how often each trait
+            appears.
+          </p>
+
+          <div id="trait-editor" class="trait-editor"></div>
+
+          <div class="rarity-settings">
+            <h3>Rarity Settings</h3>
+
+            <label for="rarity-mode"> Rarity Method </label>
+
+            <select id="rarity-mode">
+              <option value="weights">Trait Weights</option>
+
+              <option value="percentages">Percentages</option>
+
+              <option value="random">Fully Random</option>
+            </select>
+
+            <label for="rarity-names"> Rarity Labels </label>
+
+            <input
+              id="rarity-names"
+              type="text"
+              value="Common,Uncommon,Rare,Epic,Legendary"
+              placeholder="Common,Uncommon,Rare,Epic,Legendary"
+            />
+          </div>
+
+          <div class="button-row">
+            <button type="button" id="back-layers">← Back</button>
+
+            <button type="button" id="continue-generate">Continue →</button>
+          </div>
+        </div>
+
+        <!-- STEP 4: GENERATE -->
+
+        <div class="panel hidden" id="generate">
+          <h2>Generate Collection</h2>
+
+          <div class="summary">
+            <p>
+              Collection:
+              <strong id="summary-name">—</strong>
+            </p>
+
+            <p>
+              NFTs:
+              <strong id="summary-count">0</strong>
+            </p>
+
+            <p>
+              Layers:
+              <strong id="summary-layers">0</strong>
+            </p>
+
+            <p>
+              Traits:
+              <strong id="summary-traits">0</strong>
+            </p>
+          </div>
+
+          <div class="generation-options">
+            <h3>Generation Options</h3>
+
+            <label>
+              <input type="checkbox" id="prevent-duplicates" checked />
+              Prevent duplicate NFTs
+            </label>
+
+            <label>
+              <input type="checkbox" id="include-rarity" checked />
+              Include rarity in metadata
+            </label>
+
+            <label>
+              <input type="checkbox" id="include-attributes" checked />
+              Include OpenSea attributes
+            </label>
+          </div>
+
+          <div class="progress">
+            <div id="progress-bar" class="progress-bar"></div>
+          </div>
+
+          <p id="progress-text">Ready</p>
+
+          <div class="button-row">
+            <button type="button" id="back-traits">← Back</button>
+
+            <button type="button" id="generate-button">Generate NFTs</button>
+          </div>
+        </div>
+
+        <!-- STEP 5: PREVIEW & EXPORT -->
+
+        <div class="panel hidden" id="export">
+          <h2>Collection Ready</h2>
+
+          <p id="export-text">Your collection has been generated.</p>
+
+          <!-- PREVIEW -->
+
+          <div class="preview-section">
+            <h3>Preview</h3>
+
+            <div id="nft-preview" class="nft-preview"></div>
+
+            <div id="nft-info" class="nft-info"></div>
+          </div>
+
+          <!-- EXPORT OPTIONS -->
+
+          <div class="export-options">
+            <h3>Export</h3>
+
+            <button type="button" id="download-zip">
+              Download Complete ZIP
+            </button>
+
+            <button type="button" id="download-images">Download Images</button>
+
+            <button type="button" id="download-metadata">
+              Download Metadata
+            </button>
+
+            <button type="button" id="download-collection-metadata">
+              Download Collection Metadata
+            </button>
+          </div>
+
+          <button type="button" id="new-collection">
+            Create New Collection
+          </button>
+        </div>
+      </section>
+
+      <!-- MIDDLE AD -->
+
+      <div class="ad-slot">
+        <!-- AdSense -->
+      </div>
+    </main>
+    <!--MDN Reference
+https://developer.mozilla.org/docs/Web/HTML/Reference/Elements/script FOOTER -->
+    <footer>
+      <p>DREAMVERSE — Where Dreams Become Reality.</p>
+
+      <a href="index.html"> Back to DREAMVERSE </a>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+    <script src="nft-generator.js"></script>
+  </body>
+</html>
