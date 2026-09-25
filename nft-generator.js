@@ -959,3 +959,284 @@ function buildMetadata(tokenNumber, selections) {
    GENERATE ONE NFT
    ============================================================ */
 
+function selectTraitsForNFT(rarityMode) {
+  return state.layers.map((layer) => {
+    const trait = chooseTrait(layer, rarityMode);
+
+    return {
+      layerId: layer.id,
+
+      layer,
+
+      traitId: trait.id,
+
+      trait,
+    };
+  });
+}
+
+async function generateOneNFT(
+  tokenNumber,
+  usedCombinations,
+  preventDuplicates,
+  rarityMode,
+) {
+  const maximumAttempts = 2000;
+
+  let selections = null;
+
+  let key = "";
+
+  for (let attempt = 0; attempt < maximumAttempts; attempt += 1) {
+    selections = selectTraitsForNFT(rarityMode);
+
+    key = createCombinationKey(selections);
+
+    if (!preventDuplicates || !usedCombinations.has(key)) {
+      break;
+    }
+
+    if (attempt === maximumAttempts - 1) {
+      throw new Error(
+        "Unable to find another unique NFT combination.\n\n" +
+          "Try adding more traits or changing the rarity settings.",
+      );
+    }
+  }
+
+  if (preventDuplicates) {
+    usedCombinations.add(key);
+  }
+
+  const imageBlob = await composeNFT(selections);
+
+  const metadata = buildMetadata(tokenNumber, selections);
+
+  return {
+    tokenNumber,
+    imageBlob,
+    metadata,
+    combinationKey: key,
+  };
+}
+
+/* ============================================================
+   PROGRESS
+   ============================================================ */
+
+function updateProgress(current, total, message) {
+  const percentage = total > 0 ? Math.round((current / total) * 100) : 0;
+
+  const bar = $("progress-bar");
+
+  if (bar) {
+    bar.style.width = `${percentage}%`;
+  }
+
+  setText("progress-text", message || `${current} / ${total} NFTs generated`);
+}
+
+/* ============================================================
+   GENERATE COLLECTION
+   ============================================================ */
+
+async function generateCollection() {
+  if (state.isGenerating) {
+    return;
+  }
+
+  try {
+    readCollectionSetup();
+
+    validateLayers();
+
+    updateSummary();
+
+    const count = state.collection.count;
+
+    const preventDuplicates = $("prevent-duplicates")?.checked !== false;
+
+    const rarityMode = $("rarity-mode")?.value || "weights";
+
+    state.isGenerating = true;
+
+    state.generated = [];
+
+    const usedCombinations = new Set();
+
+    updateProgress(0, count, "Preparing generation...");
+
+    await new Promise((resolve) => setTimeout(resolve, 50));
+
+    for (let number = 1; number <= count; number += 1) {
+      const nft = await generateOneNFT(
+        number,
+        usedCombinations,
+        preventDuplicates,
+        rarityMode,
+      );
+
+      state.generated.push(nft);
+
+      updateProgress(number, count, `Generating NFT ${number} of ${count}...`);
+
+      /*
+       * Give the browser time
+       * to remain responsive.
+       */
+      if (number % 3 === 0) {
+        await new Promise((resolve) => setTimeout(resolve, 0));
+      }
+    }
+
+    updateProgress(count, count, `Generation complete — ${count} NFTs ready.`);
+
+    renderPreview();
+
+    showPanel("export");
+  } catch (error) {
+    showError(error.message || "Generation failed.");
+  } finally {
+    state.isGenerating = false;
+  }
+}
+
+/* ============================================================
+   PREVIEW
+   ============================================================ */
+
+function renderPreview() {
+  const preview = $("nft-preview");
+
+  const info = $("nft-info");
+
+  if (!preview) {
+    return;
+  }
+
+  preview.innerHTML = "";
+
+  if (info) {
+    info.innerHTML = "";
+  }
+
+  if (!state.generated.length) {
+    return;
+  }
+
+  const nft = state.generated[0];
+
+  const url = URL.createObjectURL(nft.imageBlob);
+
+  const image = document.createElement("img");
+
+  image.src = url;
+
+  image.alt = nft.metadata.name;
+
+  image.onload = () => {
+    setTimeout(() => {
+      URL.revokeObjectURL(url);
+    }, 1000);
+  };
+
+  preview.appendChild(image);
+
+  if (info) {
+    const title = document.createElement("strong");
+
+    title.textContent = nft.metadata.name;
+
+    info.appendChild(title);
+
+    if (nft.metadata.rarity) {
+      const rarity = document.createElement("p");
+
+      rarity.textContent = `Rarity: ${nft.metadata.rarity}`;
+
+      info.appendChild(rarity);
+    }
+  }
+
+  setText(
+    "export-text",
+    `${state.generated.length} NFTs have been generated successfully.`,
+  );
+}
+
+/* ============================================================
+   JSZIP
+   ============================================================ */
+
+function ensureJSZip() {
+  if (typeof JSZip === "undefined") {
+    throw new Error(
+      "ZIP support is unavailable.\n\n" +
+        "Make sure JSZip is loaded before nft-generator.js in your HTML.",
+    );
+  }
+}
+
+function metadataJSON(metadata) {
+  return JSON.stringify(metadata, null, 2);
+}
+
+/* ============================================================
+   IMAGES ZIP
+   ============================================================ */
+
+async function createImagesZip() {
+  ensureJSZip();
+
+  if (!state.generated.length) {
+    throw new Error("There are no generated NFTs to download.");
+  }
+
+  const zip = new JSZip();
+
+  const folder = zip.folder("images");
+
+  state.generated.forEach((nft) => {
+    folder.file(`${nft.tokenNumber}.png`, nft.imageBlob);
+  });
+
+  return zip.generateAsync({
+    type: "blob",
+    compression: "STORE",
+  });
+}
+
+/* ============================================================
+   METADATA ZIP
+   ============================================================ */
+
+async function createMetadataZip() {
+  ensureJSZip();
+
+  if (!state.generated.length) {
+    throw new Error("There is no metadata to download.");
+  }
+
+  const zip = new JSZip();
+
+  const folder = zip.folder("metadata");
+
+  state.generated.forEach((nft) => {
+    folder.file(`${nft.tokenNumber}.json`, metadataJSON(nft.metadata));
+  });
+
+  return zip.generateAsync({
+    type: "blob",
+
+    compression: "DEFLATE",
+
+    compressionOptions: {
+      level: 6,
+    },
+  });
+}
+
+/* ============================================================
+   COLLECTION METADATA
+   ============================================================ */
+
