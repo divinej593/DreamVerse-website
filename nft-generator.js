@@ -1239,4 +1239,304 @@ async function createMetadataZip() {
 /* ============================================================
    COLLECTION METADATA
    ============================================================ */
+function buildCollectionMetadata() {
+  const metadata = {
+    name: state.collection.name,
+
+    description: state.collection.description,
+  };
+
+  if (state.collection.website) {
+    metadata.external_link = state.collection.website;
+  }
+
+  return metadata;
+}
+
+function downloadCollectionMetadata() {
+  try {
+    if (!state.generated.length) {
+      throw new Error("Generate your collection first.");
+    }
+
+    const json = JSON.stringify(buildCollectionMetadata(), null, 2);
+
+    const blob = new Blob([json], {
+      type: "application/json",
+    });
+
+    downloadBlob(blob, "collection.json");
+  } catch (error) {
+    showError(error.message || "Unable to download collection metadata.");
+  }
+}
+
+/* ============================================================
+   COMPLETE ZIP
+   ============================================================ */
+
+async function createCompleteZip() {
+  ensureJSZip();
+
+  if (!state.generated.length) {
+    throw new Error("Generate your collection first.");
+  }
+
+  const zip = new JSZip();
+
+  const images = zip.folder("images");
+
+  const metadata = zip.folder("metadata");
+
+  state.generated.forEach((nft) => {
+    images.file(`${nft.tokenNumber}.png`, nft.imageBlob);
+
+    metadata.file(`${nft.tokenNumber}.json`, metadataJSON(nft.metadata));
+  });
+
+  metadata.file(
+    "collection.json",
+    JSON.stringify(buildCollectionMetadata(), null, 2),
+  );
+
+  zip.file(
+    "README.txt",
+    [
+      "DREAMVERSE NFT STUDIO",
+      "",
+      `Collection: ${state.collection.name}`,
+      `NFTs: ${state.generated.length}`,
+      "",
+      "Folders:",
+      "- images/",
+      "- metadata/",
+      "",
+      "Important:",
+      "If no IPFS Base URI was entered, replace the IPFS_URI_REQUIRED placeholder in the metadata after uploading the images to IPFS.",
+    ].join("\n"),
+  );
+
+  return zip.generateAsync({
+    type: "blob",
+
+    compression: "DEFLATE",
+
+    compressionOptions: {
+      level: 6,
+    },
+  });
+}
+
+/* ============================================================
+   DOWNLOAD BUTTONS
+   ============================================================ */
+
+async function downloadImages() {
+  try {
+    setText("progress-text", "Preparing images ZIP...");
+
+    const blob = await createImagesZip();
+
+    downloadBlob(blob, `${slugify(state.collection.name)}-images.zip`);
+
+    setText("progress-text", "Images ZIP downloaded.");
+  } catch (error) {
+    showError(error.message || "Unable to download images.");
+  }
+}
+
+async function downloadMetadata() {
+  try {
+    setText("progress-text", "Preparing metadata ZIP...");
+
+    const blob = await createMetadataZip();
+
+    downloadBlob(blob, `${slugify(state.collection.name)}-metadata.zip`);
+
+    setText("progress-text", "Metadata ZIP downloaded.");
+  } catch (error) {
+    showError(error.message || "Unable to download metadata.");
+  }
+}
+
+async function downloadCompleteZip() {
+  try {
+    setText("progress-text", "Preparing complete collection ZIP...");
+
+    const blob = await createCompleteZip();
+
+    downloadBlob(blob, `${slugify(state.collection.name)}-complete.zip`);
+
+    setText("progress-text", "Complete ZIP downloaded.");
+  } catch (error) {
+    showError(error.message || "Unable to download complete ZIP.");
+  }
+}
+
+/* ============================================================
+   RESET
+   ============================================================ */
+
+function resetGenerator() {
+  if (
+    !window.confirm(
+      "Start a new collection?\n\n" +
+        "Your current generated collection will be cleared.",
+    )
+  ) {
+    return;
+  }
+
+  state.collection = {
+    name: "DREAMVERSE",
+    description: "",
+    count: 10,
+    website: "",
+    imageBaseURI: "",
+  };
+
+  state.layers = [];
+
+  state.generated = [];
+
+  state.isGenerating = false;
+
+  state.imageDimensions = {
+    width: null,
+    height: null,
+  };
+
+  if ($("collection-name")) {
+    $("collection-name").value = "DREAMVERSE";
+  }
+
+  if ($("collection-description")) {
+    $("collection-description").value = "";
+  }
+
+  if ($("nft-count")) {
+    $("nft-count").value = "10";
+  }
+
+  if ($("external-url")) {
+    $("external-url").value = "";
+  }
+
+  if ($("image-base-uri")) {
+    $("image-base-uri").value = "";
+  }
+
+  if ($("rarity-mode")) {
+    $("rarity-mode").value = "weights";
+  }
+
+  if ($("rarity-names")) {
+    $("rarity-names").value = "Common,Uncommon,Rare,Epic,Legendary";
+  }
+
+  if ($("prevent-duplicates")) {
+    $("prevent-duplicates").checked = true;
+  }
+
+  if ($("include-rarity")) {
+    $("include-rarity").checked = true;
+  }
+
+  if ($("include-attributes")) {
+    $("include-attributes").checked = true;
+  }
+
+  if ($("progress-bar")) {
+    $("progress-bar").style.width = "0%";
+  }
+
+  setText("progress-text", "Ready");
+
+  renderLayers();
+
+  showPanel("setup");
+}
+
+/* ============================================================
+   INITIALIZATION
+   ============================================================ */
+
+function initialize() {
+  /* Setup */
+
+  $("continue-layers")?.addEventListener("click", continueToLayers);
+
+  /* Layers */
+
+  $("add-layer")?.addEventListener("click", addLayer);
+
+  $("back-setup")?.addEventListener("click", () => {
+    showPanel("setup");
+  });
+
+  $("continue-traits")?.addEventListener("click", () => {
+    try {
+      validateLayers();
+
+      showPanel("traits");
+    } catch (error) {
+      showError(error.message || "Layer validation failed.");
+    }
+  });
+
+  /* Traits */
+
+  $("back-layers")?.addEventListener("click", () => {
+    showPanel("layers");
+  });
+
+  $("continue-generate")?.addEventListener("click", () => {
+    try {
+      validateLayers();
+
+      updateSummary();
+
+      showPanel("generate");
+    } catch (error) {
+      showError(error.message || "Trait validation failed.");
+    }
+  });
+
+  /* Generation */
+
+  $("back-traits")?.addEventListener("click", () => {
+    showPanel("traits");
+  });
+
+  $("generate-button")?.addEventListener("click", generateCollection);
+
+  /* Export */
+
+  $("download-zip")?.addEventListener("click", downloadCompleteZip);
+
+  $("download-images")?.addEventListener("click", downloadImages);
+
+  $("download-metadata")?.addEventListener("click", downloadMetadata);
+
+  $("download-collection-metadata")?.addEventListener(
+    "click",
+    downloadCollectionMetadata,
+  );
+
+  $("new-collection")?.addEventListener("click", resetGenerator);
+
+  renderLayers();
+
+  showPanel("setup");
+}
+
+/* ============================================================
+   START
+   ============================================================ */
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initialize, { once: true });
+} else {
+  initialize();
+}
 
