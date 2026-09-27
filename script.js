@@ -1,135 +1,73 @@
 document.addEventListener("DOMContentLoaded", () => {
-  "use strict";
-
-  /* =========================================
+  /* =========================================================
      DREAMVERSE — MAIN JAVASCRIPT
-  ========================================= */
+     ========================================================= */
 
-  /* =========================================
-     MOBILE NAVIGATION
-  ========================================= */
+  /* =========================================================
+     MOBILE HAMBURGER MENU
+     ========================================================= */
 
   const hamburger = document.querySelector(".hamburger");
-  const mainNavigation = document.querySelector(".main-navigation");
-  const navActions = document.querySelector(".nav-actions");
-  const navigation = document.querySelector("nav");
+  const navigation = document.querySelector(".main-navigation");
 
-  if (hamburger && mainNavigation && navActions && navigation) {
-    const mobileBreakpoint = 900;
+  if (hamburger && navigation) {
+    hamburger.addEventListener("click", () => {
+      const isOpen = navigation.classList.toggle("active");
 
-    const setMenuState = (isOpen = false) => {
-      hamburger.classList.toggle("is-open", isOpen);
-      mainNavigation.classList.toggle("is-open", isOpen);
-      navActions.classList.toggle("is-open", isOpen);
-      navigation.classList.toggle("menu-open", isOpen);
+      hamburger.classList.toggle("active", isOpen);
 
       hamburger.setAttribute("aria-expanded", String(isOpen));
-      hamburger.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
-    };
 
-    hamburger.setAttribute("aria-expanded", "false");
-
-    /* Open / close menu */
-    hamburger.addEventListener("click", () => {
-      const isOpen = hamburger.classList.contains("is-open");
-      setMenuState(!isOpen);
+      hamburger.setAttribute(
+        "aria-label",
+        isOpen ? "Close menu" : "Open menu"
+      );
     });
 
-    /* Close menu when navigation link is clicked */
-    const navigationLinks = mainNavigation.querySelectorAll("a");
-
-    navigationLinks.forEach((link) => {
+    /* Close menu when a navigation link is clicked */
+    navigation.querySelectorAll("a").forEach((link) => {
       link.addEventListener("click", () => {
-        setMenuState(false);
+        navigation.classList.remove("active");
+        hamburger.classList.remove("active");
+
+        hamburger.setAttribute("aria-expanded", "false");
+        hamburger.setAttribute("aria-label", "Open menu");
       });
     });
 
-    /* Close menu when action button is clicked */
-    const actionLinks = navActions.querySelectorAll("a");
-
-    actionLinks.forEach((link) => {
-      link.addEventListener("click", () => {
-        setMenuState(false);
-      });
-    });
-
-    /* Close menu when clicking outside the navigation */
+    /* Close menu when clicking outside */
     document.addEventListener("click", (event) => {
       if (
-        hamburger.classList.contains("is-open") &&
-        !navigation.contains(event.target)
+        navigation.classList.contains("active") &&
+        !navigation.contains(event.target) &&
+        !hamburger.contains(event.target)
       ) {
-        setMenuState(false);
+        navigation.classList.remove("active");
+        hamburger.classList.remove("active");
+
+        hamburger.setAttribute("aria-expanded", "false");
+        hamburger.setAttribute("aria-label", "Open menu");
       }
     });
 
-    /* Close menu with Escape */
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") {
-        setMenuState(false);
-        hamburger.focus();
-      }
-    });
-
-    /* Reset mobile menu when switching to desktop */
+    /* Reset menu when returning to desktop */
     window.addEventListener("resize", () => {
-      if (window.innerWidth >= mobileBreakpoint) {
-        setMenuState(false);
+      if (window.innerWidth > 850) {
+        navigation.classList.remove("active");
+        hamburger.classList.remove("active");
+
+        hamburger.setAttribute("aria-expanded", "false");
+        hamburger.setAttribute("aria-label", "Open menu");
       }
     });
   }
 
-  /* =========================================
-     SECRET COMMUNITY MESSAGE
-  ========================================= */
 
-  const secretTrigger = document.querySelector(".secret-trigger");
-  const secretMessage = document.querySelector(".secret-message");
+  /* =========================================================
+     SMOOTH SCROLLING
+     ========================================================= */
 
-  if (secretTrigger && secretMessage) {
-    secretTrigger.setAttribute("aria-expanded", "false");
-
-    const toggleSecretMessage = () => {
-      const isHidden = secretMessage.hidden;
-
-      secretMessage.hidden = !isHidden;
-      secretTrigger.setAttribute("aria-expanded", String(isHidden));
-    };
-
-    secretTrigger.addEventListener("click", toggleSecretMessage);
-
-    secretTrigger.addEventListener("keydown", (event) => {
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        toggleSecretMessage();
-      }
-    });
-  }
-
-  /* =========================================
-     CLOSE SECRET MESSAGE WHEN CLICKING OUTSIDE
-  ========================================= */
-
-  if (secretTrigger && secretMessage) {
-    document.addEventListener("click", (event) => {
-      if (
-        !secretMessage.hidden &&
-        !secretTrigger.contains(event.target) &&
-        !secretMessage.contains(event.target)
-      ) {
-        secretMessage.hidden = true;
-        secretTrigger.setAttribute("aria-expanded", "false");
-      }
-    });
-  }
-
-  /* =========================================
-     INTERNAL ANCHOR LINKS
-  ========================================= */
-
-  const anchorLinks = document.querySelectorAll('a[href^="#"]');
-
-  anchorLinks.forEach((link) => {
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
     link.addEventListener("click", (event) => {
       const targetId = link.getAttribute("href");
 
@@ -137,51 +75,157 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      const targetElement = document.querySelector(targetId);
+      const target = document.querySelector(targetId);
 
-      if (!targetElement) {
-        return;
+      if (target) {
+        event.preventDefault();
+
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+        /* Update URL without jumping */
+        if (history.pushState) {
+          history.pushState(null, "", targetId);
+        }
       }
-
-      event.preventDefault();
-
-      targetElement.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-
-      /* Update browser URL without jumping */
-      history.replaceState(null, "", targetId);
     });
   });
 
-  /* =========================================
-     ACCESSIBILITY — KEYBOARD FOCUS
-  ========================================= */
 
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Tab") {
-      document.body.classList.add("keyboard-navigation");
-    }
-  });
+  /* =========================================================
+     FAQ ACCORDION
+     Works automatically if your FAQ uses <details>
+     ========================================================= */
 
-  document.addEventListener("mousedown", () => {
-    document.body.classList.remove("keyboard-navigation");
-  });
+  const faqItems = document.querySelectorAll(".faq-item");
 
-  /* =========================================
+  if (faqItems.length > 0) {
+    faqItems.forEach((item) => {
+      const question = item.querySelector(".faq-question");
+      const answer = item.querySelector(".faq-answer");
+
+      if (!question || !answer) return;
+
+      question.addEventListener("click", () => {
+        const isOpen = item.classList.contains("active");
+
+        /* Close all other FAQ items */
+        faqItems.forEach((otherItem) => {
+          otherItem.classList.remove("active");
+
+          const otherAnswer = otherItem.querySelector(".faq-answer");
+
+          if (otherAnswer) {
+            otherAnswer.style.maxHeight = null;
+          }
+        });
+
+        /* Open selected item */
+        if (!isOpen) {
+          item.classList.add("active");
+          answer.style.maxHeight = answer.scrollHeight + "px";
+        }
+      });
+    });
+  }
+
+
+  /* =========================================================
      EXTERNAL LINKS
-  ========================================= */
+     ========================================================= */
 
-  const externalLinks = document.querySelectorAll('a[target="_blank"]');
-
-  externalLinks.forEach((link) => {
+  document.querySelectorAll('a[target="_blank"]').forEach((link) => {
     link.setAttribute("rel", "noopener noreferrer");
   });
 
-  /* =========================================
-     PAGE LOAD
-  ========================================= */
 
-  document.body.classList.add("js-loaded");
+  /* =========================================================
+     EASTER EGG / SECRET TRIGGER
+     ========================================================= */
+
+  const secretTrigger = document.querySelector(".secret-trigger");
+  const secretMessage = document.querySelector(".secret-message");
+
+  if (secretTrigger && secretMessage) {
+    secretTrigger.addEventListener("click", () => {
+      secretMessage.classList.toggle("active");
+    });
+  }
+
+
+  /* =========================================================
+     ESC KEY
+     Closes mobile menu and secret message
+     ========================================================= */
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+
+    if (navigation && hamburger) {
+      navigation.classList.remove("active");
+      hamburger.classList.remove("active");
+
+      hamburger.setAttribute("aria-expanded", "false");
+      hamburger.setAttribute("aria-label", "Open menu");
+    }
+
+    if (secretMessage) {
+      secretMessage.classList.remove("active");
+    }
+  });
+
+
+  /* =========================================================
+     HEADER SCROLL EFFECT
+     ========================================================= */
+
+  const header = document.querySelector("header");
+
+  if (header) {
+    const updateHeader = () => {
+      if (window.scrollY > 30) {
+        header.classList.add("scrolled");
+      } else {
+        header.classList.remove("scrolled");
+      }
+    };
+
+    window.addEventListener("scroll", updateHeader, {
+      passive: true
+    });
+
+    updateHeader();
+  }
+
+
+  /* =========================================================
+     CURRENT YEAR
+     Automatically updates elements using .current-year
+     ========================================================= */
+
+  document.querySelectorAll(".current-year").forEach((element) => {
+    element.textContent = new Date().getFullYear();
+  });
+
+
+  /* =========================================================
+     IMAGE ERROR HANDLING
+     Prevents broken images from looking ugly
+     ========================================================= */
+
+  document.querySelectorAll("img").forEach((image) => {
+    image.addEventListener("error", () => {
+      image.classList.add("image-error");
+    });
+  });
+
+
+  /* =========================================================
+     PAGE READY
+     ========================================================= */
+
+  document.documentElement.classList.add("js-ready");
+
 });
