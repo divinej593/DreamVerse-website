@@ -1,0 +1,442 @@
+/* =========================================================
+   DREAMVERSE — FAQ
+   Clean modern interface inspired by WFunded-style layouts
+   ========================================================= */
+
+:root {
+  --bg: #f5f5f2;
+  --card: #ffffff;
+  --text: #111111;
+  --muted: #686868;
+  --border: #e7e7e3;
+  --soft: #f0f0ec;
+  --accent: #111111;
+  --shadow: 0 12px 35px rgba(0, 0, 0, 0.06);
+  --radius: 18px;
+}
+
+/* =========================
+   RESET
+   ========================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(255, 255, 255, 0.95),
+      transparent 35%
+    ),
+    var(--bg);
+
+  color: var(--text);
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+/* =========================
+   MAIN CONTAINER
+   ========================= */
+
+main {
+  width: min(100% - 32px, 900px);
+  margin: 0 auto;
+  padding: 70px 0 80px;
+}
+
+/* =========================
+   MAIN SECTIONS
+   ========================= */
+
+main > section {
+  margin-bottom: 28px;
+}
+
+main > section:first-child {
+  margin-bottom: 42px;
+}
+
+/* =========================
+   HEADINGS
+   ========================= */
+
+h1 {
+  font-size: clamp(32px, 5vw, 48px);
+  line-height: 1.1;
+  letter-spacing: -1.5px;
+  font-weight: 750;
+  margin-bottom: 30px;
+}
+
+h2 {
+  font-size: 20px;
+  line-height: 1.35;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  margin-bottom: 12px;
+}
+
+h3 {
+  font-size: 24px;
+  line-height: 1.3;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+/* =========================
+   FAQ QUESTION CARDS
+   ========================= */
+
+main > section:first-child > section {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 25px 26px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+main > section:first-child > section:hover {
+  transform: translateY(-2px);
+  border-color: #dcdcd7;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* =========================
+   PARAGRAPHS
+   ========================= */
+
+p {
+  color: var(--muted);
+  font-size: 15.5px;
+  line-height: 1.75;
+}
+
+strong {
+  color: var(--text);
+  font-weight: 700;
+}
+
+/* =========================
+   LISTS
+   ========================= */
+
+ul {
+  list-style: none;
+  margin: 18px 0;
+  display: grid;
+  gap: 10px;
+}
+
+li {
+  background: var(--soft);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 13px 16px;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+li strong {
+  color: var(--text);
+}
+
+/* =========================
+   GENESIS MINT POLICY
+   ========================= */
+
+main > section:nth-child(2) {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 34px;
+  box-shadow: var(--shadow);
+}
+
+main > section:nth-child(2) > h1 {
+  padding-bottom: 24px;
+  margin-bottom: 28px;
+  border-bottom: 1px solid var(--border);
+}
+
+main > section:nth-child(2) > h2 {
+  margin-top: 30px;
+  margin-bottom: 12px;
+}
+
+main > section:nth-child(2) > h2:first-of-type {
+  margin-top: 0;
+}
+
+main > section:nth-child(2) > p {
+  margin-bottom: 14px;
+}
+
+/* =========================
+   MINT DETAILS
+   ========================= */
+
+main > section:nth-child(2) ul {
+  margin-top: 0;
+}
+
+main > section:nth-child(2) li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+/* =========================
+   SUPPORT BOX
+   ========================= */
+
+.support-box {
+  background: #111111;
+  color: #ffffff;
+  border-radius: 22px;
+  padding: 34px;
+  text-align: center;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
+}
+
+.support-box h3 {
+  color: #ffffff;
+}
+
+.support-box p {
+  color: rgba(255, 255, 255, 0.72);
+  max-width: 600px;
+  margin: 0 auto 24px;
+}
+
+/* =========================
+   SUPPORT BUTTON
+   ========================= */
+
+.support-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 48px;
+  padding: 12px 22px;
+
+  background: #ffffff;
+  color: #111111;
+
+  border-radius: 12px;
+
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.support-button:hover {
+  transform: translateY(-2px);
+  opacity: 0.94;
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.12);
+}
+
+.support-button:active {
+  transform: translateY(0);
+}
+
+/* =========================
+   FOCUS ACCESSIBILITY
+   ========================= */
+
+a:focus-visible {
+  outline: 3px solid rgba(17, 17, 17, 0.25);
+  outline-offset: 4px;
+}
+
+/* =========================
+   TABLET
+   ========================= */
+
+@media (max-width: 768px) {
+
+  main {
+    width: min(100% - 24px, 680px);
+    padding: 45px 0 60px;
+  }
+
+  h1 {
+    font-size: 34px;
+    letter-spacing: -1px;
+  }
+
+  h2 {
+    font-size: 19px;
+  }
+
+  main > section:first-child > section {
+    padding: 22px;
+  }
+
+  main > section:nth-child(2) {
+    padding: 26px;
+  }
+
+  .support-box {
+    padding: 28px 22px;
+  }
+}
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 480px) {
+
+  main {
+    width: calc(100% - 20px);
+    padding: 30px 0 45px;
+  }
+
+  h1 {
+    font-size: 29px;
+    line-height: 1.15;
+    margin-bottom: 22px;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+  h3 {
+    font-size: 21px;
+  }
+
+  p {
+    font-size: 14.5px;
+    line-height: 1.7;
+  }
+
+  main > section:first-child > section {
+    padding: 19px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+  }
+
+  main > section:nth-child(2) {
+    padding: 20px;
+    border-radius: 17px;
+  }
+
+  main > section:nth-child(2) > h1 {
+    padding-bottom: 18px;
+    margin-bottom: 20px;
+  }
+
+  main > section:nth-child(2) > h2 {
+    margin-top: 24px;
+  }
+
+  ul {
+    gap: 8px;
+  }
+
+  li {
+    padding: 11px 13px;
+    font-size: 14px;
+  }
+
+  main > section:nth-child(2) li {
+    display: block;
+  }
+
+  .support-box {
+    padding: 25px 18px;
+    border-radius: 17px;
+  }
+
+  .support-box p {
+    margin-bottom: 20px;
+  }
+
+  .support-button {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 13.5px;
+  }
+}
+
+/* =========================
+   VERY SMALL PHONES
+   ========================= */
+
+@media (max-width: 350px) {
+
+  main {
+    width: calc(100% - 16px);
+  }
+
+  h1 {
+    font-size: 26px;
+  }
+
+  h2 {
+    font-size: 17px;
+  }
+
+  p {
+    font-size: 14px;
+  }
+
+  main > section:first-child > section,
+  main > section:nth-child(2) {
+    padding: 16px;
+  }
+
+  .support-box {
+    padding: 22px 14px;
+  }
+}
+
+/* =========================
+   REDUCED MOTION
+   ========================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+  }
+}
