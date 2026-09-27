@@ -1405,172 +1405,350 @@ repeat(2, minmax(0, 1fr));
 }
 }
 /* =========================================================
-28. MOBILE NAVIGATION
+28. MOBILE RESPONSIVE FIX
 ========================================================= */
+
 @media (max-width: 850px) {
-body > header {
-position: sticky;
-}
-nav {
-min-height: 70px;
-}
-.hamburger {
-display: flex;
-}
-.main-navigation {
-position: absolute;
-top: calc(100% + 1px);
-left: 20px;
-right: 20px;
 
-display: none;
+  body {
+    overflow-x: hidden;
+  }
 
-padding: 12px;
+  nav {
+    width: calc(100% - 28px);
+    min-height: 68px;
+  }
 
-flex-direction: column;
-align-items: stretch;
+  .hamburger {
+    display: flex;
+  }
 
-background:
-  rgba(9, 12, 19, 0.97);
+  .main-navigation {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 14px;
+    right: 14px;
 
-border: 1px solid var(--border);
-border-radius: 16px;
+    display: none;
 
-box-shadow: var(--shadow);
+    padding: 10px;
 
-backdrop-filter: blur(20px);
+    flex-direction: column;
+    align-items: stretch;
 
+    background: rgba(8, 11, 18, 0.98);
+
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 16px;
+
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .main-navigation.active {
+    display: flex;
+  }
+
+  .main-navigation a {
+    width: 100%;
+    min-height: 44px;
+
+    padding: 0 14px;
+
+    justify-content: flex-start;
+
+    font-size: 0.82rem;
+  }
+
+  .main-navigation a::after {
+    display: none;
+  }
+
+  .nav-actions {
+    display: none;
+  }
+
+  /* COMMUNITY ACTIONS */
+
+  .community-actions {
+    width: calc(100% - 28px);
+
+    padding: 12px 0 16px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 10px;
+  }
+
+  .community-actions a {
+    min-height: 40px;
+
+    padding: 0 14px;
+
+    font-size: 0.68rem;
+
+    white-space: nowrap;
+  }
+
+  .community-actions .studio-link {
+    flex-basis: auto;
+  }
+
+
+  /* HERO */
+
+  .hero {
+    width: 100%;
+
+    min-height: 620px;
+
+    padding:
+      90px 20px
+      75px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+  }
+
+  .hero-content {
+    width: 100%;
+    max-width: 100%;
+
+    overflow: hidden;
+  }
+
+  .hero h1 {
+    width: 100%;
+    max-width: 100%;
+
+    margin: 0 auto 16px;
+
+    font-size: clamp(
+      2.7rem,
+      14vw,
+      4.5rem
+    );
+
+    line-height: 0.95;
+
+    letter-spacing: -0.075em;
+
+    white-space: nowrap;
+
+    text-align: center;
+
+    overflow: hidden;
+  }
+
+  .hero h2 {
+    max-width: 100%;
+
+    margin-bottom: 20px;
+
+    font-size: clamp(
+      1.2rem,
+      5vw,
+      1.6rem
+    );
+
+    line-height: 1.25;
+  }
+
+  .hero-description {
+    width: 100%;
+    max-width: 360px;
+
+    margin: 0 auto 28px;
+
+    font-size: 0.95rem;
+
+    line-height: 1.65;
+  }
+
+  .hero-actions {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 10px;
+  }
+
+  .hero-actions a {
+    width: 100%;
+    max-width: 360px;
+
+    min-height: 54px;
+
+    padding: 0 18px;
+
+    text-align: center;
+  }
 }
-.main-navigation.active {
-display: flex;
-}
-.main-navigation a {
-min-height: 46px;
-padding: 0 14px;
-}
-.main-navigation a::after {
-display: none;
-}
-.nav-actions {
-display: none;
-}
-.community-actions {
-padding-bottom: 12px;
-}
-.community-actions a {
-font-size: 0.67rem;
-}
-}
+
+
 /* =========================================================
-29. MOBILE CONTENT
+  29. SMALL MOBILE
 ========================================================= */
-@media (max-width: 700px) {
-section {
-width: min(
-calc(100% - 28px),
-var(--container)
-);
-padding: 80px 0;
 
+@media (max-width: 480px) {
+
+  section {
+    width: calc(100% - 28px);
+
+    padding:
+      70px 0;
+  }
+
+  /* Keep HERO FULL WIDTH */
+
+  .hero {
+    width: 100%;
+
+    padding:
+      75px 14px
+      65px;
+  }
+
+  .hero h1 {
+    font-size: 13.2vw;
+
+    letter-spacing: -0.07em;
+  }
+
+  .hero h2 {
+    font-size: 1.25rem;
+  }
+
+  .hero-description {
+    max-width: 350px;
+
+    font-size: 0.92rem;
+  }
+
+  .hero-actions a {
+    max-width: 350px;
+  }
+
+  /* COMMUNITY LINKS */
+
+  .community-actions {
+    gap: 8px;
+  }
+
+  .community-actions a {
+    min-height: 38px;
+
+    padding: 0 12px;
+
+    font-size: 0.63rem;
+  }
+
+  .community-actions .studio-link {
+    width: auto;
+  }
+
+  /* SECTION HEADINGS */
+
+  .section-header {
+    margin-bottom: 35px;
+  }
+
+  .section-header h2 {
+    font-size: 2rem;
+
+    line-height: 1.1;
+  }
+
+  /* CARDS */
+
+  .dreamer-gallery,
+  .nft-grid,
+  .identity-grid,
+  .pillar-grid,
+  .community-grid,
+  .utility-grid,
+  .roadmap-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .current-story {
+    padding: 20px;
+  }
+
+  .future-stories ul {
+    grid-template-columns: 1fr;
+  }
+
+  .waitlist-content,
+  .support-box {
+    padding: 25px 18px;
+  }
+
+  .final-cta {
+    padding:
+      80px 14px;
+  }
+
+  .final-cta h2 {
+    font-size: 2.6rem;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+  }
 }
-.hero {
-min-height: 650px;
-}
-.hero h1 {
-font-size: clamp(
-3.6rem,
-19vw,
-6rem
-);
-}
-.hero-actions,
-.mint-actions,
-.cta-actions {
-flex-direction: column;
-}
-.hero-actions a,
-.mint-actions a,
-.cta-actions a {
-width: 100%;
-max-width: 360px;
-}
-.dreamer-gallery,
-.nft-grid,
-.pillar-grid,
-.community-grid,
-.utility-grid {
-grid-template-columns: 1fr;
-}
-.identity-grid {
-grid-template-columns: 1fr;
-}
-.roadmap-grid {
-grid-template-columns: 1fr;
-}
-.future-stories {
-margin-top: 45px;
-}
-.future-stories ul {
-grid-template-columns: 1fr;
-}
-.current-story {
-padding: 22px;
-}
-.waitlist-content,
-.support-box {
-padding: 25px 20px;
-}
-.final-cta {
-padding-top: 90px;
-padding-bottom: 90px;
-}
-.footer-bottom {
-flex-direction: column;
-gap: 8px;
-}
-}
+
+
 /* =========================================================
-30. SMALL PHONES
+ 30.  VERY SMALL PHONES
 ========================================================= */
-@media (max-width: 430px) {
-nav {
-width: calc(100% - 28px);
-}
-.logo {
-font-size: 1.05rem;
-}
-.logo img {
-width: 29px;
-height: 29px;
-}
-.community-actions {
-width: calc(100% - 28px);
-gap: 8px;
-}
-.community-actions a {
-width: 100%;
-}
-.section-header {
-margin-bottom: 38px;
-}
-.section-header h2 {
-font-size: 2rem;
-}
-.dreamer-info,
-.nft-info {
-padding: 18px;
-}
-.roadmap-grid article,
-.identity-grid article,
-.pillar,
-.community-grid article,
-.utility-grid article {
-padding: 22px;
-}
-.footer-social ul {
-flex-direction: column;
-align-items: flex-start;
-}
+
+@media (max-width: 360px) {
+
+  .logo {
+    font-size: 0.95rem;
+  }
+
+  .logo img {
+    width: 28px;
+    height: 28px;
+  }
+
+  .community-actions {
+    flex-direction: column;
+  }
+
+  .community-actions a,
+  .community-actions .studio-link {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .hero {
+    padding-top: 65px;
+  }
+
+  .hero h1 {
+    font-size: 12.5vw;
+  }
+
+  .hero h2 {
+    font-size: 1.15rem;
+  }
+
+  .hero-description {
+    font-size: 0.88rem;
+  }
 }
 /* =========================================================
 31. REDUCED MOTION
