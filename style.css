@@ -1284,47 +1284,306 @@ color: var(--text-soft);
 padding-top: 70px;
 padding-bottom: 70px;
 }
-
 .support-box {
 max-width: 760px;
-
 margin: auto;
 padding: 35px;
-
 text-align: center;
-
 background:
 linear-gradient(
 145deg,
 rgba(124, 140, 255, 0.08),
 rgba(255, 255, 255, 0.025)
 );
-
 border: 1px solid var(--border);
 border-radius: var(--radius-large);
 }
-
 .support-box h3 {
 margin-bottom: 8px;
-
 font-size: 1.4rem;
 }
-
 .support-box p {
 margin-bottom: 22px;
-
 color: var(--text-soft);
 }
-
 .support-button {
 background: transparent;
 color: var(--text);
 border-color: var(--border-light);
 }
-
 .support-button:hover {
 background: var(--text);
 color: #080a0f;
 }
+/* =========================================================
+25. FOOTER
+========================================================= */
+footer {
+width: 100%;
+padding: 70px max(20px, calc((100% - 1180px) / 2)) 30px;
+background: #03050a;
+border-top: 1px solid var(--border);
+}
+.footer-brand h2 {
+margin-bottom: 8px;
+font-size: 1.5rem;
+letter-spacing: -0.04em;
+}
+.footer-brand p {
+color: var(--text-muted);
+font-size: 0.88rem;
+}
+.footer-social {
+margin-top: 35px;
+}
+.footer-social h3 {
+margin-bottom: 14px;
+font-size: 0.78rem;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+}
+.footer-social ul {
+display: flex;
+flex-wrap: wrap;
+gap: 10px;
+}
+.footer-social a {
+display: inline-flex;
+padding: 8px 12px;
+border: 1px solid var(--border);
+border-radius: 8px;
+color: var(--text-soft);
+font-size: 0.78rem;
+transition: var(--transition);
+}
+.footer-social a:hover {
+color: var(--text);
+border-color: var(--accent);
+background: rgba(124, 140, 255, 0.08);
+}
+.footer-bottom {
+margin-top: 50px;
+padding-top: 22px;
+display: flex;
+justify-content: space-between;
+gap: 20px;
+border-top: 1px solid var(--border);
+color: var(--text-muted);
+font-size: 0.75rem;
+}
+/* =========================================================
+26. FOCUS ACCESSIBILITY
+========================================================= */
+a:focus-visible,
+button:focus-visible,
+.secret-trigger:focus-visible {
+outline: 2px solid var(--accent-light);
+outline-offset: 4px;
+}
+/* =========================================================
+27. TABLET
+========================================================= */
+@media (max-width: 1100px) {
+.main-navigation {
+gap: 0;
+}
+.main-navigation a {
+padding: 0 7px;
+font-size: 0.72rem;
+}
+.nav-actions a {
+padding: 0 10px;
+font-size: 0.68rem;
+}
+.roadmap-grid {
+grid-template-columns:
+repeat(2, minmax(0, 1fr));
+}
+.identity-grid {
+grid-template-columns:
+repeat(2, minmax(0, 1fr));
+}
+}
+/* =========================================================
+28. MOBILE NAVIGATION
+========================================================= */
+@media (max-width: 850px) {
+body > header {
+position: sticky;
+}
+nav {
+min-height: 70px;
+}
+.hamburger {
+display: flex;
+}
+.main-navigation {
+position: absolute;
+top: calc(100% + 1px);
+left: 20px;
+right: 20px;
 
-/* ===================================
+display: none;
+
+padding: 12px;
+
+flex-direction: column;
+align-items: stretch;
+
+background:
+  rgba(9, 12, 19, 0.97);
+
+border: 1px solid var(--border);
+border-radius: 16px;
+
+box-shadow: var(--shadow);
+
+backdrop-filter: blur(20px);
+
+}
+.main-navigation.active {
+display: flex;
+}
+.main-navigation a {
+min-height: 46px;
+padding: 0 14px;
+}
+.main-navigation a::after {
+display: none;
+}
+.nav-actions {
+display: none;
+}
+.community-actions {
+padding-bottom: 12px;
+}
+.community-actions a {
+font-size: 0.67rem;
+}
+}
+/* =========================================================
+29. MOBILE CONTENT
+========================================================= */
+@media (max-width: 700px) {
+section {
+width: min(
+calc(100% - 28px),
+var(--container)
+);
+padding: 80px 0;
+
+}
+.hero {
+min-height: 650px;
+}
+.hero h1 {
+font-size: clamp(
+3.6rem,
+19vw,
+6rem
+);
+}
+.hero-actions,
+.mint-actions,
+.cta-actions {
+flex-direction: column;
+}
+.hero-actions a,
+.mint-actions a,
+.cta-actions a {
+width: 100%;
+max-width: 360px;
+}
+.dreamer-gallery,
+.nft-grid,
+.pillar-grid,
+.community-grid,
+.utility-grid {
+grid-template-columns: 1fr;
+}
+.identity-grid {
+grid-template-columns: 1fr;
+}
+.roadmap-grid {
+grid-template-columns: 1fr;
+}
+.future-stories {
+margin-top: 45px;
+}
+.future-stories ul {
+grid-template-columns: 1fr;
+}
+.current-story {
+padding: 22px;
+}
+.waitlist-content,
+.support-box {
+padding: 25px 20px;
+}
+.final-cta {
+padding-top: 90px;
+padding-bottom: 90px;
+}
+.footer-bottom {
+flex-direction: column;
+gap: 8px;
+}
+}
+/* =========================================================
+30. SMALL PHONES
+========================================================= */
+@media (max-width: 430px) {
+nav {
+width: calc(100% - 28px);
+}
+.logo {
+font-size: 1.05rem;
+}
+.logo img {
+width: 29px;
+height: 29px;
+}
+.community-actions {
+width: calc(100% - 28px);
+gap: 8px;
+}
+.community-actions a {
+width: 100%;
+}
+.section-header {
+margin-bottom: 38px;
+}
+.section-header h2 {
+font-size: 2rem;
+}
+.dreamer-info,
+.nft-info {
+padding: 18px;
+}
+.roadmap-grid article,
+.identity-grid article,
+.pillar,
+.community-grid article,
+.utility-grid article {
+padding: 22px;
+}
+.footer-social ul {
+flex-direction: column;
+align-items: flex-start;
+}
+}
+/* =========================================================
+31. REDUCED MOTION
+========================================================= */
+@media (prefers-reduced-motion: reduce) {
+html {
+scroll-behavior: auto;
+}
+*,
+*::before,
+*::after {
+transition-duration: 0.01ms !important;
+animation-duration: 0.01ms !important;
+animation-iteration-count: 1 !important;
+}
+}
