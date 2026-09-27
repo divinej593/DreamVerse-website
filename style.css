@@ -1,1805 +1,1330 @@
 /* =========================================================
-   DREAMVERSE — PROFESSIONAL MAIN STYLESHEET
-   Fantasy • Cinematic • Navy • Gold
-   Responsive / Mobile First
+DREAMVERSE — COMPLETE WEBSITE CSS
+Dark Premium / Dream Universe Interface
+Responsive: Mobile • Tablet • Desktop
 ========================================================= */
 
 /* =========================================================
-   1. RESET
-========================================================= */
 
-*,
-*::before,
-*::after {
+1. RESET
+   ========================================================= */
+
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
+  }
 
 html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 80px;
+scroll-behavior: smooth;
+scroll-padding-top: 100px;
 }
 
 body {
-  min-height: 100vh;
-  overflow-x: hidden;
+min-height: 100vh;
+font-family:
+Inter,
+system-ui,
+-apple-system,
+BlinkMacSystemFont,
+"Segoe UI",
+sans-serif;
 
-  font-family: Arial, Helvetica, sans-serif;
-  line-height: 1.6;
+color: #f5f7fb;
+background:
+radial-gradient(
+circle at 15% 10%,
+rgba(72, 96, 255, 0.16),
+transparent 32%
+),
+radial-gradient(
+circle at 85% 20%,
+rgba(122, 72, 255, 0.13),
+transparent 30%
+),
+radial-gradient(
+circle at 50% 75%,
+rgba(40, 110, 180, 0.08),
+transparent 35%
+),
+#05070c;
 
-  color: #f5f1e8;
+line-height: 1.7;
+overflow-x: hidden;
+}
 
-  background:
-    radial-gradient(
-      circle at 20% 20%,
-      rgba(44, 77, 145, 0.28),
-      transparent 35%
-    ),
-    radial-gradient(
-      circle at 80% 10%,
-      rgba(212, 175, 55, 0.1),
-      transparent 28%
-    ),
-    #071525;
+body::before {
+content: "";
+position: fixed;
+inset: 0;
+pointer-events: none;
+z-index: -1;
+
+background:
+linear-gradient(
+rgba(255, 255, 255, 0.015) 1px,
+transparent 1px
+),
+linear-gradient(
+90deg,
+rgba(255, 255, 255, 0.015) 1px,
+transparent 1px
+);
+
+background-size: 70px 70px;
+mask-image: linear-gradient(to bottom, black, transparent 90%);
 }
 
 img {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  height: auto;
+display: block;
+max-width: 100%;
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
-}
-
-button {
-  font: inherit;
-}
-
-ul {
-  list-style: none;
+color: inherit;
+text-decoration: none;
 }
 
 button,
 a {
-  -webkit-tap-highlight-color: transparent;
+-webkit-tap-highlight-color: transparent;
+}
+
+button {
+font: inherit;
+}
+
+ul {
+list-style: none;
 }
 
 /* =========================================================
-   2. VARIABLES
+2. GLOBAL VARIABLES
 ========================================================= */
 
 :root {
-  --navy-black: #071525;
-  --navy-dark: #0a1a2d;
-  --navy: #0d223b;
-  --navy-light: #153451;
+--bg: #05070c;
+--bg-soft: #090c13;
+--surface: rgba(15, 19, 29, 0.78);
+--surface-strong: #101521;
+--surface-light: rgba(255, 255, 255, 0.045);
 
-  --gold: #d4af37;
-  --gold-light: #f4d477;
-  --gold-dark: #9d791c;
+--border: rgba(255, 255, 255, 0.09);
+--border-light: rgba(255, 255, 255, 0.14);
 
-  --white: #f7f3e9;
-  --text: #d9dce3;
-  --muted: #a7afbd;
+--text: #f5f7fb;
+--text-soft: #aeb7c8;
+--text-muted: #7d8799;
 
-  --glass: rgba(12, 35, 59, 0.78);
-  --glass-light: rgba(18, 48, 78, 0.68);
+--accent: #7c8cff;
+--accent-light: #aeb7ff;
+--accent-dark: #5969ee;
 
-  --gold-border: rgba(212, 175, 55, 0.3);
+--glow: rgba(124, 140, 255, 0.25);
 
-  --container: 1200px;
+--radius-small: 12px;
+--radius: 20px;
+--radius-large: 30px;
 
-  --small-radius: 8px;
-  --medium-radius: 12px;
-  --large-radius: 18px;
+--container: 1180px;
 
-  --transition: 0.3s ease;
+--shadow:
+0 25px 70px rgba(0, 0, 0, 0.38);
+
+--transition:
+0.25s ease;
 }
 
 /* =========================================================
-   3. BACKGROUND STAR FIELD
-========================================================= */
-
-body::before {
-  content: "";
-
-  position: fixed;
-  inset: 0;
-
-  pointer-events: none;
-
-  z-index: 0;
-
-  opacity: 0.3;
-
-  background-image:
-    radial-gradient(circle, rgba(255, 255, 255, 0.75) 1px, transparent 1px),
-    radial-gradient(circle, rgba(212, 175, 55, 0.45) 1px, transparent 1px);
-
-  background-size:
-    110px 110px,
-    170px 170px;
-
-  background-position:
-    20px 20px,
-    80px 100px;
-}
-
-body > * {
-  position: relative;
-  z-index: 1;
-}
-
-/* =========================================================
-   4. GLOBAL SECTIONS
+3. GLOBAL CONTAINER / SECTIONS
 ========================================================= */
 
 main {
-  width: 100%;
+width: 100%;
 }
 
 section {
-  width: 100%;
-  padding: 70px 18px;
+width: min(
+calc(100% - 40px),
+var(--container)
+);
 
-  position: relative;
-
-  border-bottom: 1px solid rgba(212, 175, 55, 0.1);
-}
-
-section > * {
-  width: min(100%, var(--container));
-
-  margin-left: auto;
-  margin-right: auto;
+margin: 0 auto;
+padding: 110px 0;
 }
 
 .section-header {
-  text-align: center;
-  margin-bottom: 35px;
+max-width: 760px;
+margin: 0 auto 55px;
+text-align: center;
 }
 
-.section-header > p:first-child {
-  margin-bottom: 9px;
+.section-header > p:first-child,
+.eyebrow {
+margin-bottom: 12px;
 
-  color: var(--gold-light);
+color: var(--accent-light);
 
-  font-size: 0.68rem;
-  font-weight: 700;
-
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
+font-size: 0.76rem;
+font-weight: 800;
+letter-spacing: 0.18em;
+text-transform: uppercase;
 }
 
 .section-header h2 {
-  margin-bottom: 14px;
+margin-bottom: 18px;
 
-  color: var(--white);
+color: var(--text);
 
-  font-family: Georgia, "Times New Roman", serif;
+font-size: clamp(
+2rem,
+4vw,
+3.4rem
+);
 
-  font-size: clamp(1.7rem, 5vw, 2.8rem);
-  line-height: 1.15;
-
-  font-weight: 500;
+line-height: 1.08;
+letter-spacing: -0.035em;
 }
 
-.section-header p {
-  max-width: 700px;
-
-  margin-left: auto;
-  margin-right: auto;
-
-  color: var(--text);
-
-  font-size: 0.9rem;
+.section-header p:last-child {
+color: var(--text-soft);
+font-size: 1rem;
 }
 
 /* =========================================================
-   5. HEADER
+4. HEADER
 ========================================================= */
 
+header {
+position: relative;
+}
+
 body > header {
-  position: sticky;
+position: sticky;
+top: 0;
+z-index: 1000;
 
-  top: 0;
+width: 100%;
 
-  z-index: 1000;
+background:
+rgba(5, 7, 12, 0.82);
 
-  background: rgba(7, 21, 37, 0.94);
+border-bottom: 1px solid var(--border);
 
-  border-bottom: 1px solid rgba(212, 175, 55, 0.18);
-
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+backdrop-filter: blur(20px);
+-webkit-backdrop-filter: blur(20px);
 }
 
 nav {
-  width: min(100%, 1250px);
+width: min(
+calc(100% - 40px),
+1280px
+);
 
-  min-height: 68px;
+min-height: 76px;
+margin: auto;
 
-  margin: auto;
-
-  padding: 0 18px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  gap: 15px;
-}
-
-.logo {
-  color: var(--gold-light);
-
-  font-family: Georgia, "Times New Roman", serif;
-
-  font-size: 1.1rem;
-
-  letter-spacing: 0.08em;
-
-  white-space: nowrap;
-}
-.logo img {
-  width: 45px;
-  height: auto;
-  display: block;
-}
-
-@media (min-width: 900px) {
-  .logo img {
-    width: 55px;
-  }
-}
-.main-navigation,
-.nav-actions {
-  display: none;
+display: flex;
+align-items: center;
+gap: 28px;
 }
 
 /* =========================================================
-   6. HAMBURGER
+5. LOGO
+========================================================= */
+
+.logo {
+display: inline-flex;
+align-items: center;
+gap: 9px;
+
+flex-shrink: 0;
+
+font-size: 1.25rem;
+font-weight: 900;
+letter-spacing: -0.04em;
+
+transition: var(--transition);
+}
+
+.logo img {
+width: 34px;
+height: 34px;
+object-fit: contain;
+}
+
+.logo:hover {
+opacity: 0.8;
+}
+
+/* =========================================================
+6. MAIN NAVIGATION
+========================================================= */
+
+.main-navigation {
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 4px;
+
+flex: 1;
+}
+
+.main-navigation a {
+position: relative;
+
+display: inline-flex;
+align-items: center;
+
+min-height: 42px;
+padding: 0 10px;
+
+color: var(--text-soft);
+
+font-size: 0.79rem;
+font-weight: 650;
+
+border-radius: 10px;
+
+transition:
+color var(--transition),
+background var(--transition);
+}
+
+.main-navigation a::after {
+content: "";
+
+position: absolute;
+left: 10px;
+right: 10px;
+bottom: 4px;
+
+height: 2px;
+
+background: var(--accent);
+
+transform: scaleX(0);
+transform-origin: center;
+
+transition: transform var(--transition);
+}
+
+.main-navigation a:hover {
+color: var(--text);
+background: var(--surface-light);
+}
+
+.main-navigation a:hover::after {
+transform: scaleX(1);
+}
+
+/* =========================================================
+7. NAV ACTIONS
+========================================================= */
+
+.nav-actions {
+display: flex;
+align-items: center;
+gap: 8px;
+}
+
+.nav-actions a {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+
+min-height: 42px;
+padding: 0 14px;
+
+border: 1px solid var(--border-light);
+border-radius: 10px;
+
+color: var(--text);
+background: rgba(255, 255, 255, 0.035);
+
+font-size: 0.76rem;
+font-weight: 800;
+
+transition:
+transform var(--transition),
+background var(--transition),
+border-color var(--transition),
+box-shadow var(--transition);
+}
+
+.nav-actions a:last-child {
+background: var(--text);
+color: #080a0f;
+border-color: var(--text);
+}
+
+.nav-actions a:hover {
+transform: translateY(-2px);
+border-color: var(--accent-light);
+box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* =========================================================
+8. HAMBURGER
 ========================================================= */
 
 .hamburger {
-  width: 42px;
-  height: 42px;
+display: none;
 
-  display: flex;
+width: 44px;
+height: 44px;
 
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+margin-left: auto;
 
-  gap: 5px;
+align-items: center;
+justify-content: center;
+flex-direction: column;
+gap: 5px;
 
-  border: 1px solid rgba(212, 175, 55, 0.35);
+border: 1px solid var(--border);
+border-radius: 12px;
 
-  border-radius: 8px;
+background: var(--surface-light);
+color: var(--text);
 
-  background: rgba(212, 175, 55, 0.06);
-
-  cursor: pointer;
-
-  transition: var(--transition);
+cursor: pointer;
 }
 
 .hamburger span {
-  width: 20px;
-  height: 2px;
+width: 19px;
+height: 2px;
 
-  border-radius: 999px;
+background: currentColor;
+border-radius: 99px;
 
-  background: var(--gold-light);
-
-  transition: var(--transition);
-}
-
-.hamburger:hover {
-  background: rgba(212, 175, 55, 0.14);
+transition: var(--transition);
 }
 
 /* =========================================================
-   MOBILE MENU — OPEN STATE
-========================================================= */
-
-@media (max-width: 899px) {
-  nav.menu-open {
-    flex-wrap: wrap;
-  }
-
-  .main-navigation.is-open {
-    display: flex;
-
-    flex-direction: column;
-    align-items: stretch;
-
-    width: 100%;
-
-    order: 3;
-
-    margin: 0;
-
-    padding: 15px 0;
-
-    gap: 0;
-
-    border-top: 1px solid rgba(212, 175, 55, 0.12);
-  }
-
-  .main-navigation.is-open li {
-    width: 100%;
-  }
-
-  .main-navigation.is-open a {
-    display: block;
-
-    width: 100%;
-
-    padding: 13px 5px;
-
-    color: var(--muted);
-
-    font-size: 0.78rem;
-    font-weight: 700;
-
-    letter-spacing: 0.05em;
-
-    transition: var(--transition);
-  }
-
-  .main-navigation.is-open a:hover {
-    color: var(--gold-light);
-  }
-
-  .nav-actions.is-open {
-    display: flex;
-
-    flex-direction: column;
-
-    width: 100%;
-
-    order: 4;
-
-    margin: 0;
-
-    padding: 5px 0 15px;
-
-    gap: 10px;
-  }
-
-  .nav-actions.is-open a {
-    width: 100%;
-  }
-
-  /* Hamburger → X */
-  .hamburger.is-open span:nth-child(1) {
-    transform: translateY(7px) rotate(45deg);
-  }
-
-  .hamburger.is-open span:nth-child(2) {
-    opacity: 0;
-  }
-
-  .hamburger.is-open span:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg);
-  }
-}
-
-/* =========================================================
-   7. COMMUNITY ACTION LINKS
+9. COMMUNITY ACTIONS
 ========================================================= */
 
 .community-actions {
-  width: min(100%, 1250px);
+width: min(
+calc(100% - 40px),
+1180px
+);
 
-  margin: 0 auto;
+margin: 0 auto;
 
-  padding: 10px 18px;
+padding: 10px 0 14px;
 
-  display: flex;
+display: flex;
+align-items: center;
+justify-content: center;
 
-  align-items: center;
-
-  justify-content: center;
-
-  gap: 15px;
-
-  background: rgba(10, 29, 49, 0.85);
-
-  border-top: 1px solid rgba(212, 175, 55, 0.08);
+gap: 14px;
+flex-wrap: wrap;
 }
 
 .community-actions a {
-  display: inline-flex;
+display: inline-flex;
+align-items: center;
+justify-content: center;
 
-  align-items: center;
-  justify-content: center;
+min-height: 38px;
+padding: 0 15px;
 
-  min-height: 34px;
+border: 1px solid var(--border);
+border-radius: 999px;
 
-  padding: 7px 15px;
+background: rgba(255, 255, 255, 0.025);
 
-  border: 1px solid rgba(212, 175, 55, 0.5);
+color: var(--text-soft);
 
-  border-radius: 999px;
+font-size: 0.72rem;
+font-weight: 800;
+letter-spacing: 0.04em;
 
-  color: var(--gold-light);
-
-  background: rgba(212, 175, 55, 0.05);
-
-  font-size: 0.62rem;
-
-  font-weight: 700;
-
-  letter-spacing: 0.08em;
-
-  transition: var(--transition);
+transition:
+color var(--transition),
+background var(--transition),
+border-color var(--transition),
+transform var(--transition);
 }
 
 .community-actions a:hover {
-  color: var(--navy-black);
+color: var(--text);
+background: rgba(124, 140, 255, 0.1);
+border-color: var(--accent);
+transform: translateY(-2px);
+}
 
-  background: var(--gold);
-
-  transform: translateY(-2px);
+.community-actions .studio-link {
+color: var(--accent-light);
+border-color: rgba(124, 140, 255, 0.35);
 }
 
 /* =========================================================
-   8. HERO
+10. HERO
 ========================================================= */
 
 .hero {
-  min-height: 570px;
+min-height: 760px;
 
-  display: flex;
-  align-items: center;
+display: flex;
+align-items: center;
+justify-content: center;
 
-  text-align: left;
+text-align: center;
 
-  background:
-    linear-gradient(
-      90deg,
-      rgba(7, 21, 37, 0.82) 0%,
-      rgba(7, 21, 37, 0.56) 45%,
-      rgba(7, 21, 37, 0.2) 100%
-    ),
-    linear-gradient(180deg, rgba(7, 21, 37, 0.08), rgba(7, 21, 37, 0.62));
+position: relative;
+}
 
-  background-position: center;
-  background-size: cover;
+.hero::before {
+content: "";
+
+position: absolute;
+
+width: 650px;
+height: 650px;
+
+left: 50%;
+top: 50%;
+
+transform: translate(-50%, -50%);
+
+background:
+radial-gradient(
+circle,
+rgba(104, 120, 255, 0.17),
+transparent 68%
+);
+
+filter: blur(10px);
+
+pointer-events: none;
 }
 
 .hero-content {
-  max-width: 650px;
+position: relative;
+z-index: 1;
 
-  margin: 0;
-}
-
-.eyebrow {
-  margin-bottom: 12px;
-
-  color: var(--gold-light);
-
-  font-size: 0.68rem;
-
-  font-weight: 700;
-
-  letter-spacing: 0.24em;
+max-width: 900px;
 }
 
 .hero h1 {
-  margin-bottom: 8px;
+margin-bottom: 12px;
 
-  color: var(--white);
+font-size: clamp(
+4rem,
+12vw,
+8.5rem
+);
 
-  font-family: Georgia, "Times New Roman", serif;
+line-height: 0.9;
+letter-spacing: -0.075em;
+font-weight: 950;
 
-  font-size: clamp(3rem, 11vw, 6.5rem);
+background:
+linear-gradient(
+180deg,
+#ffffff 0%,
+#dce2ff 45%,
+#8d9aff 100%
+);
 
-  font-weight: 500;
+-webkit-background-clip: text;
+background-clip: text;
+color: transparent;
 
-  line-height: 0.95;
-
-  letter-spacing: 0.04em;
-
-  text-shadow:
-    0 0 25px rgba(212, 175, 55, 0.12),
-    0 0 60px rgba(80, 120, 200, 0.2);
+filter:
+drop-shadow(
+0 0 40px rgba(124, 140, 255, 0.18)
+);
 }
 
 .hero h2 {
-  margin-bottom: 18px;
+margin-bottom: 24px;
 
-  color: var(--gold-light);
+font-size: clamp(
+1.25rem,
+3vw,
+2.2rem
+);
 
-  font-family: Georgia, "Times New Roman", serif;
-
-  font-size: clamp(1.15rem, 4vw, 2rem);
-
-  font-weight: 500;
+color: var(--text);
+font-weight: 650;
+letter-spacing: -0.025em;
 }
 
 .hero-description {
-  max-width: 560px;
+max-width: 650px;
+margin: 0 auto 35px;
 
-  margin-bottom: 27px;
+color: var(--text-soft);
 
-  color: var(--text);
-
-  font-size: 0.88rem;
+font-size: clamp(
+1rem,
+2vw,
+1.15rem
+);
 }
-
-/* =========================================================
-   9. BUTTONS
-========================================================= */
 
 .hero-actions,
 .mint-actions,
 .cta-actions {
-  display: flex;
-
-  flex-direction: column;
-
-  align-items: flex-start;
-
-  gap: 11px;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 12px;
+flex-wrap: wrap;
 }
 
 .hero-actions a,
 .mint-actions a,
 .cta-actions a,
 .section-action a,
-.waitlist-content a {
-  display: inline-flex;
+.waitlist-content a,
+.faq-button,
+.support-button {
+display: inline-flex;
+align-items: center;
+justify-content: center;
 
-  align-items: center;
-  justify-content: center;
+min-height: 50px;
+padding: 0 22px;
 
-  min-height: 42px;
+border-radius: 12px;
 
-  padding: 10px 22px;
+background: var(--text);
+color: #080a0f;
 
-  border: 1px solid var(--gold);
+font-size: 0.78rem;
+font-weight: 850;
+letter-spacing: 0.035em;
 
-  border-radius: 999px;
+border: 1px solid var(--text);
 
-  color: var(--gold-light);
-
-  background: rgba(212, 175, 55, 0.04);
-
-  font-size: 0.68rem;
-
-  font-weight: 700;
-
-  letter-spacing: 0.1em;
-
-  transition:
-    transform var(--transition),
-    background var(--transition),
-    color var(--transition),
-    box-shadow var(--transition);
+transition:
+transform var(--transition),
+box-shadow var(--transition),
+background var(--transition),
+color var(--transition);
 }
 
 .hero-actions a:hover,
 .mint-actions a:hover,
 .cta-actions a:hover,
 .section-action a:hover,
-.waitlist-content a:hover {
-  color: var(--navy-black);
+.waitlist-content a:hover,
+.faq-button:hover,
+.support-button:hover {
+transform: translateY(-3px);
 
-  background: var(--gold);
+box-shadow:
+0 14px 35px rgba(0, 0, 0, 0.35),
+0 0 25px rgba(124, 140, 255, 0.12);
+}
 
-  transform: translateY(-2px);
-
-  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.2);
+.hero-actions a:last-child,
+.mint-actions a:last-child,
+.cta-actions a:last-child {
+background: transparent;
+color: var(--text);
+border-color: var(--border-light);
 }
 
 /* =========================================================
-   10. PHILOSOPHY
+11. GENERAL CONTENT SECTIONS
+========================================================= */
+
+.philosophy,
+.dreamers,
+.collection,
+.dreamer-identity,
+.foundation,
+.mint,
+.story-portal,
+.community,
+.waitlist,
+.roadmap,
+.nft-utility,
+.faq-section,
+.community-easter-egg,
+.support-section {
+border-top: 1px solid rgba(255, 255, 255, 0.055);
+}
+
+/* =========================================================
+12. PHILOSOPHY
 ========================================================= */
 
 .philosophy {
-  text-align: center;
-
-  padding-top: 38px;
-  padding-bottom: 38px;
-
-  background:
-    radial-gradient(circle at center, rgba(20, 62, 125, 0.3), transparent 65%),
-    rgba(8, 25, 43, 0.9);
-}
-
-.philosophy .section-header {
-  margin-bottom: 12px;
-}
-
-.philosophy .section-header h2 {
-  margin-bottom: 8px;
-
-  font-size: clamp(1.45rem, 4vw, 2rem);
+text-align: center;
+max-width: 900px;
 }
 
 .philosophy > p {
-  max-width: 720px;
+max-width: 760px;
+margin: 14px auto;
 
-  margin-bottom: 9px;
-
-  color: var(--text);
-
-  font-size: 0.82rem;
-}
-
-.philosophy > p:first-of-type {
-  color: var(--gold-light);
+color: var(--text-soft);
+font-size: 1.05rem;
 }
 
 /* =========================================================
-   11. DREAMERS
+13. DREAMER GALLERY
 ========================================================= */
 
-.dreamers {
-  background: linear-gradient(
-    90deg,
-    rgba(7, 21, 37, 0.9),
-    rgba(9, 30, 50, 0.82)
-  );
+.dreamer-gallery,
+.nft-grid {
+display: grid;
+
+grid-template-columns:
+repeat(3, minmax(0, 1fr));
+
+gap: 22px;
 }
 
-.dreamer-gallery {
-  display: grid;
+.dreamer-card,
+.nft-card {
+overflow: hidden;
 
-  grid-template-columns: 1fr;
+background: var(--surface);
 
-  gap: 15px;
+border: 1px solid var(--border);
+border-radius: var(--radius);
+
+box-shadow: var(--shadow);
+
+transition:
+transform var(--transition),
+border-color var(--transition),
+box-shadow var(--transition);
 }
 
-.dreamer-card {
-  overflow: hidden;
+.dreamer-card:hover,
+.nft-card:hover {
+transform: translateY(-7px);
 
-  border: 1px solid rgba(105, 151, 205, 0.28);
+border-color:
+rgba(124, 140, 255, 0.35);
 
-  border-radius: var(--medium-radius);
-
-  background: linear-gradient(
-    145deg,
-    rgba(20, 51, 82, 0.78),
-    rgba(7, 24, 42, 0.88)
-  );
-
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-
-  transition: var(--transition);
+box-shadow:
+0 30px 80px rgba(0, 0, 0, 0.45),
+0 0 35px rgba(124, 140, 255, 0.07);
 }
 
-.dreamer-card:hover {
-  transform: translateY(-5px);
+.dreamer-image,
+.nft-card > img {
+width: 100%;
+aspect-ratio: 1 / 1;
 
-  border-color: rgba(212, 175, 55, 0.65);
+object-fit: cover;
 
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-}
-
-.dreamer-image {
-  aspect-ratio: 1 / 1;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  overflow: hidden;
-
-  background:
-    radial-gradient(circle, rgba(45, 87, 155, 0.35), transparent 65%), #0b223b;
+background: #090c13;
 }
 
 .dreamer-image img {
-  width: 100%;
-  height: 100%;
+width: 100%;
+height: 100%;
+object-fit: cover;
 
-  object-fit: cover;
+transition: transform 0.5s ease;
 }
 
-.dreamer-info {
-  padding: 12px 14px;
+.dreamer-card:hover .dreamer-image img {
+transform: scale(1.04);
 }
 
-.dreamer-info h3 {
-  margin-bottom: 2px;
-
-  color: var(--white);
-
-  font-family: Georgia, "Times New Roman", serif;
-
-  font-size: 0.9rem;
+.dreamer-info,
+.nft-info {
+padding: 22px;
 }
 
-.dreamer-info p {
-  margin-bottom: 5px;
+.dreamer-info h3,
+.nft-info h3 {
+margin-bottom: 5px;
 
-  color: var(--muted);
-
-  font-size: 0.68rem;
+font-size: 1.1rem;
 }
 
-.dreamer-info a {
-  color: var(--gold-light);
+.dreamer-info p,
+.nft-info p {
+margin-bottom: 14px;
 
-  font-size: 0.68rem;
+color: var(--text-muted);
+font-size: 0.88rem;
+}
 
-  font-weight: 700;
+.dreamer-info a,
+.nft-info a {
+display: inline-flex;
+
+padding: 7px 12px;
+
+border: 1px solid var(--border-light);
+border-radius: 8px;
+
+color: var(--accent-light);
+
+font-size: 0.75rem;
+font-weight: 800;
+
+transition: var(--transition);
+}
+
+.dreamer-info a:hover,
+.nft-info a:hover {
+color: var(--text);
+background: rgba(124, 140, 255, 0.1);
+border-color: var(--accent);
 }
 
 .section-action {
-  margin-top: 25px;
-
-  text-align: center;
+margin-top: 35px;
+text-align: center;
 }
 
 /* =========================================================
-   12. COLLECTION
+14. IDENTITY / PILLARS / COMMUNITY / UTILITY GRIDS
 ========================================================= */
 
-.collection {
-  padding-top: 35px;
+.identity-grid,
+.pillar-grid,
+.community-grid,
+.utility-grid {
+display: grid;
 
-  background: linear-gradient(
-    180deg,
-    rgba(7, 21, 37, 0.78),
-    rgba(10, 31, 51, 0.9)
-  );
+grid-template-columns:
+repeat(4, minmax(0, 1fr));
+
+gap: 18px;
 }
 
-.nft-grid {
-  display: grid;
-
-  grid-template-columns: 1fr;
-
-  gap: 15px;
+.pillar-grid,
+.community-grid,
+.utility-grid {
+grid-template-columns:
+repeat(3, minmax(0, 1fr));
 }
 
-.nft-card {
-  overflow: hidden;
+.identity-grid article,
+.pillar,
+.community-grid article,
+.utility-grid article {
+padding: 28px;
 
-  border: 1px solid rgba(105, 151, 205, 0.25);
+background: var(--surface);
 
-  border-radius: var(--medium-radius);
+border: 1px solid var(--border);
+border-radius: var(--radius);
 
-  background: var(--glass);
-
-  transition: var(--transition);
+transition:
+transform var(--transition),
+border-color var(--transition),
+background var(--transition);
 }
 
-.nft-card:hover {
-  transform: translateY(-5px);
+.identity-grid article:hover,
+.pillar:hover,
+.community-grid article:hover,
+.utility-grid article:hover {
+transform: translateY(-5px);
 
-  border-color: rgba(212, 175, 55, 0.65);
+background:
+rgba(20, 25, 38, 0.9);
+
+border-color:
+rgba(124, 140, 255, 0.3);
 }
 
-.nft-card > img {
-  aspect-ratio: 1 / 1;
+.identity-grid span,
+.pillar span {
+display: block;
 
-  object-fit: cover;
+margin-bottom: 16px;
+
+font-size: 1.8rem;
 }
 
-.nft-info {
-  padding: 13px;
+.identity-grid h3,
+.pillar h3,
+.community-grid h3,
+.utility-grid h3 {
+margin-bottom: 9px;
+
+font-size: 1rem;
+line-height: 1.3;
 }
 
-.nft-info h3 {
-  margin-bottom: 3px;
-
-  color: var(--white);
-
-  font-family: Georgia, "Times New Roman", serif;
-
-  font-size: 0.9rem;
-}
-
-.nft-info p {
-  margin-bottom: 5px;
-
-  color: var(--muted);
-
-  font-size: 0.68rem;
-}
-
-.nft-info a {
-  color: var(--gold-light);
-
-  font-size: 0.68rem;
-
-  font-weight: 700;
+.identity-grid p,
+.pillar p,
+.community-grid p,
+.utility-grid li {
+color: var(--text-soft);
+font-size: 0.9rem;
 }
 
 /* =========================================================
-   13. IDENTITY
+15. COMMUNITY LINK
 ========================================================= */
 
-.dreamer-identity {
-  background: rgba(9, 28, 47, 0.9);
+.community-grid a {
+color: var(--accent-light);
+
+font-weight: 800;
+
+text-decoration: underline;
+text-decoration-color: transparent;
+
+transition: var(--transition);
 }
 
-.identity-grid {
-  display: grid;
-
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-
-  gap: 12px;
-}
-
-.identity-grid article {
-  min-height: 150px;
-
-  padding: 20px 12px;
-
-  border: 1px solid rgba(105, 151, 205, 0.25);
-
-  border-radius: var(--medium-radius);
-
-  background: rgba(12, 39, 65, 0.7);
-
-  text-align: center;
-
-  transition: var(--transition);
-}
-
-.identity-grid article:hover {
-  transform: translateY(-4px);
-
-  border-color: rgba(212, 175, 55, 0.55);
-}
-
-.identity-grid span {
-  display: block;
-
-  margin-bottom: 8px;
-
-  font-size: 1.7rem;
-}
-
-.identity-grid h3 {
-  margin-bottom: 5px;
-
-  color: var(--gold-light);
-
-  font-family: Georgia, "Times New Roman", serif;
-
-  font-size: 0.88rem;
-}
-
-.identity-grid p {
-  color: var(--muted);
-
-  font-size: 0.68rem;
+.community-grid a:hover {
+color: var(--text);
+text-decoration-color: var(--accent);
 }
 
 /* =========================================================
-   14. FOUNDATION
-========================================================= */
-
-.foundation {
-  background: rgba(7, 24, 41, 0.94);
-}
-
-.pillar-grid {
-  display: grid;
-
-  grid-template-columns: 1fr;
-
-  gap: 14px;
-}
-
-.pillar {
-  padding: 23px 18px;
-
-  border: 1px solid rgba(105, 151, 205, 0.25);
-
-  border-radius: var(--medium-radius);
-
-  background: linear-gradient(
-    145deg,
-    rgba(17, 48, 78, 0.76),
-    rgba(7, 25, 43, 0.9)
-  );
-
-  text-align: center;
-
-  transition: var(--transition);
-}
-
-.pillar:hover {
-  transform: translateY(-4px);
-
-  border-color: rgba(212, 175, 55, 0.55);
-}
-
-.pillar > span {
-  display: block;
-
-  margin-bottom: 8px;
-
-  font-size: 1.7rem;
-}
-
-.pillar h3 {
-  margin-bottom: 7px;
-
-  color: var(--gold-light);
-
-  font-size: 0.75rem;
-
-  letter-spacing: 0.06em;
-}
-
-.pillar p {
-  color: var(--muted);
-
-  font-size: 0.72rem;
-}
-
-/* =========================================================
-   15. MINT / BUY
+16. MINT
 ========================================================= */
 
 .mint {
-  text-align: left;
+text-align: center;
 
-  background: linear-gradient(
-    90deg,
-    rgba(7, 21, 37, 0.9),
-    rgba(12, 40, 64, 0.76)
-  );
-}
+padding-top: 120px;
+padding-bottom: 120px;
 
-.mint .section-header {
-  text-align: left;
-}
-
-.mint .section-header > a {
-  display: inline-block;
-
-  margin-bottom: 12px;
-
-  color: var(--gold-light);
-
-  font-size: 0.68rem;
-
-  font-weight: 700;
-}
-
-.mint .section-header p {
-  margin-left: 0;
-}
-
-.mint-actions {
-  margin-top: 18px;
+background:
+radial-gradient(
+circle at center,
+rgba(124, 140, 255, 0.08),
+transparent 60%
+);
 }
 
 /* =========================================================
-   16. STORY PORTAL
+17. STORY PORTAL
 ========================================================= */
 
-.story-portal {
-  background: rgba(7, 24, 41, 0.94);
-}
-
 .current-story {
-  padding: 23px 18px;
+max-width: 850px;
 
-  border: 1px solid rgba(105, 151, 205, 0.3);
+margin: 0 auto;
 
-  border-radius: var(--large-radius);
+padding: 35px;
 
-  background: linear-gradient(
-    145deg,
-    rgba(16, 48, 78, 0.75),
-    rgba(7, 25, 43, 0.9)
-  );
+background: var(--surface);
+
+border: 1px solid var(--border);
+border-radius: var(--radius-large);
+
+box-shadow: var(--shadow);
 }
 
 .story-status {
-  display: inline-block;
+display: inline-flex;
 
-  margin-bottom: 10px;
+margin-bottom: 15px;
+padding: 6px 10px;
 
-  color: var(--gold-light);
+border: 1px solid rgba(124, 140, 255, 0.3);
+border-radius: 999px;
 
-  font-size: 0.65rem;
+color: var(--accent-light);
 
-  font-weight: 700;
-
-  letter-spacing: 0.12em;
+font-size: 0.68rem;
+font-weight: 850;
+letter-spacing: 0.12em;
+text-transform: uppercase;
 }
 
 .current-story h3 {
-  margin-bottom: 15px;
+margin-bottom: 25px;
 
-  color: var(--gold-light);
+font-size: 1.5rem;
+}
 
-  font-family: Georgia, "Times New Roman", serif;
+.current-story > img {
+width: 100%;
+max-height: 500px;
 
-  font-size: 1.35rem;
+margin-bottom: 30px;
+
+object-fit: cover;
+
+border-radius: 18px;
+
+border: 1px solid var(--border);
 }
 
 .story-content p {
-  margin-bottom: 13px;
+margin-bottom: 18px;
 
-  color: var(--text);
-
-  font-size: 0.78rem;
+color: var(--text-soft);
 }
 
 .future-stories {
-  margin-top: 25px;
+max-width: 850px;
+margin: 60px auto 0;
 }
 
-.future-stories h3 {
-  margin-bottom: 5px;
-
-  color: var(--gold-light);
-
-  font-size: 0.8rem;
-
-  letter-spacing: 0.08em;
+.future-stories > h3 {
+margin-bottom: 8px;
 }
 
 .future-stories > p {
-  margin-bottom: 14px;
+margin-bottom: 22px;
 
-  color: var(--muted);
-
-  font-size: 0.72rem;
+color: var(--text-muted);
 }
 
 .future-stories ul {
-  display: grid;
-
-  gap: 7px;
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 10px;
 }
 
 .future-stories li {
-  padding: 11px 13px;
+padding: 18px;
 
-  display: flex;
+display: flex;
+justify-content: space-between;
+align-items: center;
+gap: 15px;
 
-  align-items: center;
-  justify-content: space-between;
+background: var(--surface);
 
-  gap: 12px;
-
-  border: 1px solid rgba(212, 175, 55, 0.15);
-
-  border-radius: var(--small-radius);
-
-  background: rgba(11, 35, 58, 0.75);
+border: 1px solid var(--border);
+border-radius: 12px;
 }
 
 .future-stories h4 {
-  color: var(--white);
-
-  font-family: Georgia, "Times New Roman", serif;
-
-  font-size: 0.75rem;
+font-size: 0.9rem;
 }
 
-.future-stories li span {
-  color: var(--gold-light);
-
-  font-size: 0.58rem;
-
-  white-space: nowrap;
+.future-stories span {
+color: var(--text-muted);
+font-size: 0.72rem;
 }
 
 /* =========================================================
-   17. COMMUNITY
+18. WAITLIST
 ========================================================= */
-
-.community {
-  background: rgba(9, 29, 48, 0.92);
-}
-
-.community-grid {
-  display: grid;
-
-  grid-template-columns: 1fr;
-
-  gap: 14px;
-}
-
-.community-grid article {
-  padding: 22px 18px;
-
-  border: 1px solid rgba(105, 151, 205, 0.25);
-
-  border-radius: var(--medium-radius);
-
-  background: var(--glass);
-}
-
-.community-grid h3 {
-  margin-bottom: 7px;
-
-  color: var(--gold-light);
-
-  font-family: Georgia, "Times New Roman", serif;
-
-  font-size: 0.95rem;
-}
-
-.community-grid p {
-  color: var(--muted);
-
-  font-size: 0.75rem;
-}
-
-.community-grid a {
-  color: var(--gold-light);
-
-  font-weight: 700;
-}
-
-/* =========================================================
-   18. WAIT-LIST
-========================================================= */
-
-.waitlist {
-  text-align: left;
-
-  background:
-    radial-gradient(
-      circle at 70% 50%,
-      rgba(44, 77, 145, 0.25),
-      transparent 55%
-    ),
-    rgba(8, 25, 43, 0.94);
-}
-
-.waitlist .section-header {
-  text-align: left;
-}
-
-.waitlist .section-header p {
-  margin-left: 0;
-}
 
 .waitlist-content {
-  padding: 22px 18px;
+max-width: 700px;
 
-  border: 1px solid rgba(105, 151, 205, 0.28);
+margin: auto;
+padding: 38px;
 
-  border-radius: var(--large-radius);
+text-align: center;
 
-  background: rgba(13, 40, 65, 0.78);
+background:
+linear-gradient(
+145deg,
+rgba(124, 140, 255, 0.08),
+rgba(255, 255, 255, 0.025)
+);
+
+border: 1px solid var(--border);
+border-radius: var(--radius-large);
 }
 
 .waitlist-content p {
-  margin-bottom: 16px;
+margin-bottom: 24px;
 
-  color: var(--text);
-
-  font-size: 0.78rem;
-}
-
-.waitlist-content a {
-  background: var(--gold);
-
-  color: var(--navy-black);
+color: var(--text-soft);
 }
 
 /* =========================================================
-   19. ROADMAP
+19. ROADMAP
 ========================================================= */
 
-.roadmap {
-  background: rgba(9, 29, 48, 0.92);
-}
-
 .roadmap-grid {
-  display: grid;
+display: grid;
 
-  grid-template-columns: 1fr;
+grid-template-columns:
+repeat(4, minmax(0, 1fr));
 
-  gap: 10px;
+gap: 16px;
 }
 
 .roadmap-grid article {
-  padding: 18px;
+position: relative;
 
-  border-left: 2px solid var(--gold-dark);
+padding: 28px;
 
-  background: rgba(12, 38, 62, 0.75);
+background: var(--surface);
+
+border: 1px solid var(--border);
+border-radius: var(--radius);
+
+overflow: hidden;
+}
+
+.roadmap-grid article::before {
+content: "";
+
+position: absolute;
+
+top: 0;
+left: 0;
+right: 0;
+
+height: 2px;
+
+background:
+linear-gradient(
+90deg,
+transparent,
+var(--accent),
+transparent
+);
 }
 
 .roadmap-grid article > span {
-  color: var(--gold-light);
+color: var(--accent-light);
 
-  font-size: 0.65rem;
-
-  font-weight: 700;
+font-size: 0.7rem;
+font-weight: 850;
+letter-spacing: 0.14em;
+text-transform: uppercase;
 }
 
 .roadmap-grid h3 {
-  margin: 5px 0 6px;
+margin: 12px 0 20px;
 
-  color: var(--white);
-
-  font-family: Georgia, "Times New Roman", serif;
-
-  font-size: 0.85rem;
+font-size: 1.1rem;
 }
 
 .roadmap-grid li {
-  color: var(--muted);
+position: relative;
 
-  font-size: 0.68rem;
+padding-left: 17px;
+margin-bottom: 10px;
+
+color: var(--text-soft);
+
+font-size: 0.85rem;
+}
+
+.roadmap-grid li::before {
+content: "";
+
+position: absolute;
+
+left: 0;
+top: 0.72em;
+
+width: 5px;
+height: 5px;
+
+border-radius: 50%;
+
+background: var(--accent);
 }
 
 /* =========================================================
-   20. NFT UTILITY
+20. NFT UTILITY
 ========================================================= */
 
-.nft-utility {
-  background:
-    radial-gradient(circle at 50% 0%, rgba(44, 77, 145, 0.25), transparent 60%),
-    rgba(8, 25, 43, 0.94);
-}
-
 .utility-grid {
-  display: grid;
-
-  grid-template-columns: 1fr;
-
-  gap: 14px;
+grid-template-columns: repeat(3, 1fr);
 }
 
 .utility-grid article {
-  padding: 22px 18px;
-
-  border: 1px solid rgba(105, 151, 205, 0.28);
-
-  border-radius: var(--medium-radius);
-
-  background: linear-gradient(
-    145deg,
-    rgba(16, 47, 76, 0.78),
-    rgba(8, 27, 46, 0.9)
-  );
-
-  transition: var(--transition);
-}
-
-.utility-grid article:hover {
-  transform: translateY(-4px);
-
-  border-color: rgba(212, 175, 55, 0.55);
+padding: 30px;
 }
 
 .utility-grid h3 {
-  margin-bottom: 13px;
+margin-bottom: 22px;
 
-  color: var(--gold-light);
-
-  font-family: Georgia, "Times New Roman", serif;
-
-  font-size: 1rem;
+color: var(--text);
 }
 
 .utility-grid li {
-  position: relative;
+position: relative;
 
-  padding-left: 15px;
-
-  margin-bottom: 8px;
-
-  color: var(--muted);
-
-  font-size: 0.72rem;
+padding-left: 19px;
+margin-bottom: 13px;
 }
 
 .utility-grid li::before {
-  content: "•";
+content: "✓";
 
-  position: absolute;
+position: absolute;
+left: 0;
 
-  left: 0;
-
-  color: var(--gold-light);
+color: var(--accent-light);
+font-weight: 900;
 }
 
 /* =========================================================
-   21. EASTER EGG
+21. FAQ
+========================================================= */
+
+.faq-section {
+text-align: center;
+}
+
+.faq-button {
+background: transparent;
+color: var(--text);
+border-color: var(--border-light);
+}
+
+.faq-button:hover {
+background: var(--text);
+color: #080a0f;
+}
+
+/* =========================================================
+22. EASTER EGG
 ========================================================= */
 
 .community-easter-egg {
-  padding-top: 25px;
-  padding-bottom: 25px;
-
-  text-align: center;
-
-  background: rgba(7, 21, 37, 0.96);
+text-align: center;
 }
 
 .community-easter-egg p {
-  color: var(--text);
-
-  font-size: 0.8rem;
+color: var(--text-soft);
 }
 
 .secret-trigger {
-  cursor: pointer;
+display: inline-block;
+
+padding: 2px 5px;
+
+color: var(--accent-light);
+
+cursor: pointer;
+
+border-radius: 5px;
+
+transition: var(--transition);
 }
 
-.secret-trigger em {
-  color: var(--gold-light);
-
-  font-style: normal;
-
-  font-weight: 700;
-
-  text-decoration: underline dotted rgba(212, 175, 55, 0.45);
+.secret-trigger:hover,
+.secret-trigger:focus {
+background: rgba(124, 140, 255, 0.12);
+outline: none;
 }
 
 .secret-message {
-  display: inline-block;
+display: block;
 
-  max-width: 700px;
+max-width: 700px;
 
-  margin-top: 12px;
+margin: 25px auto 0;
+padding: 18px;
 
-  padding: 12px 16px;
+color: var(--accent-light);
 
-  border: 1px solid rgba(212, 175, 55, 0.35);
+background: var(--surface);
 
-  border-radius: var(--small-radius);
+border: 1px solid var(--border);
+border-radius: var(--radius-small);
 
-  color: var(--gold-light);
-
-  background: rgba(11, 35, 58, 0.92);
-
-  font-size: 0.68rem;
-
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+font-size: 0.82rem;
 }
 
 /* =========================================================
-   22. FINAL CTA
+23. FINAL CTA
 ========================================================= */
 
 .final-cta {
-  text-align: center;
+text-align: center;
 
-  background:
-    radial-gradient(circle at center, rgba(34, 71, 130, 0.32), transparent 65%),
-    rgba(7, 21, 37, 0.9);
+padding-top: 130px;
+padding-bottom: 130px;
+
+border-top: 1px solid var(--border);
+
+background:
+radial-gradient(
+circle at center,
+rgba(124, 140, 255, 0.11),
+transparent 58%
+);
 }
 
 .final-cta > p:first-child {
-  margin-bottom: 8px;
+margin-bottom: 14px;
 
-  color: var(--gold-light);
+color: var(--accent-light);
 
-  font-size: 0.65rem;
-
-  font-weight: 700;
-
-  letter-spacing: 0.18em;
+font-size: 0.76rem;
+font-weight: 850;
+letter-spacing: 0.18em;
+text-transform: uppercase;
 }
 
 .final-cta h2 {
-  margin-bottom: 8px;
+margin-bottom: 10px;
 
-  color: var(--white);
+font-size: clamp(
+2.5rem,
+6vw,
+5rem
+);
 
-  font-family: Georgia, "Times New Roman", serif;
-
-  font-size: clamp(1.8rem, 6vw, 3rem);
-
-  font-weight: 500;
+line-height: 1;
+letter-spacing: -0.055em;
 }
 
 .final-cta > p:nth-of-type(2) {
-  margin-bottom: 20px;
+margin-bottom: 30px;
 
-  color: var(--text);
+color: var(--text-soft);
 }
 
 /* =========================================================
-   23. FOOTER
+24. SUPPORT
 ========================================================= */
 
-footer {
-  padding: 40px 18px 20px;
-
-  background: #06111e;
-
-  border-top: 1px solid rgba(212, 175, 55, 0.15);
+.support-section {
+padding-top: 70px;
+padding-bottom: 70px;
 }
 
-footer > div {
-  width: min(100%, var(--container));
+.support-box {
+max-width: 760px;
 
-  margin-left: auto;
-  margin-right: auto;
+margin: auto;
+padding: 35px;
+
+text-align: center;
+
+background:
+linear-gradient(
+145deg,
+rgba(124, 140, 255, 0.08),
+rgba(255, 255, 255, 0.025)
+);
+
+border: 1px solid var(--border);
+border-radius: var(--radius-large);
 }
 
-.footer-brand {
-  margin-bottom: 28px;
+.support-box h3 {
+margin-bottom: 8px;
+
+font-size: 1.4rem;
 }
 
-.footer-brand h2 {
-  margin-bottom: 5px;
+.support-box p {
+margin-bottom: 22px;
 
-  color: var(--gold-light);
-
-  font-family: Georgia, "Times New Roman", serif;
-
-  font-size: 1.05rem;
-
-  letter-spacing: 0.08em;
+color: var(--text-soft);
 }
 
-.footer-brand p {
-  color: var(--muted);
-
-  font-size: 0.72rem;
+.support-button {
+background: transparent;
+color: var(--text);
+border-color: var(--border-light);
 }
 
-.footer-social {
-  margin-bottom: 28px;
+.support-button:hover {
+background: var(--text);
+color: #080a0f;
 }
 
-.footer-social h3 {
-  margin-bottom: 10px;
-
-  color: var(--white);
-
-  font-size: 0.72rem;
-
-  letter-spacing: 0.08em;
-}
-
-.footer-social ul {
-  display: flex;
-
-  flex-wrap: wrap;
-
-  gap: 15px;
-}
-
-.footer-social a {
-  color: var(--muted);
-
-  font-size: 0.72rem;
-
-  transition: color var(--transition);
-}
-
-.footer-social a:hover {
-  color: var(--gold-light);
-}
-
-.footer-bottom {
-  padding-top: 17px;
-
-  border-top: 1px solid rgba(255, 255, 255, 0.07);
-}
-
-.footer-bottom p {
-  margin-bottom: 4px;
-
-  color: var(--muted);
-
-  font-size: 0.62rem;
-}
-
-/* =========================================================
-   24. TABLET — 600px+
-========================================================= */
-
-@media (min-width: 600px) {
-  section {
-    padding: 80px 30px;
-  }
-
-  .hero-actions,
-  .mint-actions,
-  .cta-actions {
-    flex-direction: row;
-  }
-
-  .hero-actions a,
-  .mint-actions a,
-  .cta-actions a {
-    min-width: 175px;
-  }
-
-  .dreamer-gallery {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .nft-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .pillar-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .community-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .utility-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .roadmap-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .roadmap-grid article {
-    min-height: 145px;
-  }
-
-  .current-story {
-    padding: 30px;
-  }
-
-  .footer-social ul {
-    gap: 20px;
-  }
-}
-
-/* =========================================================
-   25. DESKTOP — 900px+
-========================================================= */
-
-@media (min-width: 900px) {
-  nav {
-    min-height: 76px;
-
-    padding: 0 25px;
-  }
-
-  .logo {
-    font-size: 1.25rem;
-  }
-
-  .hamburger {
-    display: none;
-  }
-
-  .main-navigation {
-    display: flex;
-
-    align-items: center;
-
-    gap: 22px;
-
-    margin-left: auto;
-  }
-
-  .main-navigation a {
-    position: relative;
-
-    color: var(--muted);
-
-    font-size: 0.7rem;
-
-    font-weight: 700;
-
-    letter-spacing: 0.04em;
-
-    transition: color var(--transition);
-  }
-
-  .main-navigation a::after {
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-    bottom: -7px;
-
-    width: 0;
-    height: 1px;
-
-    background: var(--gold);
-
-    transition: width var(--transition);
-  }
-
-  .main-navigation a:hover {
-    color: var(--gold-light);
-  }
-
-  .main-navigation a:hover::after {
-    width: 100%;
-  }
-
-  .nav-actions {
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
-
-    margin-left: 20px;
-  }
-
-  .nav-actions a {
-    display: inline-flex;
-
-    align-items: center;
-    justify-content: center;
-
-    min-height: 38px;
-
-    padding: 8px 15px;
-
-    border: 1px solid rgba(212, 175, 55, 0.5);
-
-    border-radius: 999px;
-
-    color: var(--gold-light);
-
-    font-size: 0.62rem;
-
-    font-weight: 700;
-
-    letter-spacing: 0.06em;
-
-    transition: var(--transition);
-  }
-
-  .nav-actions a:hover {
-    color: var(--navy-black);
-
-    background: var(--gold);
-  }
-
-  .community-actions {
-    justify-content: flex-end;
-
-    padding: 8px 25px;
-  }
-
-  .hero {
-    min-height: 680px;
-
-    padding-top: 100px;
-    padding-bottom: 100px;
-  }
-
-  .hero-description {
-    font-size: 0.95rem;
-  }
-
-  .dreamer-gallery {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .nft-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .identity-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .community-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .roadmap-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .utility-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .current-story {
-    max-width: 900px;
-
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  footer {
-    padding-left: 30px;
-    padding-right: 30px;
-  }
-}
-
-/* =========================================================
-   26. LARGE DESKTOP — 1200px+
-========================================================= */
-
-@media (min-width: 1200px) {
-  section {
-    padding-top: 95px;
-    padding-bottom: 95px;
-  }
-
-  .section-header {
-    margin-bottom: 45px;
-  }
-
-  .hero {
-    min-height: 720px;
-  }
-
-  .hero h1 {
-    font-size: 6.5rem;
-  }
-
-  .dreamer-gallery,
-  .nft-grid {
-    gap: 20px;
-  }
-
-  .identity-grid {
-    gap: 18px;
-  }
-
-  .pillar-grid,
-  .community-grid,
-  .utility-grid {
-    gap: 20px;
-  }
-
-  .roadmap-grid {
-    gap: 18px;
-  }
-}
-
-/* =========================================================
-   27. ACCESSIBILITY
-========================================================= */
-
-a:focus-visible,
-button:focus-visible {
-  outline: 2px solid var(--gold-light);
-
-  outline-offset: 3px;
-}
-
-/* =========================================================
-   28. REDUCED MOTION
-========================================================= */
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  *,
-  *::before,
-  *::after {
-    transition: none !important;
-  }
-}
-.community-actions {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 18px;
-  flex-wrap: wrap;
-}
-
-.studio-link {
-  font-weight: 700;
-  padding: 12px 22px;
-  border-radius: 8px;
-  border: 1px solid currentColor;
-  text-decoration: none;
-  cursor: pointer;
-}
+/* ===================================
