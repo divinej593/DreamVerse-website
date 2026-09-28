@@ -1959,3 +1959,218 @@ animation-iteration-count: 1 !important;
     padding: 22px;
   }
         }
+
+/* =========================================================
+   DREAMVERSE HUB — LAYOUT & SPACING
+   ========================================================= */
+
+.dreamverse-hub {
+  padding: 100px 0;
+}
+
+.dreamverse-hub .section-header {
+  max-width: 760px;
+  margin: 0 auto 50px;
+  text-align: center;
+}
+
+.dreamverse-hub .section-label {
+  display: inline-block;
+  margin-bottom: 14px;
+  color: var(--accent-light);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.dreamverse-hub .section-header h2 {
+  margin-bottom: 16px;
+}
+
+.dreamverse-hub .section-header p {
+  max-width: 650px;
+  margin: 0 auto;
+  color: var(--text-soft);
+  line-height: 1.8;
+}
+
+
+/* HUB GRID */
+
+.dreamverse-hub .hub-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
+  align-items: stretch;
+}
+
+
+/* HUB CARD */
+
+.dreamverse-hub .hub-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 285px;
+  padding: 26px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition:
+    transform var(--transition),
+    border-color var(--transition),
+    background var(--transition);
+}
+
+.dreamverse-hub .hub-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(174, 183, 255, 0.35);
+  background: var(--surface-strong);
+}
+
+
+/* ICON */
+
+.dreamverse-hub .hub-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 48px;
+  height: 48px;
+  margin-bottom: 20px;
+
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+
+  background: var(--surface-light);
+  color: var(--accent-light);
+
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+
+/* STATUS */
+
+.dreamverse-hub .hub-status {
+  display: block;
+  margin-bottom: 10px;
+
+  color: var(--text-muted);
+
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.dreamverse-hub .hub-status.available {
+  color: var(--accent-light);
+}
+
+
+/* TEXT */
+
+.dreamverse-hub .hub-card h3 {
+  margin: 0 0 12px;
+  font-size: 1.15rem;
+}
+
+.dreamverse-hub .hub-card p {
+  margin: 0;
+  color: var(--text-soft);
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+
+/* BUTTON */
+
+.dreamverse-hub .hub-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  min-height: 44px;
+
+  margin-top: auto;
+  padding: 11px 16px;
+
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+
+  background: var(--surface-light);
+  color: var(--text);
+
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+
+  transition:
+    background var(--transition),
+    border-color var(--transition),
+    transform var(--transition);
+}
+
+.dreamverse-hub .hub-button:hover {
+  transform: translateY(-2px);
+  background: rgba(124, 140, 255, 0.12);
+  border-color: rgba(174, 183, 255, 0.35);
+}
+
+
+/* DISABLED BUTTON */
+
+.dreamverse-hub .hub-button.disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+
+.dreamverse-hub .hub-button.disabled:hover {
+  transform: none;
+  background: var(--surface-light);
+  border-color: var(--border-light);
+}
+
+
+/* FEATURED STUDIO */
+
+.dreamverse-hub .hub-card-featured {
+  border-color: rgba(124, 140, 255, 0.30);
+}
+
+
+/* =========================================================
+   HUB RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1100px) {
+  .dreamverse-hub .hub-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+
+@media (max-width: 600px) {
+  .dreamverse-hub {
+    padding: 80px 0;
+  }
+
+  .dreamverse-hub .section-header {
+    margin-bottom: 35px;
+  }
+
+  .dreamverse-hub .hub-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .dreamverse-hub .hub-card {
+    min-height: 0;
+    padding: 22px;
+  }
+}
