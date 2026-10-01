@@ -1,518 +1,645 @@
-<!DOCTYPE html>
-<html lang="en">
+/* =========================================================
+   DREAMVERSE — DISCLAIMER PAGE
+   Professional dark interface inspired by modern
+   fintech/trading website layouts.
+========================================================= */
+
+:root {
+  --bg: #070b12;
+  --bg-soft: #0b111b;
+  --surface: #101722;
+  --surface-hover: #141d2a;
+
+  --gold: #d4af37;
+  --gold-light: #f0cf68;
+  --gold-soft: rgba(212, 175, 55, 0.12);
 
-<head>
+  --text: #f4f6f8;
+  --text-soft: #c7ced8;
+  --muted: #8993a2;
 
-  <meta charset="UTF-8">
+  --border: rgba(255, 255, 255, 0.08);
+  --border-gold: rgba(212, 175, 55, 0.22);
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  --container: 1120px;
 
-  <meta
-    name="description"
-    content="DREAMVERSE Disclaimer and Legal Notice."
-  >
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
 
-  <title>
-    DREAMVERSE — Disclaimer
-  </title>
+  --transition: 0.25s ease;
+}
 
-  <link
-    rel="stylesheet"
-    href="style.css"
-  >
 
-</head>
+/* =========================================================
+   RESET
+========================================================= */
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-<body>
+html {
+  scroll-behavior: smooth;
+}
 
+body {
+  min-height: 100vh;
 
-<header class="site-header">
+  background:
+    radial-gradient(
+      circle at 50% -10%,
+      rgba(212, 175, 55, 0.08),
+      transparent 38%
+    ),
+    var(--bg);
 
-  <div class="container">
+  color: var(--text);
 
-    <a
-      href="index.html"
-      class="logo"
-      aria-label="DREAMVERSE Home"
-    >
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
 
-      DreamVerse
+  line-height: 1.7;
 
-      <img
-        src="images/dreamverse-logo.png"
-        alt="DREAMVERSE"
-      >
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
 
-    </a>
 
-  </div>
+/* =========================================================
+   GLOBAL ELEMENTS
+========================================================= */
 
-</header>
+img {
+  max-width: 100%;
+  height: auto;
+}
 
+a {
+  color: inherit;
+  text-decoration: none;
+}
 
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
 
-<main>
+::selection {
+  background: var(--gold);
+  color: #05070b;
+}
 
-<section class="section">
 
-  <div class="container">
+/* =========================================================
+   HEADER
+========================================================= */
 
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
 
-    <header class="section-header">
+  width: 100%;
 
-      <p>
-        LEGAL NOTICE
-      </p>
+  background: rgba(7, 11, 18, 0.88);
 
-      <h1>
-        DREAMVERSE Disclaimer
-      </h1>
+  border-bottom: 1px solid var(--border);
 
-      <p>
-        Please read this disclaimer carefully before using
-        the DREAMVERSE website, community channels,
-        creator tools, or participating in DREAMVERSE-related
-        activities.
-      </p>
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
 
-    </header>
 
+.site-header .container {
+  width: min(
+    calc(100% - 40px),
+    var(--container)
+  );
 
+  min-height: 76px;
 
-    <div class="legal-content">
+  margin: 0 auto;
 
+  display: flex;
+  align-items: center;
+}
 
-      <h2>
-        1. General Information
-      </h2>
 
-      <p>
-        DREAMVERSE is a creative digital universe and evolving
-        ecosystem centered around digital collectibles,
-        Dreamer identity, storytelling, community participation,
-        creative tools, creators, discovery, and future
-        digital experiences.
-      </p>
+.logo {
+  display: inline-flex;
 
-      <p>
-        Information published through the DREAMVERSE website,
-        official social channels, community platforms,
-        creator tools, and related materials is provided for
-        general informational, creative, educational,
-        and entertainment purposes.
-      </p>
-
-
-
-      <h2>
-        2. Not Financial, Investment, Legal, or Tax Advice
-      </h2>
-
-      <p>
-        Nothing published by DREAMVERSE or its representatives
-        is intended to constitute financial, investment,
-        legal, tax, accounting, or other professional advice.
-      </p>
-
-      <p>
-        Nothing on the DREAMVERSE website should be understood
-        as a recommendation to buy, sell, hold, or otherwise
-        transact in any digital asset.
-      </p>
-
-      <p>
-        Users are responsible for making their own decisions
-        and obtaining independent professional advice where
-        appropriate.
-      </p>
-
-
-
-      <h2>
-        3. NFTs and Digital Asset Risks
-      </h2>
-
-      <p>
-        NFTs and blockchain-based assets involve risks.
-        These may include market volatility, limited liquidity,
-        changing demand, blockchain congestion, transaction
-        fees, technical failures, smart-contract risks,
-        marketplace changes, scams, and loss of wallet access.
-      </p>
-
-      <p>
-        Purchasing or holding a DREAMVERSE NFT does not
-        guarantee profit, appreciation, resale value,
-        income, or any particular financial outcome.
-      </p>
-
-
-
-      <h2>
-        4. Nature of DREAMVERSE NFTs
-      </h2>
-
-      <p>
-        A DREAMVERSE NFT represents a digital collectible
-        and a place within the DREAMVERSE universe.
-      </p>
-
-      <p>
-        Ownership of a DREAMVERSE NFT does not automatically
-        provide ownership of DREAMVERSE as a business,
-        its revenues, intellectual property, trademarks,
-        or other assets unless expressly stated in a separate
-        written agreement.
-      </p>
-
-
-
-      <h2>
-        5. Roadmap and Future Development
-      </h2>
-
-      <p>
-        DREAMVERSE may describe planned experiences including
-        Dreamer Identity, quests, points, levels,
-        achievements, holder verification, exclusive content,
-        DreamVerse Studio, the DREAMVERSE Creator Hub,
-        creator profiles, creator collaborations, creator tools,
-        discovery, community opportunities, future marketplace
-        functionality, additional collections, rewards,
-        and other ecosystem developments.
-      </p>
-
-      <p>
-        Roadmap items represent intended development direction
-        and are not guarantees.
-      </p>
-
-      <p>
-        Timelines, functionality, eligibility, availability,
-        specifications, priorities, and scope may change.
-        A planned feature may be delayed, modified, replaced,
-        suspended, or discontinued.
-      </p>
-
-
-
-      <h2>
-        6. No Guarantee of Value or Future Benefits
-      </h2>
-
-      <p>
-        DREAMVERSE does not guarantee that any NFT will
-        increase in value or that a holder will be able
-        to resell an NFT at a profit or at all.
-      </p>
-
-      <p>
-        DREAMVERSE does not guarantee future rewards,
-        income, financial returns, airdrops, access,
-        creator opportunities, or any other particular
-        financial benefit.
-      </p>
-
-
+  align-items: center;
+  gap: 10px;
 
-      <h2>
-        7. Community Activities, Quests, and Rewards
-      </h2>
+  color: var(--text);
 
-      <p>
-        Community activities, quests, contests, achievements,
-        points, levels, rewards, and similar experiences
-        may have separate rules, eligibility requirements,
-        participation limits, or availability periods.
-      </p>
+  font-size: 1.15rem;
+  font-weight: 800;
 
-      <p>
-        Participation in an activity does not guarantee
-        a reward, prize, recognition, access, or future benefit.
-      </p>
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
 
 
+.logo img {
+  width: 34px;
+  height: 34px;
 
-      <h2>
-        8. Creator Ecosystem
-      </h2>
+  object-fit: contain;
 
-      <p>
-        DREAMVERSE may develop the DREAMVERSE Creator Hub
-        as a central creator-focused ecosystem space.
-      </p>
+  display: block;
+}
 
-      <p>
-        The Creator Hub may bring together creator profiles,
-        creator collaborations, creator tools, discovery,
-        community opportunities, and other creator-focused
-        experiences.
-      </p>
 
-      <p>
-        DreamVerse Studio may operate separately as a
-        creation-focused tool supporting digital artwork,
-        NFT collections, metadata, and other creative projects.
-      </p>
+/* =========================================================
+   MAIN
+========================================================= */
 
-      <p>
-        Participation in the Creator Hub or use of creator
-        tools does not guarantee publication, promotion,
-        sales, income, collaboration, visibility, or
-        any particular result.
-      </p>
+main {
+  width: 100%;
+}
 
 
+/* =========================================================
+   DISCLAIMER HERO
+========================================================= */
 
-      <h2>
-        9. Treasury and Unminted NFTs
-      </h2>
+.section {
+  padding: 90px 0 100px;
+}
 
-      <p>
-        Genesis NFTs reserved for or later allocated to the
-        DREAMVERSE Treasury may be used in connection with
-        future ecosystem milestones, community activities,
-        collaborations, contests, creator initiatives,
-        or other activities related to DREAMVERSE.
-      </p>
 
-      <p>
-        Treasury decisions may evolve as the ecosystem
-        develops and should not be interpreted as a promise
-        of a specific future use or financial benefit.
-      </p>
+.section > .container {
+  width: min(
+    calc(100% - 40px),
+    var(--container)
+  );
 
+  margin: 0 auto;
+}
 
 
-      <h2>
-        10. Blockchain and Wallet Security
-      </h2>
+.section-header {
+  max-width: 820px;
 
-      <p>
-        Blockchain transactions may be irreversible.
-        Users are solely responsible for securing their
-        wallets, private keys, seed phrases, passwords,
-        and other credentials.
-      </p>
+  margin: 0 auto 55px;
 
-      <p>
-        DREAMVERSE will never ask you to provide your
-        private key or seed phrase.
-      </p>
+  text-align: center;
+}
 
-      <p>
-        Always verify official DREAMVERSE links before
-        connecting a wallet, approving a transaction,
-        or signing a blockchain message.
-      </p>
 
+.section-header > p:first-child {
+  margin-bottom: 14px;
 
+  color: var(--gold-light);
 
-      <div class="legal-notice">
+  font-size: 0.72rem;
+  font-weight: 800;
 
-        <strong>
-          SECURITY WARNING:
-        </strong>
+  letter-spacing: 0.16em;
 
-        Never share your wallet seed phrase or private key
-        with anyone claiming to represent DREAMVERSE.
+  text-transform: uppercase;
+}
 
-      </div>
 
+.section-header h1 {
+  margin-bottom: 22px;
 
+  color: var(--text);
 
-      <h2>
-        11. Third-Party Platforms and Services
-      </h2>
+  font-size: clamp(
+    2.4rem,
+    6vw,
+    4.5rem
+  );
 
-      <p>
-        DREAMVERSE may use or link to third-party services
-        including marketplaces, blockchain networks,
-        wallets, social networks, community platforms,
-        hosting providers, and other external services.
-      </p>
+  line-height: 1.04;
 
-      <p>
-        DREAMVERSE does not control third-party platforms
-        and does not guarantee their availability, security,
-        policies, functionality, or continued operation.
-      </p>
+  font-weight: 800;
 
+  letter-spacing: -0.045em;
+}
 
 
-      <h2>
-        12. User Responsibility and Legal Compliance
-      </h2>
+.section-header > p:last-child {
+  max-width: 680px;
 
-      <p>
-        Users are responsible for determining whether
-        participation in DREAMVERSE activities or the
-        acquisition, ownership, transfer, or sale of digital
-        assets is lawful or appropriate in their jurisdiction.
-      </p>
+  margin: 0 auto;
 
-      <p>
-        Users are also responsible for any taxes,
-        reporting requirements, fees, restrictions,
-        or other obligations that may apply to them.
-      </p>
+  color: var(--muted);
 
+  font-size: 1rem;
 
+  line-height: 1.8;
+}
 
-      <h2>
-        13. Website and Technical Availability
-      </h2>
 
-      <p>
-        DREAMVERSE may experience interruptions, errors,
-        maintenance, security incidents, network problems,
-        data loss, or other technical issues.
-      </p>
+/* =========================================================
+   LEGAL CONTENT
+========================================================= */
 
-      <p>
-        Website content, tools, community services,
-        ecosystem features, and creator experiences may
-        be updated, changed, restricted, or removed.
-      </p>
+.legal-content {
+  width: min(
+    100%,
+    900px
+  );
 
+  margin: 0 auto;
 
+  padding: clamp(
+    28px,
+    5vw,
+    58px
+  );
 
-      <h2>
-        14. Scams, Impersonation, and Fraud
-      </h2>
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.035),
+      rgba(255, 255, 255, 0.012)
+    );
 
-      <p>
-        Digital-asset communities can attract impersonators,
-        phishing attempts, fake giveaways, fraudulent mint
-        links, and other scams.
-      </p>
+  border: 1px solid var(--border);
 
-      <p>
-        Users should independently verify official DREAMVERSE
-        accounts, links, announcements, collection pages,
-        and wallet addresses.
-      </p>
+  border-radius: var(--radius-lg);
 
-      <p>
-        DREAMVERSE is not responsible for losses resulting
-        from interaction with fraudulent accounts, unofficial
-        links, phishing websites, fake giveaways, or
-        unauthorized third parties.
-      </p>
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.28);
 
+  position: relative;
 
+  overflow: hidden;
+}
 
-      <h2>
-        15. No Warranty
-      </h2>
 
-      <p>
-        To the fullest extent permitted by applicable law,
-        the DREAMVERSE website, content, information, tools,
-        and services are provided on an "as is" and
-        "as available" basis without warranties of any kind,
-        whether express or implied.
-      </p>
+/* subtle gold line */
 
+.legal-content::before {
+  content: "";
 
+  position: absolute;
 
-      <h2>
-        16. Limitation of Responsibility
-      </h2>
+  top: 0;
+  left: 0;
 
-      <p>
-        To the extent permitted by applicable law,
-        DREAMVERSE and its representatives are not responsible
-        for losses or damages arising from blockchain
-        transactions, wallet compromise, user error,
-        third-party platforms, market movements, technical
-        failures, scams, or other events outside reasonable
-        control.
-      </p>
+  width: 100%;
+  height: 2px;
 
-      <p>
-        Nothing in this disclaimer is intended to exclude
-        or limit any liability that cannot lawfully be
-        excluded or limited.
-      </p>
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--gold),
+      transparent
+    );
 
+  opacity: 0.7;
+}
 
 
-      <h2>
-        17. Changes to DREAMVERSE and This Disclaimer
-      </h2>
+.legal-content h2 {
+  margin-top: 42px;
+  margin-bottom: 14px;
 
-      <p>
-        DREAMVERSE may update its website, ecosystem,
-        roadmap, policies, features, community structure,
-        creator programs, or services as the project develops.
-      </p>
+  color: var(--text);
 
-      <p>
-        This disclaimer may also be updated from time to time.
-        The latest version published on the official DREAMVERSE
-        website should be treated as the current version.
-      </p>
+  font-size: 1.2rem;
 
+  line-height: 1.35;
 
+  font-weight: 750;
 
-      <h2>
-        18. Official Information and Contact
-      </h2>
+  letter-spacing: -0.01em;
+}
 
-      <p>
-        For official announcements, project information,
-        and support, use links provided directly through
-        the official DREAMVERSE website and official
-        community channels.
-      </p>
 
-      <p>
-        Be cautious of anyone claiming to represent
-        DREAMVERSE and requesting payment, private
-        credentials, seed phrases, or wallet approvals
-        through unofficial channels.
-      </p>
+.legal-content h2:first-child {
+  margin-top: 0;
+}
 
 
+.legal-content p {
+  margin-bottom: 18px;
 
-      <p class="legal-updated">
-        Last updated: October 2026
-      </p>
+  color: var(--text-soft);
 
+  font-size: 0.96rem;
 
-    </div>
+  line-height: 1.85;
+}
 
-  </div>
 
-</section>
+.legal-content p:last-child {
+  margin-bottom: 0;
+}
 
-</main>
 
+/* =========================================================
+   IMPORTANT NOTICE
+========================================================= */
 
+.legal-notice {
+  margin-top: 42px;
+  padding: 22px 24px;
 
-<footer class="site-footer">
+  background: var(--gold-soft);
 
-  <div class="container">
+  border: 1px solid var(--border-gold);
 
-    <p>
-      © 2026 DREAMVERSE. All rights reserved.
-    </p>
+  border-radius: var(--radius-md);
 
-    <p>
-      <a href="index.html">
-        Back to DREAMVERSE
-      </a>
-    </p>
+  color: var(--text-soft);
 
-  </div>
+  font-size: 0.92rem;
 
-</footer>
+  line-height: 1.7;
+}
 
 
-</body>
-</html>
+.legal-notice strong {
+  color: var(--gold-light);
+}
+
+
+/* =========================================================
+   LAST UPDATED
+========================================================= */
+
+.legal-updated {
+  margin-top: 40px !important;
+  padding-top: 22px;
+
+  border-top: 1px solid var(--border);
+
+  color: var(--muted) !important;
+
+  font-size: 0.78rem !important;
+
+  letter-spacing: 0.04em;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.site-footer {
+  padding: 34px 0;
+
+  border-top: 1px solid var(--border);
+
+  background: #05080d;
+}
+
+
+.site-footer .container {
+  width: min(
+    calc(100% - 40px),
+    var(--container)
+  );
+
+  margin: 0 auto;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+}
+
+
+.site-footer p {
+  color: var(--muted);
+
+  font-size: 0.78rem;
+}
+
+
+.site-footer a {
+  color: var(--gold-light);
+
+  font-weight: 700;
+
+  transition: var(--transition);
+}
+
+
+.site-footer a:hover {
+  color: var(--text);
+}
+
+
+/* =========================================================
+   HOVER / FOCUS
+========================================================= */
+
+a:focus-visible {
+  outline: 2px solid var(--gold-light);
+
+  outline-offset: 4px;
+
+  border-radius: 4px;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 800px) {
+
+  .section {
+    padding: 75px 0 80px;
+  }
+
+  .section-header {
+    margin-bottom: 40px;
+  }
+
+  .legal-content {
+    padding: 36px;
+  }
+
+  .site-footer .container {
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .site-header .container {
+    width: min(
+      calc(100% - 28px),
+      var(--container)
+    );
+
+    min-height: 68px;
+  }
+
+
+  .logo {
+    font-size: 1rem;
+  }
+
+
+  .logo img {
+    width: 30px;
+    height: 30px;
+  }
+
+
+  .section {
+    padding: 62px 0 65px;
+  }
+
+
+  .section > .container {
+    width: min(
+      calc(100% - 28px),
+      var(--container)
+    );
+  }
+
+
+  .section-header {
+    margin-bottom: 32px;
+  }
+
+
+  .section-header > p:first-child {
+    font-size: 0.66rem;
+  }
+
+
+  .section-header h1 {
+    font-size: clamp(
+      2rem,
+      11vw,
+      3rem
+    );
+
+    letter-spacing: -0.04em;
+  }
+
+
+  .section-header > p:last-child {
+    font-size: 0.9rem;
+
+    line-height: 1.75;
+  }
+
+
+  .legal-content {
+    padding: 25px 21px;
+
+    border-radius: var(--radius-md);
+  }
+
+
+  .legal-content h2 {
+    margin-top: 34px;
+
+    font-size: 1.05rem;
+  }
+
+
+  .legal-content p {
+    font-size: 0.9rem;
+
+    line-height: 1.8;
+  }
+
+
+  .legal-notice {
+    margin-top: 32px;
+
+    padding: 18px;
+
+    font-size: 0.86rem;
+  }
+
+
+  .site-footer {
+    padding: 28px 0;
+  }
+
+
+  .site-footer .container {
+    width: min(
+      calc(100% - 28px),
+      var(--container)
+    );
+
+    gap: 10px;
+  }
+
+
+  .site-footer p {
+    font-size: 0.72rem;
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 380px) {
+
+  .section-header h1 {
+    font-size: 1.85rem;
+  }
+
+
+  .legal-content {
+    padding: 22px 17px;
+  }
+
+
+  .legal-content h2 {
+    font-size: 1rem;
+  }
+
+
+  .legal-content p {
+    font-size: 0.86rem;
+  }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  * {
+    transition: none !important;
+  }
+
+}
