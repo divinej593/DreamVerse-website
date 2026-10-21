@@ -81,13 +81,38 @@ async function apiRequest(path, options = {}) {
       ...options,
       headers
     });
-  } catch {
+  } catch (error) {
+    console.error("DREAMVERSE API connection error:", {
+      endpoint: `${API_BASE}${path}`,
+      websiteOrigin: window.location.origin,
+      error
+    });
+
+    const details =
+      error instanceof Error ? error.message : String(error);
+
     throw new Error(
-      "Unable to connect. Check your internet connection and try again."
+      `API connection failed: ${details}. Check the browser console for details.`
     );
   }
 
-  const data = await response.json().catch(() => ({}));
+  let data;
+
+  try {
+    data = await response.json();
+  } catch (error) {
+    console.error("DREAMVERSE API response was not valid JSON:", {
+      endpoint: `${API_BASE}${path}`,
+      status: response.status,
+      error
+    });
+
+    if (!response.ok) {
+      throw new Error(`The server returned HTTP ${response.status}.`);
+    }
+
+    throw new Error("The server returned an unexpected response.");
+  }
 
   if (response.status === 401 && path !== "/api/admin/login") {
     logout(false);
@@ -172,7 +197,12 @@ loginForm.addEventListener("submit", async (/** @type {SubmitEvent} */ event) =>
     showMessage(loginMessage, "");
     await loadAnalyses();
   } catch (/** @type {any} */ error) {
-    showMessage(loginMessage, error.message, "error");
+    console.error("DREAMVERSE admin login failed:", error);
+    showMessage(
+      loginMessage,
+      error.message || "Login failed. Please try again.",
+      "error"
+    );
   } finally {
     setBusy(false);
   }
@@ -276,9 +306,9 @@ function normalizeAnalysis(analysis) {
     videoUrl: analysis.videoUrl || analysis.video_url || "",
     status: analysis.status || "draft",
     images: Array.isArray(analysis.images)
-? analysis.images
-    .map(normalizeImage)
-    .filter(/** @param {AnalysisImage} image */ (image) => Boolean(image.key))
+      ? analysis.images
+          .map(normalizeImage)
+          .filter((/** @type {AnalysisImage} */ image) => Boolean(image.key))
       : [],
     createdAt: analysis.createdAt || analysis.created_at || "",
     updatedAt: analysis.updatedAt || analysis.updated_at || "",
@@ -510,6 +540,7 @@ async function saveAnalysis(status) {
 
     await loadAnalyses();
   } catch (/** @type {any} */ error) {
+    console.error("DREAMVERSE analysis save failed:", error);
     showMessage(dashboardMessage, error.message, "error");
   } finally {
     setBusy(false);
@@ -647,3 +678,4 @@ async function initialize() {
 }
 
 initialize();
+  
