@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f4ef">
+
+  <title>Admin Dashboard | DREAMVERSE</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Private DREAMVERSE market analysis publishing dashboard.">
+
+  <link rel="stylesheet" href="admin.css">
+  <script src="admin.js" defer></script>
+</head>
+<body>
+  <main class="admin-shell">
+    <header class="admin-header">
+      <a class="brand" href="index.html" aria-label="DREAMVERSE home">
+        <img
+  class="brand-logo"
+  src="dreamverse-logo.png"
+  alt="DREAMVERSE logo"
+>
+        <span>DREAMVERSE <small>ADMIN</small></span>
+      </a>
+      <button id="logout-button" class="button button-outline" type="button" hidden>
+        Log out
+      </button>
+    </header>
+
+    <section id="login-section" class="panel login-panel">
+      <p class="eyebrow">PRIVATE ACCESS</p>
+      <h1>Admin sign in</h1>
+      <p class="muted">Sign in to manage market analysis publications.</p>
+
+      <form id="login-form">
+        <label for="admin-password">Admin password</label>
+        <input
+          id="admin-password"
+          name="password"
+          type="password"
+          autocomplete="current-password"
+          required
+        >
+        <button class="button button-primary" type="submit">
+          Sign in
+        </button>
+        <p id="login-message" class="form-message" role="status"></p>
+      </form>
+    </section>
+
+    <section id="dashboard-section" hidden>
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow">PUBLICATION MANAGEMENT</p>
+          <h1>Market Analysis</h1>
+          <p class="muted">Create, edit, and publish educational market analysis.</p>
+        </div>
+        <button id="new-analysis-button" class="button button-primary" type="button">
+          + New analysis
+        </button>
+      </div>
+
+      <p id="dashboard-message" class="form-message" role="status"></p>
+
+      <section class="panel editor-panel" aria-labelledby="editor-heading">
+        <div class="section-heading">
+          <h2 id="editor-heading">Write an analysis</h2>
+          <span id="editor-status" class="status-label">New draft</span>
+        </div>
+
+        <form id="analysis-form">
+          <input id="analysis-id" name="id" type="hidden">
+
+          <div class="form-grid">
+            <div class="field field-wide">
+              <label for="analysis-title">Analysis title</label>
+              <input
+                id="analysis-title"
+                name="title"
+                type="text"
+                maxlength="180"
+                placeholder="Enter a clear, descriptive title"
+                required
+              >
+            </div>
+
+            <div class="field">
+              <label for="analysis-category">Category</label>
+              <select id="analysis-category" name="category" required>
+                <option value="">Choose a category</option>
+                <option value="Bitcoin">Bitcoin</option>
+                <option value="Altcoins">Altcoins</option>
+                <option value="Market Overview">Market Overview</option>
+                <option value="Technical Analysis">Technical Analysis</option>
+                <option value="Education">Education</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div class="field field-wide">
+              <label for="analysis-summary">Short summary</label>
+              <textarea
+                id="analysis-summary"
+                name="summary"
+                rows="3"
+                maxlength="500"
+                placeholder="Briefly explain what this analysis covers"
+              ></textarea>
+            </div>
+
+            <div class="field field-wide">
+              <label for="analysis-content">Full analysis</label>
+              <textarea
+                id="analysis-content"
+                name="content"
+                rows="14"
+                placeholder="Write your analysis, observations, key levels, scenarios, and risks..."
+                required
+              ></textarea>
+              <small>Use plain text for now. We'll add clear formatting support where appropriate.</small>
+            </div>
+
+            <div class="field field-wide">
+              <label for="analysis-images">Chart images</label>
+              <input
+                id="analysis-images"
+                name="images"
+                type="file"
+                accept="image/jpeg,image/png,image/webp"
+                multiple
+              >
+              <small>JPG, PNG, or WebP. Maximum 8 MB per image. Save the analysis before adding new images.</small>
+              <div id="image-list" class="image-list" aria-live="polite"></div>
+            </div>
+
+            <div class="field field-wide">
+              <label for="analysis-video">YouTube link (optional)</label>
+              <input
+                id="analysis-video"
+                name="video_url"
+                type="url"
+                placeholder="https://www.youtube.com/watch?v=..."
+              >
+            </div>
+          </div>
+
+          <div class="editor-actions">
+            <button id="save-draft-button" class="button button-outline" type="button">
+              Save draft
+            </button>
+            <button id="publish-button" class="button button-primary" type="button">
+              Publish analysis
+            </button>
+          </div>
+          <p class="muted form-note">
+            Publishing makes the analysis publicly visible. Review its content and images before publishing.
+          </p>
+        </form>
+      </section>
+
+      <section class="panel entries-panel" aria-labelledby="entries-heading">
+        <div class="section-heading">
+          <div>
+            <h2 id="entries-heading">Your analyses</h2>
+            <p class="muted">Manage drafts and published entries.</p>
+          </div>
+          <button id="refresh-button" class="button button-outline" type="button">
+            Refresh
+          </button>
+        </div>
+
+        <div id="analysis-list" class="analysis-list" aria-live="polite">
+          <p class="muted">Your analyses will appear here after loading.</p>
+        </div>
+      </section>
+    </section>
+
+    <footer class="admin-footer">
+      <p>© <span id="current-year"></span> DREAMVERSE</p>
+      <p>Educational content only. Not financial advice.</p>
+    </footer>
+  </main>
+</body>
+                </html>
