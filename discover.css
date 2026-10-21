@@ -804,3 +804,6 @@ p {
     transition-duration: 0.01ms !important;
   }
   }
+.project-card[hidden] {
+  display: none !important;
+}
