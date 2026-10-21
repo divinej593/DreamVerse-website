@@ -65,13 +65,20 @@ function showMessage(element, message, type = "") {
  */
 async function apiRequest(path, options = {}) {
   const headers = new Headers(options.headers || {});
+  const isLogin = path === "/api/admin/login";
 
-  if (token) {
+  // Login must not send an old session token.
+  if (token && !isLogin) {
     headers.set("Authorization", `Bearer ${token}`);
   }
 
+  // Use text/plain for login to avoid a JSON-triggered preflight.
+  // The request body remains JSON text, which request.json() can parse.
   if (options.body && !(options.body instanceof FormData)) {
-    headers.set("Content-Type", "application/json");
+    headers.set(
+      "Content-Type",
+      isLogin ? "text/plain;charset=UTF-8" : "application/json"
+    );
   }
 
   let response;
@@ -114,7 +121,7 @@ async function apiRequest(path, options = {}) {
     throw new Error("The server returned an unexpected response.");
   }
 
-  if (response.status === 401 && path !== "/api/admin/login") {
+  if (response.status === 401 && !isLogin) {
     logout(false);
     throw new Error("Your session has expired. Please sign in again.");
   }
@@ -678,4 +685,4 @@ async function initialize() {
 }
 
 initialize();
-  
+      
