@@ -1,0 +1,402 @@
+/* ==========================================
+   DREAMVERSE MEMBER — THUNDER & RAIN
+   ========================================== */
+
+:root {
+  --night: #030712;
+  --storm: #101d33;
+  --blue: #9bcaff;
+  --white: #f4f8ff;
+  --muted: #bdcbe0;
+  --border: rgba(190, 220, 255, 0.2);
+  --container: 1080px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  isolation: isolate;
+  position: relative;
+  color: var(--white);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.7;
+
+  background:
+    radial-gradient(
+      ellipse at 78% 18%,
+      rgba(100, 139, 196, 0.2),
+      transparent 35%
+    ),
+    radial-gradient(
+      ellipse at 15% 65%,
+      rgba(40, 68, 111, 0.2),
+      transparent 40%
+    ),
+    linear-gradient(
+      145deg,
+      #02050d 0%,
+      #101d33 48%,
+      #030712 100%
+    );
+}
+
+/* Keep all page content above the weather effects */
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Falling rain */
+body::before {
+  content: "";
+  position: fixed;
+  inset: -30% -20%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.38;
+
+  background-image: repeating-linear-gradient(
+    105deg,
+    transparent 0,
+    transparent 22px,
+    rgba(194, 220, 255, 0.28) 23px,
+    transparent 24px,
+    transparent 39px
+  );
+
+  animation: rain-fall 0.65s linear infinite;
+}
+
+/* Lightning illuminating the storm clouds */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: transparent;
+  animation: lightning-flash 11s infinite;
+}
+
+.container {
+  width: min(var(--container), 88%);
+  margin-inline: auto;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* ==========================================
+   HERO
+   ========================================== */
+
+.inner-hero {
+  min-height: 390px;
+  padding: 90px 0 80px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+
+  border-bottom: 1px solid var(--border);
+
+  background: linear-gradient(
+    180deg,
+    rgba(7, 15, 29, 0.24),
+    rgba(3, 7, 18, 0.42)
+  );
+}
+
+.inner-hero .container {
+  position: relative;
+  z-index: 2;
+}
+
+.eyebrow {
+  margin-bottom: 18px;
+  color: var(--blue);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.inner-hero h1 {
+  max-width: 800px;
+  font-size: clamp(2.1rem, 5vw, 4.2rem);
+  line-height: 1.13;
+  letter-spacing: -1.4px;
+  text-wrap: balance;
+  text-shadow: 0 4px 28px rgba(104, 165, 255, 0.2);
+}
+
+.lead {
+  max-width: 700px;
+  margin-top: 24px;
+  color: var(--muted);
+  font-size: clamp(1rem, 2vw, 1.2rem);
+}
+
+/* ==========================================
+   MEMBERSHIP SECTION
+   ========================================== */
+
+.section {
+  padding: 75px 0 100px;
+}
+
+.info-panel {
+  padding: clamp(24px, 5vw, 48px);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+
+  background: rgba(7, 15, 30, 0.82);
+
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.3),
+    inset 0 1px rgba(255, 255, 255, 0.04);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.info-panel h2 {
+  margin-bottom: 18px;
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  line-height: 1.3;
+}
+
+.info-panel p {
+  max-width: 800px;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+/* ==========================================
+   BUTTONS
+   ========================================== */
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 30px;
+}
+
+.button {
+  min-height: 48px;
+  padding: 12px 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid transparent;
+  border-radius: 8px;
+
+  background: var(--blue);
+  color: #061020;
+
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  background: #ffffff;
+}
+
+.button.secondary {
+  color: var(--white);
+  background: rgba(8, 17, 33, 0.65);
+  border-color: var(--border);
+}
+
+.button.secondary:hover {
+  background: rgba(143, 195, 255, 0.12);
+  border-color: var(--blue);
+}
+
+/* ==========================================
+   FOOTER
+   ========================================== */
+
+.site-footer {
+  border-top: 1px solid var(--border);
+  background: rgba(2, 5, 13, 0.88);
+}
+
+.site-footer .container {
+  padding-top: 30px;
+  padding-bottom: 25px;
+}
+
+.footer-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.footer-brand .brand {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+}
+
+.footer-brand img {
+  display: block;
+  width: min(132px, 100%);
+  height: auto;
+  object-fit: contain;
+}
+
+.footer-bottom {
+  margin-top: 24px;
+  padding-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px 24px;
+
+  border-top: 1px solid rgba(190, 220, 255, 0.12);
+  color: #9aaac2;
+  font-size: 0.85rem;
+}
+
+/* Keyboard accessibility */
+a:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 4px;
+}
+
+/* ==========================================
+   WEATHER ANIMATIONS
+   ========================================== */
+
+@keyframes rain-fall {
+  from {
+    transform: translate3d(0, -5%, 0);
+  }
+
+  to {
+    transform: translate3d(-5%, 5%, 0);
+  }
+}
+
+@keyframes lightning-flash {
+  0%, 7%, 8%, 42%, 43%, 100% {
+    background: transparent;
+  }
+
+  7.2%, 7.5%, 42.3% {
+    background: rgba(202, 225, 255, 0.12);
+  }
+
+  7.8%, 42.6% {
+    background: rgba(180, 211, 255, 0.035);
+  }
+}
+
+/* ==========================================
+   TABLET
+   ========================================== */
+
+@media (max-width: 768px) {
+  .inner-hero {
+    min-height: 340px;
+    padding: 75px 0 60px;
+  }
+
+  .section {
+    padding: 55px 0 75px;
+  }
+}
+
+/* ==========================================
+   MOBILE
+   ========================================== */
+
+@media (max-width: 520px) {
+  .container {
+    width: 90%;
+  }
+
+  .inner-hero {
+    min-height: 320px;
+    padding: 60px 0 50px;
+  }
+
+  .inner-hero h1 {
+    letter-spacing: -0.6px;
+  }
+
+  .lead {
+    margin-top: 18px;
+  }
+
+  .section {
+    padding: 40px 0 60px;
+  }
+
+  .info-panel {
+    padding: 24px 20px;
+    border-radius: 14px;
+  }
+
+  .button-row {
+    flex-direction: column;
+  }
+
+  .button {
+    width: 100%;
+  }
+
+  .footer-top {
+    justify-content: center;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  body::before {
+    opacity: 0.28;
+  }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  body::before,
+  body::after {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+  }
+    }
