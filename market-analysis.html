@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Market Analysis | DREAMVERSE</title>
+    <meta
+      name="description"
+      content="Forex and cryptocurrency market analysis, chart reviews, and educational insights from DREAMVERSE."
+    />
+    <meta name="theme-color" content="#f5f4ef" />
+
+    <link rel="stylesheet" href="market-analysis.css" />
+    <script src="market-analysis.js" defer></script>
+  </head>
+
+  <body>
+    <header class="site-header">
+      <a href="index.html" class="site-logo" aria-label="DREAMVERSE Home">
+        <img src="dreamverse-logo.png" alt="DREAMVERSE" />
+      </a>
+
+      <a href="index.html" class="back-link"> Back to DREAMVERSE </a>
+    </header>
+
+    <main>
+      <section class="page-intro">
+        <p class="eyebrow">DREAMVERSE INSIGHTS</p>
+        <h1>Market Analysis</h1>
+        <p>Forex and crypto charts, insights, and video analysis.</p>
+      </section>
+
+      <section class="published-analysis" aria-labelledby="analysis-heading">
+        <div class="section-heading">
+          <h2 id="analysis-heading">Latest Analysis</h2>
+        </div>
+
+        <div
+          id="analysis-list"
+          class="analysis-grid"
+          aria-live="polite"
+          aria-busy="true"
+        >
+          <p class="analysis-message">Loading analysis...</p>
+        </div>
+      </section>
+
+      <section class="disclaimer" aria-labelledby="disclaimer-heading">
+        <h2 id="disclaimer-heading">Disclaimer</h2>
+        <p>
+          All content is provided for educational and informational purposes
+          only and is not financial advice or a recommendation to buy or sell
+          any asset. Forex and cryptocurrency trading involve significant risk,
+          including the possible loss of capital. Past performance does not
+          guarantee future results. Always conduct your own research and make
+          independent decisions.
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <a href="index.html">DREAMVERSE</a>
+      <p>&copy; <span id="current-year"></span> DREAMVERSE.</p>
+    </footer>
+  </body>
+</html>
