@@ -2,34 +2,31 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <meta
       name="description"
-      content="DREAMVERSE — Where Dreams Become Reality. A creative digital universe bringing together fantasy, imagination, technology, storytelling, and community."
+      content="DREAMVERSE is a creative digital ecosystem bringing Dreamoni digital collectibles, creative tools, community, and a growing directory of featured projects and creators together."
     />
+
+    <meta name="theme-color" content="#f5f4ef" />
 
     <meta
-      name="theme-color"
-      content="#f5f4ef"
+      property="og:title"
+      content="DREAMVERSE | Creative Digital Ecosystem"
     />
-
-    <title>DREAMVERSE — Where Dreams Become Reality</title>
-
-    <link
-      rel="icon"
-      href="dreamverse-logo.png"
+    <meta
+      property="og:description"
+      content="Discover Dreamoni, create with Studio, connect through Hangout, explore featured projects and creators, and join the DREAMVERSE community."
     />
+    <meta property="og:type" content="website" />
 
-    <link
-      rel="stylesheet"
-      href="style.css"
-    />
+    <title>DREAMVERSE | Creative Digital Ecosystem</title>
 
-    <!-- Google AdSense: Add approved code here -->
+    <link rel="icon" href="dreamverse-logo.png" />
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Google AdSense -->
     <script
       async
       src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3923660938499775"
@@ -38,23 +35,11 @@
   </head>
 
   <body>
-    <!-- =================================
-         HEADER
-    ================================== -->
+    <!-- HEADER -->
     <header class="site-header">
-      <nav
-        class="navbar"
-        aria-label="Main Navigation"
-      >
-        <a
-          href="#home"
-          class="logo"
-          aria-label="DREAMVERSE Home"
-        >
-          <img
-            src="dreamverse-logo.png"
-            alt="DREAMVERSE Logo"
-          />
+      <nav class="navbar" aria-label="Main navigation">
+        <a href="#home" class="logo" aria-label="DREAMVERSE home">
+          <img src="dreamverse-logo.png" alt="DREAMVERSE logo" />
           <span>DREAMVERSE</span>
         </a>
 
@@ -70,152 +55,94 @@
           <span></span>
         </button>
 
-        <ul
-          class="main-navigation"
-          id="main-navigation"
-        >
-          <li>
-            <a href="#home">Home</a>
-          </li>
-
-          <li>
-            <a href="#dreamers">Dreamers</a>
-          </li>
-
-          <li>
-            <a href="#ecosystem">Ecosystem</a>
-          </li>
-
-          <li>
-            <a href="story.html">Stories</a>
-          </li>
-
-          <li>
-            <a href="#community">Community</a>
-          </li>
-
-          <li>
-            <a href="#roadmap">Roadmap</a>
-          </li>
-
-          <li>
-            <a href="#faq">FAQ</a>
-          </li>
-
-          <li>
-            <a href="disclaimer.html">Disclaimer</a>
-          </li>
+        <ul class="main-navigation" id="main-navigation">
+          <li><a href="#home">Home</a></li>
+          <li><a href="market-analysis.html">Market Analysis</a></li>
+          <li><a href="#dreamonis">Dreamonis</a></li>
+          <li><a href="#ecosystem">Ecosystem</a></li>
+          <li><a href="hangout.html">Hangout</a></li>
+          <li><a href="discover.html">Discover</a></li>
+          <li><a href="#community">Community</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="disclaimer.html">Disclaimer</a></li>
         </ul>
 
         <div class="nav-actions">
-          <a
-            href="#ecosystem"
-            class="nav-explore"
-          >
-            Explore
-          </a>
+          <a href="discover.html" class="nav-explore">Discover</a>
 
+          <!-- Hidden until the official collection is launched.
+               Remove hidden and add the verified OpenSea URL at launch. -->
           <a
             href="#collection"
             class="nav-cta"
+            aria-label="Mint or buy Dreamoni NFTs"
+            hidden
           >
-            Genesis Collection
+            Mint / Buy NFT
           </a>
 
           <a
-            href="#mint"
+            href="https://discord.gg/hzZUMR7tt"
+            target="_blank"
+            rel="noopener noreferrer"
             class="nav-mint"
           >
-            Mint / Buy NFT
+            Become a Member
           </a>
         </div>
       </nav>
     </header>
 
     <main>
-      <!-- =================================
-           HERO
-      ================================== -->
-      <section
-        id="home"
-        class="hero"
-      >
+      <!-- HERO -->
+      <section id="home" class="hero">
         <div class="hero-content">
-          <p class="eyebrow">
-            A UNIVERSE OF IMAGINATION
-          </p>
+          <p class="eyebrow">A CREATIVE DIGITAL ECOSYSTEM</p>
 
-          <h1>
-            DREAMVERSE
-          </h1>
+          <h1>DREAMVERSE</h1>
 
-          <h2>
-            Where Dreams Become Reality.
-          </h2>
+          <h2>Create. Connect. Explore.</h2>
 
           <p class="hero-description">
-            A creative digital universe where imagination meets creativity.
-            Discover unique Dreamers, explore new worlds, and become part
-            of something still unfolding.
+            Discover Dreamoni, create with Studio, connect through Hangout, and
+            explore a growing world of digital creativity and community.
           </p>
 
           <div class="hero-actions">
-            <a
-              href="#ecosystem"
-              class="btn-primary"
-            >
-              Explore the Universe
-            </a>
+            <a href="#ecosystem" class="btn-primary"> Explore the Ecosystem </a>
 
-            <a
-              href="#collection"
-              class="btn-secondary"
-            >
-              Discover the Dreamers
-            </a>
+            <a href="#collection" class="btn-secondary"> Discover Dreamoni </a>
           </div>
         </div>
       </section>
 
-      <!-- =================================
-           PHILOSOPHY
-      ================================== -->
+      <!-- PHILOSOPHY -->
       <section class="philosophy">
         <div class="section-inner">
-          <p class="section-label">
-            OUR PHILOSOPHY
-          </p>
+          <p class="section-label">OUR PHILOSOPHY</p>
 
-          <h2>
-            Every dream creates something.
-          </h2>
+          <h2>Creativity brings us together.</h2>
 
           <p class="philosophy-description">
-            DREAMVERSE is a universe for those who dream, envision,
-            create, and build toward possibilities beyond the ordinary.
+            DREAMVERSE brings digital collectibles, creative tools, community,
+            and discovery together. Explore Dreamoni, create with Studio,
+            connect through Hangout, and discover featured projects and creators
+            across a growing digital ecosystem.
           </p>
         </div>
       </section>
 
-      <!-- =================================
-           DREAMERS
-      ================================== -->
-      <section
-        id="dreamers"
-        class="dreamers section"
-      >
+      <!-- DREAMONIS -->
+      <section id="dreamonis" class="dreamers section">
         <header class="section-header">
-          <p class="section-label">
-            THE BEGINNING
-          </p>
+          <p class="section-label">THE BEGINNING</p>
 
-          <h2>
-            Meet the Dreamers.
-          </h2>
+          <h2>Meet the Dreamonis.</h2>
 
           <p>
-            Unique beings born from dreams, imagination, and the unknown.
-            Each carries its own identity within the DREAMVERSE.
+            Unique digital characters born from imagination, fantasy, and the
+            unknown. Each Dreamoni represents a distinct part of the DREAMVERSE
+            universe.
           </p>
         </header>
 
@@ -224,19 +151,13 @@
             <div class="dreamer-image">
               <img
                 src="dreamer-0001.png"
-                alt="DREAMVERSE Dreamer number 0001"
+                alt="Dreamoni artwork, character 0001"
                 loading="lazy"
               />
             </div>
 
             <div class="dreamer-info">
-              <h3>
-                Dreamer #0001
-              </h3>
-
-              <p>
-                Fantasy Dreamer
-              </p>
+              <h3>Dreamoni</h3>
             </div>
           </article>
 
@@ -244,19 +165,13 @@
             <div class="dreamer-image">
               <img
                 src="dreamer-0002.png"
-                alt="DREAMVERSE Dreamer number 0002"
+                alt="Dreamoni artwork, character 0002"
                 loading="lazy"
               />
             </div>
 
             <div class="dreamer-info">
-              <h3>
-                Dreamer #0002
-              </h3>
-
-              <p>
-                Fantasy Dreamer
-              </p>
+              <h3>Dreamoni</h3>
             </div>
           </article>
 
@@ -264,1069 +179,441 @@
             <div class="dreamer-image">
               <img
                 src="dreamer-0003.png"
-                alt="DREAMVERSE Dreamer number 0003"
+                alt="Dreamoni artwork, character 0003"
                 loading="lazy"
               />
             </div>
 
             <div class="dreamer-info">
-              <h3>
-                Dreamer #0003
-              </h3>
-
-              <p>
-                Fantasy Dreamer
-              </p>
+              <h3>Dreamoni</h3>
             </div>
           </article>
         </div>
 
         <div class="section-action">
-          <a
-            href="#collection"
-            class="text-link"
-          >
-            Discover the Genesis Collection →
+          <a href="#collection" class="text-link">
+            Explore the Dreamoni Collection →
           </a>
         </div>
       </section>
 
-      <!-- =================================
-           GENESIS COLLECTION
-      ================================== -->
-      <section
-        id="collection"
-        class="collection section"
-      >
+      <!-- DREAMONI NFT COLLECTION -->
+      <section id="collection" class="collection section">
         <div class="collection-content">
           <div class="collection-text">
-            <p class="section-label">
-              THE GENESIS COLLECTION
-            </p>
+            <p class="section-label">THE GENESIS COLLECTION</p>
 
-            <h2>
-              The Dreamers.
-            </h2>
+            <h2>Meet Dreamoni.</h2>
 
             <p>
-              The first collection introducing the beings of DREAMVERSE.
-              The Genesis Collection consists of 3,333 unique digital identities.
+              Dreamoni is a planned collection of digital characters within
+              DREAMVERSE, each with its own distinctive identity and place in
+              this creative universe.
             </p>
 
             <div class="collection-details">
               <div>
-                <span class="detail-label">
-                  Collection
-                </span>
-
-                <strong>
-                  3,333 Dreamers
-                </strong>
+                <span class="detail-label">Collection Status</span>
+                <strong>Planned</strong>
               </div>
 
               <div>
-                <span class="detail-label">
-                  Platform
-                </span>
-
-                <strong>
-                  OpenSea
-                </strong>
+                <span class="detail-label">Marketplace</span>
+                <strong>OpenSea (planned)</strong>
               </div>
 
               <div>
-                <span class="detail-label">
-                  Identity
-                </span>
+                <span class="detail-label">Collection Type</span>
+                <strong>Genesis</strong>
+              </div>
 
-                <strong>
-                  Genesis
-                </strong>
+              <div>
+                <span class="detail-label">Final Collection Supply</span>
+                <strong>To be confirmed</strong>
               </div>
             </div>
 
-            <a
-              href="#mint"
-              class="btn-primary"
-            >
-              Explore Genesis
-            </a>
+            <p class="collection-status-note">
+              <strong>PLANNED LAUNCH</strong> — The Dreamoni NFT collection is
+              not yet available. Launch details and official OpenSea links will
+              be announced through DREAMVERSE's official channels when
+              confirmed.
+            </p>
+
+            <!-- NFT LAUNCH:
+                 Before launch, confirm the final supply and collection details.
+                 Replace the placeholder destination with the verified official
+                 OpenSea collection URL, then remove hidden from the CTA below. -->
+            <a href="#collection" class="nav-mint" hidden> Mint / Buy NFT </a>
+
+            <!-- Kept hidden until the official collection is available. -->
+            <a href="#collection" class="nav-mint" hidden> OWN A DREAMONI </a>
           </div>
 
           <div class="collection-art">
             <img
               src="dreamer-0001.png"
-              alt="DREAMVERSE Genesis Dreamer artwork"
+              alt="Dreamoni Genesis collection concept artwork"
               loading="lazy"
             />
           </div>
         </div>
       </section>
- <!-- =================================
-     DREAMVERSE ECOSYSTEM
-================================== -->
 
-<section
-  id="ecosystem"
-  class="ecosystem section"
->
-  <header class="section-header">
-
-    <p class="section-label">
-      BEYOND THE COLLECTION
-    </p>
-
-    <h2>
-      Explore the DREAMVERSE.
-    </h2>
-
-    <p>
-      A growing ecosystem where imagination becomes creation,
-      stories become worlds, and Dreamers become part of something more.
-    </p>
-
-  </header>
-
-
-  <div class="ecosystem-grid">
-
-
-    <!-- 01 — DREAMVERSE STUDIO -->
-    <article class="ecosystem-card ecosystem-featured">
-
-      <span class="ecosystem-number">
-        01
-      </span>
-
-      <span class="ecosystem-status available">
-        AVAILABLE
-      </span>
-
-      <div
-        class="ecosystem-brand"
-        style="display:flex;align-items:center;gap:10px;margin-bottom:12px;"
-      >
-
-        <img
-          src="dreamverse-logo.png"
-          alt=""
-          aria-hidden="true"
-          style="width:28px;height:28px;object-fit:contain;flex:0 0 28px;"
-        />
-
-        <h3>
-          DREAMVERSE STUDIO
-        </h3>
-
-      </div>
-
-      <p
-        class="ecosystem-type"
-        style="margin-bottom:12px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;"
-      >
-        CREATE
-      </p>
-
-      <p>
-        Turn imagination into digital creations.
-        Create NFT artwork, collections, and metadata
-        with DREAMVERSE tools.
-      </p>
-
-      <a
-        href="nft-generator.html"
-        class="ecosystem-link"
-      >
-        Enter Studio →
-      </a>
-
-    </article>
-
-
-    <!-- 02 — DREAMVERSE STORIES -->
-    <article class="ecosystem-card">
-
-      <span class="ecosystem-number">
-        02
-      </span>
-
-      <span class="ecosystem-status available">
-        EXPLORE
-      </span>
-
-      <div
-        class="ecosystem-brand"
-        style="display:flex;align-items:center;gap:10px;margin-bottom:12px;"
-      >
-
-        <img
-          src="dreamverse-logo.png"
-          alt=""
-          aria-hidden="true"
-          style="width:28px;height:28px;object-fit:contain;flex:0 0 28px;"
-        />
-
-        <h3>
-          DREAMVERSE STORIES
-        </h3>
-
-      </div>
-
-      <p
-        class="ecosystem-type"
-        style="margin-bottom:12px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;"
-      >
-        EXPLORE
-      </p>
-
-      <p>
-        Enter the worlds of DREAMVERSE.
-        Discover Dreamers, mysteries, characters,
-        and stories that unfold across the universe.
-      </p>
-
-      <a
-        href="story.html"
-        class="ecosystem-link"
-      >
-        Enter Story Portal →
-      </a>
-
-    </article>
-
-
-    <!-- 03 — DREAMVERSE GIFTING -->
-    <article class="ecosystem-card">
-
-      <span class="ecosystem-number">
-        03
-      </span>
-
-      <span class="ecosystem-status coming-soon">
-        COMING SOON
-      </span>
-
-      <div
-        class="ecosystem-brand"
-        style="display:flex;align-items:center;gap:10px;margin-bottom:12px;"
-      >
-
-        <img
-          src="dreamverse-logo.png"
-          alt=""
-          aria-hidden="true"
-          style="width:28px;height:28px;object-fit:contain;flex:0 0 28px;"
-        />
-
-        <h3>
-          DREAMVERSE GIFTING
-        </h3>
-
-      </div>
-
-      <p
-        class="ecosystem-type"
-        style="margin-bottom:12px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;"
-      >
-        GIVE
-      </p>
-
-      <p>
-        Turn imagination into a gift. Send NFTs,
-        digital experiences, and eligible digital
-        assets to the people who matter.
-      </p>
-
-      <span class="ecosystem-link disabled">
-        Coming Soon
-      </span>
-
-    </article>
-
-
-    <!-- 04 — DREAMERS STREAM -->
-    <article class="ecosystem-card">
-
-      <span class="ecosystem-number">
-        04
-      </span>
-
-      <span class="ecosystem-status coming-soon">
-        COMING SOON
-      </span>
-
-      <div
-        class="ecosystem-brand"
-        style="display:flex;align-items:center;gap:10px;margin-bottom:12px;"
-      >
-
-        <img
-          src="dreamverse-logo.png"
-          alt=""
-          aria-hidden="true"
-          style="width:28px;height:28px;object-fit:contain;flex:0 0 28px;"
-        />
-
-        <h3>
-          DREAMERS STREAM
-        </h3>
-
-      </div>
-
-      <p
-        class="ecosystem-type"
-        style="margin-bottom:12px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;"
-      >
-        CONNECT &amp; ENTERTAIN
-      </p>
-
-      <p>
-        A space for Dreamers to go live, share
-        creativity, host events, and connect
-        with the community.
-      </p>
-
-      <span class="ecosystem-link disabled">
-        Coming Soon
-      </span>
-
-    </article>
-
-
-    <!-- 05 — DREAMVERSE CREATOR HUB -->
-    <article class="ecosystem-card">
-
-      <span class="ecosystem-number">
-        05
-      </span>
-
-      <span class="ecosystem-status coming-soon">
-        COMING SOON
-      </span>
-
-      <div
-        class="ecosystem-brand"
-        style="display:flex;align-items:center;gap:10px;margin-bottom:12px;"
-      >
-
-        <img
-          src="dreamverse-logo.png"
-          alt=""
-          aria-hidden="true"
-          style="width:28px;height:28px;object-fit:contain;flex:0 0 28px;"
-        />
-
-        <h3>
-          DREAMVERSE CREATOR HUB
-        </h3>
-
-      </div>
-
-      <p
-        class="ecosystem-type"
-        style="margin-bottom:12px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;"
-      >
-        CREATE &amp; COLLABORATE
-      </p>
-
-      <p>
-        Build your creative identity, showcase
-        your work, discover creators, collaborate,
-        and explore opportunities across DREAMVERSE.
-      </p>
-
-      <span class="ecosystem-link disabled">
-        Coming Soon
-      </span>
-
-    </article>
-
-
-    <!-- 06 — DREAMVERSE PROMOTION -->
-    <article class="ecosystem-card">
-
-      <span class="ecosystem-number">
-        06
-      </span>
-
-      <span class="ecosystem-status coming-soon">
-        COMING SOON
-      </span>
-
-      <div
-        class="ecosystem-brand"
-        style="display:flex;align-items:center;gap:10px;margin-bottom:12px;"
-      >
-
-        <img
-          src="dreamverse-logo.png"
-          alt=""
-          aria-hidden="true"
-          style="width:28px;height:28px;object-fit:contain;flex:0 0 28px;"
-        />
-
-        <h3>
-          DREAMVERSE PROMOTION
-        </h3>
-
-      </div>
-
-      <p
-        class="ecosystem-type"
-        style="margin-bottom:12px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;"
-      >
-        DISCOVER &amp; PROMOTE
-      </p>
-
-      <p>
-        A visibility space where creators,
-        projects, and digital products can be
-        discovered, featured, and promoted
-        across DREAMVERSE.
-      </p>
-
-      <span class="ecosystem-link disabled">
-        Coming Soon
-      </span>
-
-    </article>
-
-
-      <!-- 07 — DREAMVERSE GENESIS HOLDERS ACCESS -->
-<article class="ecosystem-card">
-
-  <span class="ecosystem-number">
-    07
-  </span>
-
-  <span class="ecosystem-status available">
-    AVAILABLE
-  </span>
-
-  <div
-    class="ecosystem-brand"
-    style="display:flex;align-items:center;gap:10px;margin-bottom:12px;"
-  >
-
-    <img
-      src="dreamverse-logo.png"
-      alt=""
-      aria-hidden="true"
-      style="width:28px;height:28px;object-fit:contain;flex:0 0 28px;"
-    />
-
-    <h3>
-      DREAMVERSE GENESIS HOLDERS ACCESS
-    </h3>
-
-  </div>
-
-  <p
-    class="ecosystem-type"
-    style="margin-bottom:12px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;"
-  >
-    HOLDER ACCESS
-  </p>
-
-  <p>
-    A private space for Genesis NFT holders.
-    Verified Dreamers can access exclusive
-    community spaces, holder-only experiences,
-    and participate in the growing DREAMVERSE.
-  </p>
-
-  <span class="ecosystem-link disabled">
-    Holder Access
-  </span>
-  
-      
-  </div>
-</section>
-      
-      <!-- =================================
-           FOUNDATION
-      ================================== -->
-            <section class="foundation section">
+      <!-- ECOSYSTEM -->
+      <section id="ecosystem" class="ecosystem section">
         <header class="section-header">
-          <p class="section-label">
-            WHAT WE STAND FOR
-          </p>
+          <p class="section-label">EXPLORE DREAMVERSE</p>
 
-          <h2>
-            Built Around Imagination.
-          </h2>
+          <h2>One ecosystem. More ways to create.</h2>
 
           <p>
-            The foundation of DREAMVERSE is built around identity,
-            creativity, community, and meaningful experiences.
+            Create, connect, share, discover, and explore the growing DREAMVERSE
+            ecosystem.
           </p>
         </header>
 
-        <div class="pillar-grid">
-          <article class="pillar">
-            <span
-              class="pillar-icon"
+        <div class="ecosystem-grid">
+          <!-- FUTURE STORE — RESERVED POSITION 00 -->
+          <article
+            id="store"
+            class="ecosystem-card ecosystem-store"
+            hidden
+            style="display: none"
+          >
+            <img
+              class="ecosystem-card-image"
+              src="store.jpg"
+              alt=""
               aria-hidden="true"
-            >
-              ◈
-            </span>
+              loading="lazy"
+            />
 
-            <h3>
-              Identity &amp; Ownership
-            </h3>
+            <div class="ecosystem-card-overlay"></div>
 
-            <p>
-              Every Dreamer represents a unique digital identity
-              within the DREAMVERSE universe.
-            </p>
+            <span class="ecosystem-number">00</span>
+            <span class="ecosystem-status available">STORE</span>
+
+            <div class="ecosystem-card-content">
+              <p class="ecosystem-type">SHOP</p>
+              <h3>STORE</h3>
+
+              <p>
+                Explore physical products, including electronics, home
+                appliances, clothing, phones, laptops, and more.
+              </p>
+
+              <a href="store.html" class="ecosystem-link">
+                Explore the Store →
+              </a>
+            </div>
           </article>
 
-          <article class="pillar">
-            <span
-              class="pillar-icon"
+          <!-- STUDIO -->
+          <article class="ecosystem-card ecosystem-featured">
+            <img
+              class="ecosystem-card-image"
+              src="studio.jpg"
+              alt=""
               aria-hidden="true"
-            >
-              ✦
-            </span>
+              loading="lazy"
+            />
 
-            <h3>
-              Creativity &amp; Innovation
-            </h3>
+            <div class="ecosystem-card-overlay"></div>
 
-            <p>
-              Tools, stories, and experiences designed to help
-              transform imagination into creation.
-            </p>
+            <div class="ecosystem-card-content">
+              <h3>STUDIO</h3>
+
+              <p>
+                Create NFT artwork, generate collections, and prepare digital
+                asset metadata with creative tools.
+              </p>
+
+              <a href="nft-generator.html" class="ecosystem-link">
+                Enter Studio →
+              </a>
+            </div>
           </article>
 
-          <article class="pillar">
-            <span
-              class="pillar-icon"
-              aria-hidden="true"
-            >
-              ◎
-            </span>
+          <article class="ecosystem-card">
+            <img
+              class="ecosystem-card-image"
+              src="market-analysis.jpg"
+              alt="Forex and Crypto Market Analysis"
+              loading="lazy"
+            />
 
-            <h3>
-              Community &amp; Participation
-            </h3>
+            <div class="ecosystem-card-overlay"></div>
 
-            <p>
-              A growing community where Dreamers connect,
-              contribute, participate, and shape experiences together.
-            </p>
+            <div class="ecosystem-card-content">
+              <h3>MARKET ANALYSIS</h3>
+
+              <p>
+                Explore the latest market trends in Forex and Cryptocurrency.
+                These analyses are shared purely for educational purposes. All
+                trading decisions are at your own risk.
+              </p>
+
+              <a href="market-analysis.html" class="ecosystem-link">
+                View Analysis →
+              </a>
+            </div>
           </article>
 
-          <article class="pillar">
-            <span
-              class="pillar-icon"
+          <!-- HANGOUT -->
+          <article class="ecosystem-card">
+            <img
+              class="ecosystem-card-image"
+              src="hangout.jpg"
+              alt=""
               aria-hidden="true"
-            >
-              ∞
-            </span>
+              loading="lazy"
+            />
 
-            <h3>
-              Experience &amp; Opportunity
-            </h3>
+            <div class="ecosystem-card-overlay"></div>
 
-            <p>
-              An evolving ecosystem introducing new experiences,
-              creative opportunities, and ways to participate over time.
-            </p>
+            <div class="ecosystem-card-content">
+              <h3>HANGOUT</h3>
+
+              <p>
+                Visit our social space to connect, interact, and explore
+                community experiences.
+              </p>
+
+              <a href="hangout.html" class="ecosystem-link">
+                Enter Hangout →
+              </a>
+            </div>
+          </article>
+
+          <!-- GIFTING -->
+          <article class="ecosystem-card" hidden>
+            <img
+              class="ecosystem-card-image"
+              src="gifting.jpg"
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+            />
+
+            <div class="ecosystem-card-overlay"></div>
+
+            <div class="ecosystem-card-content">
+              <h3>GIFTING</h3>
+
+              <p>
+                A planned feature for sharing NFTs and eligible digital assets.
+                Availability and supported features will be announced if
+                developed.
+              </p>
+
+              <span class="ecosystem-link disabled">Coming Soon</span>
+            </div>
+          </article>
+
+          <!-- DISCOVER -->
+          <article class="ecosystem-card">
+            <img
+              class="ecosystem-card-image"
+              src="discover.jpg"
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+            />
+
+            <div class="ecosystem-card-overlay"></div>
+
+            <div class="ecosystem-card-content">
+              <h3>DISCOVER</h3>
+
+              <p>
+                Explore a growing directory of featured projects and creators.
+                Learn about their work and visit official links to find out
+                more.
+              </p>
+
+              <a href="discover.html" class="ecosystem-link">
+                Explore Discover →
+              </a>
+            </div>
+          </article>
+
+          <!-- MEMBERS -->
+          <article id="members" class="ecosystem-card">
+            <img
+              class="ecosystem-card-image"
+              src="members.jpg"
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+            />
+
+            <div class="ecosystem-card-overlay"></div>
+
+            <div class="ecosystem-card-content">
+              <h3>MEMBERS</h3>
+
+              <p>
+                Join the DREAMVERSE Discord community to connect with others and
+                follow announcements. Wallet verification is not currently
+                available.
+              </p>
+
+              <a
+                href="https://discord.gg/hzZUMR7tt"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="ecosystem-link"
+              >
+                Join the Community →
+              </a>
+            </div>
           </article>
         </div>
       </section>
 
-      <!-- =================================
-           COMMUNITY
-      ================================== -->
-      <section
-        id="community"
-        class="community section"
-      >
+      <!-- COMMUNITY ACCESS -->
+      <section id="community" class="community section">
         <header class="section-header">
-          <p class="section-label">
-            THE PEOPLE BEHIND THE DREAM
-          </p>
+          <p class="section-label">JOIN DREAMVERSE</p>
 
-          <h2>
-            Dream Together. Build Together.
-          </h2>
+          <h2>Be part of the community.</h2>
 
           <p>
-            DREAMVERSE is shaped by those who imagine,
-            create, contribute, and believe in new possibilities.
+            Join our Discord community to connect with others, follow project
+            updates, ask questions, and stay informed as DREAMVERSE develops.
+            Community membership does not guarantee rewards, financial returns,
+            or special access to future features.
           </p>
         </header>
 
-        <div class="community-grid">
-          <article class="community-card">
-            <h3>
-              Create Together
-            </h3>
-
-            <p>
-              Share ideas, creativity, artwork, and perspectives
-              with fellow Dreamers.
-            </p>
-          </article>
-
-          <article class="community-card">
-            <h3>
-              Participate &amp; Contribute
-            </h3>
-
-            <p>
-              Take part in community activities, voting,
-              creative challenges, and contests.
-            </p>
-          </article>
-
-          <article class="community-card">
-            <h3>
-              Shape What Comes Next
-            </h3>
-
-            <p>
-              Help influence the direction of DREAMVERSE
-              through feedback and community participation.
-            </p>
-          </article>
-        </div>
-
         <div class="community-actions">
           <a
-            href="https://discord.gg/bjGAtDsxe"
+            href="https://discord.gg/hzZUMR7tt"
             target="_blank"
             rel="noopener noreferrer"
             class="btn-primary"
           >
             Join the Community
           </a>
-
-          <a
-            href="YOUR-VOTING-LINK-HERE"
-            class="btn-secondary"
-          >
-            Voting — Coming Soon
-          </a>
-
-          <a
-            href="YOUR-CONTEST-LINK-HERE"
-            class="btn-secondary"
-          >
-            Contests — Coming Soon
-          </a>
         </div>
       </section>
 
-      <!-- =================================
-           HOLDER BENEFITS
-      ================================== -->
-      <section
-        id="holder-benefits"
-        class="holder-benefits section"
-      >
+      <!-- BOTTOM NFT CTA -->
+      <section id="mint" class="mint section">
         <header class="section-header">
-          <p class="section-label">
-            GENESIS HOLDER EXPERIENCE
-          </p>
+          <p class="section-label">THE DREAMONI COLLECTION</p>
 
-          <h2>
-            More Than Digital Ownership.
-          </h2>
+          <h2>Discover the Dreamoni Genesis Collection.</h2>
 
           <p>
-            Genesis ownership connects Dreamers to an evolving
-            ecosystem of participation and experiences.
-          </p>
-        </header>
-
-        <div class="benefit-grid">
-          <article>
-            <span class="benefit-status active">
-              CURRENT FOUNDATION
-            </span>
-
-            <h3>
-              Genesis Ownership
-            </h3>
-
-            <p>
-              Your place within the Genesis collection
-              and the DREAMVERSE universe.
-            </p>
-          </article>
-
-          <article>
-            <span class="benefit-status active">
-              COMMUNITY
-            </span>
-
-            <h3>
-              Participation
-            </h3>
-
-            <p>
-              Community activities, voting, contests,
-              and contribution opportunities as they become available.
-            </p>
-          </article>
-
-          <article>
-            <span class="benefit-status planned">
-              PLANNED
-            </span>
-
-            <h3>
-              Exclusive Experiences
-            </h3>
-
-            <p>
-              Selected content, quests, achievements,
-              and ecosystem experiences as they become available.
-            </p>
-          </article>
-
-          <article>
-            <span class="benefit-status future">
-              FUTURE
-            </span>
-
-            <h3>
-              Holder Experience
-            </h3>
-
-            <p>
-              Wallet verification, holder dashboard features,
-              progress, and additional ecosystem benefits
-              as development evolves.
-            </p>
-          </article>
-        </div>
-      </section>
-
-      <!-- =================================
-           MINT / GENESIS CTA
-      ================================== -->
-      <section
-        id="mint"
-        class="mint section"
-      >
-        <header class="section-header">
-          <p class="section-label">
-            GENESIS COLLECTION
-          </p>
-
-          <h2>
-            Become Part of DREAMVERSE.
-          </h2>
-
-          <p>
-            Discover the Genesis Dreamers and follow
-            the journey as the universe continues to evolve.
+            The Dreamoni collection is planned for a future launch. Its final
+            supply, launch details, and official marketplace links will be
+            announced through DREAMVERSE's official channels when confirmed. No
+            launch date is guaranteed.
           </p>
         </header>
 
         <div class="mint-actions">
+          <!-- Remove hidden and replace #collection with the verified
+               official OpenSea URL only when the collection is available. -->
           <a
-            href="YOUR-OPENSEA-LINK-HERE"
+            href="#collection"
+            class="btn-primary"
+            aria-label="Mint or buy Dreamoni NFTs"
+            hidden
+          >
+            Mint / Buy NFT
+          </a>
+
+          <a
+            href="https://discord.gg/hzZUMR7tt"
             target="_blank"
             rel="noopener noreferrer"
-            class="btn-primary"
-          >
-            Mint / Buy on OpenSea — Coming Soon
-          </a>
-
-          <a
-            href="#ecosystem"
             class="btn-secondary"
           >
-            Explore the Ecosystem
+            Become a Member
           </a>
         </div>
+
+        <p class="collection-status-note">
+          <strong>COLLECTION NOT YET AVAILABLE.</strong>
+          Official OpenSea access will be announced when the launch details are
+          confirmed.
+        </p>
       </section>
 
-<!-- =================================
-     DREAMVERSE ROADMAP
-================================== -->
-<section
-  id="roadmap"
-  class="roadmap"
->
-  <header class="section-header">
-    <p>
-      ROADMAP
-    </p>
-
-    <h2>
-      DREAMVERSE ROADMAP
-    </h2>
-
-    <p>
-      From Genesis holders to creation, stories,
-      connection, discovery, and an expanding
-      digital universe.
-    </p>
-  </header>
-
-
-  <div class="roadmap-grid">
-
-    <!-- =================================
-         PHASE 01
-    ================================== -->
-    <article class="roadmap-card">
-      <span class="roadmap-phase">
-        PHASE 01
-      </span>
-
-      <h3>
-        THE GENESIS
-      </h3>
-
-      <p>
-        Establish the foundation of DREAMVERSE
-        and create the first experiences for
-        Genesis Dreamers.
-      </p>
-
-      <ul>
-        <li>
-          Genesis Collection
-        </li>
-
-        <li>
-          DREAMVERSE Genesis Holders Access
-        </li>
-
-        <li>
-          DREAMVERSE Studio
-        </li>
-
-        <li>
-          DREAMVERSE Stories
-        </li>
-      </ul>
-    </article>
-
-
-    <!-- =================================
-         PHASE 02
-    ================================== -->
-    <article class="roadmap-card">
-      <span class="roadmap-phase">
-        PHASE 02
-      </span>
-
-      <h3>
-        THE DREAMER EXPERIENCE
-      </h3>
-
-      <p>
-        Expand the ways Dreamers can connect
-        with DREAMVERSE and experience the
-        growing universe.
-      </p>
-
-      <ul>
-        <li>
-          DREAMVERSE Gifting
-        </li>
-
-        <li>
-          Dreamers Stream
-        </li>
-      </ul>
-    </article>
-
-
-    <!-- =================================
-         PHASE 03
-    ================================== -->
-    <article class="roadmap-card">
-      <span class="roadmap-phase">
-        PHASE 03
-      </span>
-
-      <h3>
-        THE CREATOR ECOSYSTEM
-      </h3>
-
-      <p>
-        Build a connected environment where
-        creators, projects, and digital products
-        can create, collaborate, and be discovered.
-      </p>
-
-      <ul>
-        <li>
-          DREAMVERSE Creator Hub
-        </li>
-
-        <li>
-          DREAMVERSE Promotion
-        </li>
-      </ul>
-    </article>
-
-
-    <!-- =================================
-         PHASE 04
-    ================================== -->
-    <article class="roadmap-card">
-      <span class="roadmap-phase">
-        PHASE 04
-      </span>
-
-      <h3>
-        THE EXPANSION
-      </h3>
-
-      <p>
-        Continue expanding the DREAMVERSE with
-        new experiences, creator opportunities,
-        and future ecosystem initiatives.
-      </p>
-
-      <ul>
-        <li>
-          Future DREAMVERSE Experiences
-        </li>
-
-        <li>
-          Future Ecosystem Initiatives
-        </li>
-
-        <li>
-          Future Creator Opportunities
-        </li>
-        
-        <li>
-          Future collection 
-        </li>
-        
-        <li>
-          Additional Digital Experiences
-        </li>
-      </ul>
-    </article>
-
-  </div>
-
-
-  <p class="roadmap-note">
-    DREAMVERSE is designed to evolve.
-    Roadmap phases represent our intended direction,
-    not guaranteed timelines or promises.
-    Features may be refined, changed, delayed,
-    replaced, or expanded as the ecosystem develops.
-  </p>
-
-</section>   
-
-      <!-- =================================
-           FAQ
-      ================================== -->
-      <section
-        id="faq"
-        class="faq-section section"
-      >
+      <!-- FAQ -->
+      <section id="faq" class="faq-section section">
         <header class="section-header">
-          <p class="section-label">
-            FAQ
-          </p>
+          <p class="section-label">FAQ</p>
 
-          <h2>
-            Frequently Asked Questions.
-          </h2>
+          <h2>Frequently Asked Questions.</h2>
 
           <p>
-            Find answers to common questions about DREAMVERSE,
-            the Genesis collection, and the ecosystem.
+            Find answers to common questions about DREAMVERSE, Dreamoni, and the
+            ecosystem.
           </p>
         </header>
 
-        <a
-          href="faq.html"
-          class="faq-button"
-        >
+        <a href="faq.html" class="faq-button">
           View Frequently Asked Questions
         </a>
       </section>
 
-      <!-- =================================
-           COMMUNITY EASTER EGG
-      ================================== -->
+      <!-- COMMUNITY MESSAGE -->
       <section class="community-easter-egg">
-        <h2>
-          Message for Dreamers.
-        </h2>
+        <h2>A Message for Dreamonis.</h2>
 
         <p>
-          Everyone is
+          Everyone has a story.
           <span
             class="secret-trigger"
             role="button"
             tabindex="0"
-            aria-label="Reveal secret DREAMVERSE message"
+            aria-label="Reveal the secret DREAMVERSE message"
+            aria-expanded="false"
+            ><em>Discover yours.</em></span
           >
-            <em>unique</em>
-          </span>
-          Dreamer with a story.
         </p>
 
-        <span
-          class="secret-message"
-          hidden
-        >
-          DREAMVERSE — THE GENESIS COLLECTION OF AN EVOLVING DIGITAL UNIVERSE.
+        <span class="secret-message" hidden>
+          DREAMVERSE — A CREATIVE UNIVERSE OF DREAMONI, IMAGINATION, AND
+          COMMUNITY.
         </span>
       </section>
 
-      <!-- =================================
-           FINAL CTA
-      ================================== -->
+      <!-- FINAL CTA -->
       <section class="final-cta">
-        <p>
-          The Dream Is Only the Beginning.
-        </p>
+        <p>Creativity. Connection. Discovery.</p>
 
-        <h2>
-          Welcome to DREAMVERSE.
-        </h2>
-
-        <p>
-          Where Dreams Become Reality.
-        </p>
+        <h2>Welcome to DREAMVERSE.</h2>
 
         <div class="cta-actions">
-          <a href="#collection">
-            Explore the Collection
-          </a>
+          <a href="#collection">Explore Dreamoni</a>
 
-          <a href="#mint">
-            Mint / Buy NFT — Coming Soon
+          <a
+            href="https://discord.gg/hzZUMR7tt"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Become a Member
           </a>
         </div>
       </section>
 
-      <!-- =================================
-           SUPPORT
-      ================================== -->
+      <!-- SUPPORT -->
       <section class="support-section">
         <div class="support-box">
-          <h3>
-            Need More Help?
-          </h3>
+          <h3>Need More Help?</h3>
 
           <p>
-            Have a Dream suggestion or need assistance?
-            Chat with our support team on Discord.
+            Have a suggestion or need assistance? Connect with our support
+            community on Discord.
           </p>
 
           <a
-            href="https://discord.gg/7zxHWSkd9"
+            href="https://discord.gg/hzZUMR7tt"
             target="_blank"
             rel="noopener noreferrer"
             class="support-button"
@@ -1337,28 +624,15 @@
       </section>
     </main>
 
-    <!-- =================================
-         FOOTER
-    ================================== -->
-    <footer>
+    <!-- FOOTER -->
+        <footer>
       <div class="footer-brand">
-        <h2>
-          DREAMVERSE
-        </h2>
-
-        <p>
-          Where Dreams Become Reality.
-        </p>
-
-        <p>
-          Every dream creates something.
-        </p>
+        <h2>DREAMVERSE</h2>
+        <p>Creativity, collectibles, and community.</p>
       </div>
 
       <div class="footer-social">
-        <h3>
-          Connect
-        </h3>
+        <h3>Connect</h3>
 
         <ul>
           <li>
@@ -1366,9 +640,8 @@
               href="https://x.com/DreamVerse_HQ"
               target="_blank"
               rel="noopener noreferrer"
+              >X / Twitter</a
             >
-              X / Twitter
-            </a>
           </li>
 
           <li>
@@ -1376,44 +649,35 @@
               href="https://t.me/Dreamers_nest"
               target="_blank"
               rel="noopener noreferrer"
+              >Telegram</a
             >
-              Telegram
-            </a>
           </li>
 
           <li>
             <a
-              href="https://discord.gg/bjGAtDsxe"
+              href="https://discord.gg/hzZUMR7tt"
               target="_blank"
               rel="noopener noreferrer"
+              >Discord</a
             >
-              Discord
-            </a>
           </li>
 
-          <li>
-            <a href="disclaimer.html">
-              Disclaimer
-            </a>
-          </li>
+          <li><a href="disclaimer.html">Disclaimer</a></li>
+          <li><a href="nft.html">NFT</a></li>
         </ul>
       </div>
 
       <div class="footer-bottom">
-        <p>
-          &copy; 2026 DREAMVERSE. All rights reserved.
-        </p>
+        <p>&copy; 2026 DREAMVERSE.</p>
 
         <p>
-          Fantasy Dreamers born from dreams,
-          imagination, and the unknown.
+          Dreamonis are born from imagination and the unknown. Digital
+          collectibles involve risk. No profits, rewards, or future benefits are
+          guaranteed.
         </p>
       </div>
     </footer>
 
-    <!-- =================================
-         JAVASCRIPT
-    ================================== -->
     <script src="script.js"></script>
   </body>
 </html>
