@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta
+      name="description"
+      content="Discover the foundation of DREAMVERSE — the vision, purpose, and belief that imagination can become a universe."
+    />
+
+    <meta name="theme-color" content="#10121b" />
+
+    <title>The Foundation | DREAMVERSE</title>
+
+    <link rel="icon" href="dreamverse-logo.png" />
+    <link rel="stylesheet" href="foundation.css" />
+
+    <!-- Google AdSense: retain your approved code -->
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3923660938499775"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <header class="foundation-header">
+      <a
+        href="dreamers-hangout.html"
+        class="foundation-logo"
+        aria-label="Return to DREAMERS HANGOUT"
+      >
+        <img src="dreamverse-logo.png" alt="DREAMVERSE" />
+        <span>DREAMVERSE</span>
+      </a>
+
+      <a href="hangout.html" class="header-link">
+        <span aria-hidden="true">&larr;</span> Back to Hangout
+      </a>
+    </header>
+
+    <main>
+      <section class="foundation-hero" aria-label="The beginning of DREAMVERSE">
+        <img
+          class="foundation-hero-image"
+          src="foundation-01.jpg"
+          alt="Artwork representing the foundation of DREAMVERSE"
+          fetchpriority="high"
+        />
+
+        <div class="foundation-hero-overlay"></div>
+
+        <div class="foundation-hero-content">
+          <span class="eyebrow">THE BEGINNING OF NOTHING</span>
+
+          <h1>THE<br /><span>FOUNDATION</span></h1>
+
+          <p>Every universe begins with an idea.<br/> Our's probably start's with NOTHING</p>
+
+          <a href="#the-story" class="discover-link">
+            Discover Our Beginning
+            <span aria-hidden="true">&darr;</span>
+          </a>
+        </div>
+
+        <span class="hero-index" aria-hidden="true">01 / THE ORIGIN</span>
+      </section>
+
+      <article class="foundation-story" id="the-story">
+        <div class="story-heading">
+          <span class="eyebrow">A VISION. A PURPOSE. A UNIVERSE.</span>
+          <h2>Where It All Began</h2>
+          <div class="heading-line"></div>
+        </div>
+
+        <div class="story-body">
+          <p class="story-opening">
+            DREAMVERSE began with NOTHING more than a simple belief held by a visionary — the
+            belief that imagination could become something greater than the
+            imagination itself.
+          </p>
+
+          <p>
+            He had a vision and made the decision to build something
+            extraordinary; something he could look back on, and be grateful he
+            had the courage to dream.
+          </p>
+
+          <p>
+            He began building a place where creativity could breathe, where
+            stories could unfold, where opportunities could be discovered, and
+            where dreamoni could become part of something they could help shape.
+          </p>
+
+          <div class="story-manifesto">
+            <p>What began as a single thought</p>
+            <p>became a vision.</p>
+
+            <span class="manifesto-divider" aria-hidden="true"></span>
+
+            <p>That vision became a purpose.</p>
+            <p>And that purpose became</p>
+            <h3>DREAMVERSE.</h3>
+          </div>
+
+          <div class="story-ending">
+            <p>From a single thought comes a world.</p>
+            <p>From many dreamonis comes a universe.</p>
+
+            <span class="ending-signature"
+              >This is where DREAMVERSE began.</span
+            >
+          </div>
+        </div>
+      </article>
+
+      <section class="foundation-closing">
+        <span class="eyebrow">THE JOURNEY STARTS HERE</span>
+        <h2>
+          Every great universe<br />has a beginning. <br />
+          But remember, we promised NOTHING.
+        </h2>
+
+        <a href="index.html" class="closing-link">
+          RETURN TO HOME
+          <span aria-hidden="true">&rarr;</span>
+        </a>
+      </section>
+    </main>
+
+    <footer class="foundation-footer">
+      <a href="dreamers-hangout.html" class="footer-brand"> DREAMVERSE </a>
+
+      <p>&copy; 2026 DREAMVERSE.</p>
+
+      <a href="index.html" class="footer-home">Back to Home</a>
+    </footer>
+
+    <!-- Hidden background audio: no visible player or controls -->
+    <audio
+      id="foundation-audio"
+      autoplay
+      loop
+      preload="auto"
+      aria-hidden="true"
+    >
+      <source src="foundation-audio.mp3" type="audio/mpeg" />
+    </audio>
+
+    <script>
+      (() => {
+        "use strict";
+
+        const audio = document.getElementById("foundation-audio");
+
+        if (!audio) return;
+
+        audio.volume = 0.35;
+
+        const startAudio = () => {
+          if (!audio.paused) return;
+
+          const playback = audio.play();
+
+          if (playback && typeof playback.catch === "function") {
+            playback.catch(() => {
+              // Playback may be blocked by the browser.
+              // A later visitor interaction will try again.
+            });
+          }
+        };
+
+        // Attempt playback immediately when the page loads.
+        startAudio();
+
+        // Retry after the visitor's first interaction if autoplay was blocked.
+        const resumeAudio = () => {
+          startAudio();
+
+          if (!audio.paused) {
+            document.removeEventListener("pointerdown", resumeAudio);
+            document.removeEventListener("keydown", resumeAudio);
+            document.removeEventListener("touchstart", resumeAudio);
+          }
+        };
+
+        document.addEventListener("pointerdown", resumeAudio);
+        document.addEventListener("keydown", resumeAudio);
+        document.addEventListener("touchstart", resumeAudio, {
+          passive: true,
+        });
+      })();
+    </script>
+  </body>
+  </html>
