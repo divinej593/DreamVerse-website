@@ -1,17 +1,22 @@
 document.addEventListener("DOMContentLoaded", () => {
   /* =========================================================
      DREAMVERSE — MAIN JAVASCRIPT
+     Designed specifically for the current index.html + style.css
      ========================================================= */
 
   /* =========================================================
-     MOBILE HAMBURGER MENU
+     HAMBURGER MENU
      ========================================================= */
 
   const hamburger = document.querySelector(".hamburger");
   const navigation = document.querySelector(".main-navigation");
 
   if (hamburger && navigation) {
-    hamburger.addEventListener("click", () => {
+    /* Open / close menu */
+
+    hamburger.addEventListener("click", (event) => {
+      event.stopPropagation();
+
       const isOpen = navigation.classList.toggle("active");
 
       hamburger.classList.toggle("active", isOpen);
@@ -20,22 +25,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
       hamburger.setAttribute(
         "aria-label",
-        isOpen ? "Close menu" : "Open menu"
+        isOpen ? "Close navigation menu" : "Open navigation menu",
       );
     });
 
-    /* Close menu when a navigation link is clicked */
+    /* =======================================================
+       CLOSE MENU AFTER CLICKING A LINK
+       ======================================================= */
+
     navigation.querySelectorAll("a").forEach((link) => {
       link.addEventListener("click", () => {
         navigation.classList.remove("active");
         hamburger.classList.remove("active");
 
         hamburger.setAttribute("aria-expanded", "false");
-        hamburger.setAttribute("aria-label", "Open menu");
+
+        hamburger.setAttribute("aria-label", "Open navigation menu");
       });
     });
 
-    /* Close menu when clicking outside */
+    /* =======================================================
+       CLOSE MENU WHEN CLICKING OUTSIDE
+       ======================================================= */
+
     document.addEventListener("click", (event) => {
       if (
         navigation.classList.contains("active") &&
@@ -46,142 +58,32 @@ document.addEventListener("DOMContentLoaded", () => {
         hamburger.classList.remove("active");
 
         hamburger.setAttribute("aria-expanded", "false");
-        hamburger.setAttribute("aria-label", "Open menu");
+
+        hamburger.setAttribute("aria-label", "Open navigation menu");
       }
     });
 
-    /* Reset menu when returning to desktop */
+    /* =======================================================
+       CLOSE MENU WHEN RESIZING TO DESKTOP
+       ======================================================= */
+
     window.addEventListener("resize", () => {
       if (window.innerWidth > 850) {
         navigation.classList.remove("active");
         hamburger.classList.remove("active");
 
         hamburger.setAttribute("aria-expanded", "false");
-        hamburger.setAttribute("aria-label", "Open menu");
+
+        hamburger.setAttribute("aria-label", "Open navigation menu");
       }
     });
   }
-
-
-  /* =========================================================
-     SMOOTH SCROLLING
-     ========================================================= */
-
-  document.querySelectorAll('a[href^="#"]').forEach((link) => {
-    link.addEventListener("click", (event) => {
-      const targetId = link.getAttribute("href");
-
-      if (!targetId || targetId === "#") {
-        return;
-      }
-
-      const target = document.querySelector(targetId);
-
-      if (target) {
-        event.preventDefault();
-
-        target.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
-
-        /* Update URL without jumping */
-        if (history.pushState) {
-          history.pushState(null, "", targetId);
-        }
-      }
-    });
-  });
-
-
-  /* =========================================================
-     FAQ ACCORDION
-     Works automatically if your FAQ uses <details>
-     ========================================================= */
-
-  const faqItems = document.querySelectorAll(".faq-item");
-
-  if (faqItems.length > 0) {
-    faqItems.forEach((item) => {
-      const question = item.querySelector(".faq-question");
-      const answer = item.querySelector(".faq-answer");
-
-      if (!question || !answer) return;
-
-      question.addEventListener("click", () => {
-        const isOpen = item.classList.contains("active");
-
-        /* Close all other FAQ items */
-        faqItems.forEach((otherItem) => {
-          otherItem.classList.remove("active");
-
-          const otherAnswer = otherItem.querySelector(".faq-answer");
-
-          if (otherAnswer) {
-            otherAnswer.style.maxHeight = null;
-          }
-        });
-
-        /* Open selected item */
-        if (!isOpen) {
-          item.classList.add("active");
-          answer.style.maxHeight = answer.scrollHeight + "px";
-        }
-      });
-    });
-  }
-
-
-  /* =========================================================
-     EXTERNAL LINKS
-     ========================================================= */
-
-  document.querySelectorAll('a[target="_blank"]').forEach((link) => {
-    link.setAttribute("rel", "noopener noreferrer");
-  });
-
-
-  /* =========================================================
-     EASTER EGG / SECRET TRIGGER
-     ========================================================= */
-
-  const secretTrigger = document.querySelector(".secret-trigger");
-  const secretMessage = document.querySelector(".secret-message");
-
-  if (secretTrigger && secretMessage) {
-    secretTrigger.addEventListener("click", () => {
-      secretMessage.classList.toggle("active");
-    });
-  }
-
-
-  /* =========================================================
-     ESC KEY
-     Closes mobile menu and secret message
-     ========================================================= */
-
-  document.addEventListener("keydown", (event) => {
-    if (event.key !== "Escape") return;
-
-    if (navigation && hamburger) {
-      navigation.classList.remove("active");
-      hamburger.classList.remove("active");
-
-      hamburger.setAttribute("aria-expanded", "false");
-      hamburger.setAttribute("aria-label", "Open menu");
-    }
-
-    if (secretMessage) {
-      secretMessage.classList.remove("active");
-    }
-  });
-
 
   /* =========================================================
      HEADER SCROLL EFFECT
      ========================================================= */
 
-  const header = document.querySelector("header");
+  const header = document.querySelector(".site-header");
 
   if (header) {
     const updateHeader = () => {
@@ -192,27 +94,21 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     };
 
-    window.addEventListener("scroll", updateHeader, {
-      passive: true
-    });
+    window.addEventListener("scroll", updateHeader, { passive: true });
 
     updateHeader();
   }
 
-
   /* =========================================================
-     CURRENT YEAR
-     Automatically updates elements using .current-year
+     EXTERNAL LINKS
      ========================================================= */
 
-  document.querySelectorAll(".current-year").forEach((element) => {
-    element.textContent = new Date().getFullYear();
+  document.querySelectorAll('a[target="_blank"]').forEach((link) => {
+    link.setAttribute("rel", "noopener noreferrer");
   });
-
 
   /* =========================================================
      IMAGE ERROR HANDLING
-     Prevents broken images from looking ugly
      ========================================================= */
 
   document.querySelectorAll("img").forEach((image) => {
@@ -221,11 +117,26 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  /* =========================================================
+     ESCAPE KEY
+     ========================================================= */
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+
+    if (navigation && hamburger) {
+      navigation.classList.remove("active");
+      hamburger.classList.remove("active");
+
+      hamburger.setAttribute("aria-expanded", "false");
+
+      hamburger.setAttribute("aria-label", "Open navigation menu");
+    }
+  });
 
   /* =========================================================
-     PAGE READY
+     JAVASCRIPT READY
      ========================================================= */
 
   document.documentElement.classList.add("js-ready");
-
 });
