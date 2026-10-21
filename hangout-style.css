@@ -1,0 +1,441 @@
+/* =========================================
+   DREAMVERSE HANGOUT — MOONLIGHT THEME
+   ========================================= */
+
+:root {
+  --night: #030817;
+  --deep-blue: #08152e;
+  --moonlight: #dcecff;
+  --text: #f4f7ff;
+  --muted: #b8c9e6;
+  --accent: #91caff;
+  --border: rgba(205, 226, 255, 0.2);
+  --container: 1120px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(
+      circle at 50% 17%,
+      rgba(139, 182, 255, 0.13),
+      transparent 27%
+    ),
+    radial-gradient(
+      circle at 15% 55%,
+      rgba(55, 93, 160, 0.12),
+      transparent 30%
+    ),
+    linear-gradient(
+      180deg,
+      #020615 0%,
+      #07152f 48%,
+      #030817 100%
+    );
+  position: relative;
+  isolation: isolate;
+}
+
+/* Star-filled sky */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(2px 2px at 8% 12%, #fff 45%, transparent 55%),
+    radial-gradient(1px 1px at 18% 28%, #dceaff 45%, transparent 55%),
+    radial-gradient(2px 2px at 29% 8%, #fff 45%, transparent 55%),
+    radial-gradient(1px 1px at 39% 35%, #fff 45%, transparent 55%),
+    radial-gradient(2px 2px at 48% 17%, #dceaff 45%, transparent 55%),
+    radial-gradient(1px 1px at 57% 43%, #fff 45%, transparent 55%),
+    radial-gradient(2px 2px at 69% 12%, #fff 45%, transparent 55%),
+    radial-gradient(1px 1px at 77% 31%, #dceaff 45%, transparent 55%),
+    radial-gradient(2px 2px at 88% 19%, #fff 45%, transparent 55%),
+    radial-gradient(1px 1px at 94% 48%, #fff 45%, transparent 55%),
+    radial-gradient(1px 1px at 12% 72%, #dceaff 45%, transparent 55%),
+    radial-gradient(2px 2px at 33% 83%, #fff 45%, transparent 55%),
+    radial-gradient(1px 1px at 61% 76%, #dceaff 45%, transparent 55%),
+    radial-gradient(2px 2px at 82% 88%, #fff 45%, transparent 55%);
+  background-size: 100% 100%;
+  opacity: 0.8;
+  animation: starsTwinkle 6s ease-in-out infinite alternate;
+}
+
+/* Soft moon glow in the sky */
+body::after {
+  content: "";
+  position: fixed;
+  width: 240px;
+  height: 240px;
+  top: 95px;
+  right: 12%;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(239, 247, 255, 0.18) 0%,
+    rgba(173, 205, 255, 0.09) 35%,
+    transparent 72%
+  );
+  filter: blur(8px);
+}
+
+/* =========================================
+   HEADER
+   ========================================= */
+
+.hangout-header {
+  width: 100%;
+  min-height: 82px;
+  padding: 18px 6%;
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  border-bottom: 1px solid var(--border);
+  background: rgba(3, 8, 23, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.hangout-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.hangout-logo img {
+  display: block;
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+}
+
+.hangout-logo span {
+  text-shadow: 0 0 16px rgba(145, 202, 255, 0.2);
+}
+
+/* =========================================
+   HERO — FULL MOON
+   ========================================= */
+
+.hangout-hero {
+  position: relative;
+  min-height: 390px;
+  padding: 85px 20px 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hangout-hero::before {
+  content: "";
+  position: absolute;
+  top: 28px;
+  left: 50%;
+  width: 145px;
+  height: 145px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background:
+    radial-gradient(
+      circle at 35% 30%,
+      #ffffff 0%,
+      #e9f2ff 35%,
+      #c5dcff 72%,
+      #8eafd9 100%
+    );
+  box-shadow:
+    0 0 25px rgba(220, 236, 255, 0.55),
+    0 0 75px rgba(133, 178, 255, 0.3),
+    0 0 150px rgba(133, 178, 255, 0.13);
+  opacity: 0.94;
+}
+
+.hangout-hero h1,
+.hangout-hero p {
+  position: relative;
+  z-index: 1;
+}
+
+.hangout-hero h1 {
+  margin-top: 130px;
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  line-height: 1.15;
+  font-weight: 800;
+  letter-spacing: clamp(1px, 0.5vw, 5px);
+  text-shadow: 0 3px 28px rgba(119, 174, 255, 0.35);
+}
+
+.hangout-hero p {
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  letter-spacing: 1px;
+}
+
+/* =========================================
+   EXPERIENCE CARDS
+   ========================================= */
+
+.hangout-grid {
+  width: min(var(--container), 88%);
+  margin: 0 auto 100px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 26px;
+  position: relative;
+  z-index: 1;
+}
+
+.hangout-card {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: rgba(11, 26, 53, 0.8);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+  text-decoration: none;
+  isolation: isolate;
+  transition:
+    transform 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.hangout-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(3, 8, 23, 0.02) 45%,
+    rgba(3, 8, 23, 0.3) 100%
+  );
+}
+
+.hangout-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.55s ease;
+}
+
+.hangout-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(190, 220, 255, 0.7);
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.38),
+    0 0 24px rgba(145, 202, 255, 0.12);
+}
+
+.hangout-card:hover img {
+  transform: scale(1.055);
+}
+
+.hangout-card:focus-visible,
+.hangout-logo:focus-visible,
+footer a:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 5px;
+}
+
+/* =========================================
+   FOOTER
+   ========================================= */
+
+footer {
+  position: relative;
+  padding: 45px 6% 24px;
+  border-top: 1px solid var(--border);
+  background: rgba(2, 6, 18, 0.72);
+}
+
+.footer-social {
+  text-align: center;
+}
+
+.footer-social h2 {
+  margin-bottom: 20px;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--moonlight);
+}
+
+.footer-social ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  list-style: none;
+}
+
+.footer-social a {
+  color: var(--muted);
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.footer-social a:hover {
+  color: #fff;
+}
+
+.footer-bottom {
+  margin-top: 35px;
+  padding-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px 24px;
+  border-top: 1px solid rgba(205, 226, 255, 0.12);
+  color: #8fa4c6;
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+
+/* =========================================
+   RESPONSIVE LAYOUT
+   ========================================= */
+
+@media (max-width: 850px) {
+  .hangout-hero {
+    min-height: 350px;
+  }
+
+  .hangout-grid {
+    width: min(680px, 88%);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  .hangout-card:last-child {
+    grid-column: 1 / -1;
+    width: calc(50% - 10px);
+    justify-self: center;
+  }
+
+  body::after {
+    right: 5%;
+    width: 190px;
+    height: 190px;
+  }
+}
+
+@media (max-width: 560px) {
+  .hangout-header {
+    min-height: 70px;
+    padding: 14px 5%;
+  }
+
+  .hangout-logo {
+    gap: 9px;
+    font-size: 0.9rem;
+    letter-spacing: 1.5px;
+  }
+
+  .hangout-logo img {
+    width: 38px;
+    height: 38px;
+  }
+
+  .hangout-hero {
+    min-height: 320px;
+    padding: 65px 18px 75px;
+  }
+
+  .hangout-hero::before {
+    top: 25px;
+    width: 115px;
+    height: 115px;
+  }
+
+  .hangout-hero h1 {
+    margin-top: 105px;
+    letter-spacing: 1px;
+  }
+
+  .hangout-grid {
+    width: 88%;
+    grid-template-columns: 1fr;
+    gap: 22px;
+    margin-bottom: 70px;
+  }
+
+  .hangout-card,
+  .hangout-card:last-child {
+    width: 100%;
+    grid-column: auto;
+    aspect-ratio: 4 / 3;
+  }
+
+  footer {
+    padding: 35px 5% 22px;
+  }
+
+  .footer-social ul {
+    gap: 16px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+  }
+
+  body::after {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+/* Respect visitors' motion preferences */
+@keyframes starsTwinkle {
+  from {
+    opacity: 0.55;
+  }
+  to {
+    opacity: 0.95;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
