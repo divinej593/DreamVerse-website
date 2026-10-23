@@ -116,13 +116,43 @@ async function apiRequest(path, options = {}) {
       ...options,
       headers
     });
-  } catch (error) {
-    console.error("DREAMVERSE API connection error:", error);
+  
+} catch (error) {
+  console.error("DREAMVERSE API connection error:", {
+    url: `${API_BASE}${path}`,
+    method: options.method || "GET",
+    errorName: error?.name,
+    errorMessage: error?.message
+  });
 
-    throw new Error(
-      "Cannot connect to the backend. Check the Netlify URL, deployment status, and browser console."
-    );
+  let diagnosticMessage = "The browser could not complete the API request.";
+
+  try {
+    const testResponse = await fetch(`${API_BASE}/api/analyses`, {
+      method: "GET",
+      cache: "no-store"
+    });
+
+    if (testResponse.ok) {
+      diagnosticMessage =
+        "The API is reachable from this page, but the original request failed. The login request's CORS preflight or POST handling may be the issue.";
+    } else {
+      diagnosticMessage =
+        `The API responded to the connection test with HTTP ${testResponse.status}.`;
+    }
+  } catch (testError) {
+    console.error("DREAMVERSE API diagnostic failed:", {
+      errorName: testError?.name,
+      errorMessage: testError?.message
+    });
+
+    diagnosticMessage =
+      "The browser also failed to reach the public analyses endpoint. Check cross-origin access or network restrictions.";
   }
+
+  throw new Error(diagnosticMessage);
+}
+
 
   let data;
 
