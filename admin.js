@@ -17,11 +17,13 @@
  * @property {string} publishedAt
  */
 
-const API_BASE = "https://dreamverse-analysis-api.divinej593.workers.dev";
+// IMPORTANT: Confirm this is the exact URL Netlify assigns your site.
+const API_BASE = "https://dreamverse-market-analysis-api.netlify.app";
+
 const TOKEN_KEY = "dreamverse_admin_token";
 const MAX_IMAGE_SIZE = 8 * 1024 * 1024;
+const MAX_IMAGES = 20;
 
-/** @param {string} selector @returns {any} */
 const $ = (selector) => document.querySelector(selector);
 
 const loginSection = $("#login-section");
@@ -35,45 +37,71 @@ const analysisList = $("#analysis-list");
 const imageInput = $("#analysis-images");
 const imageList = $("#image-list");
 
-/** @type {string} */
 let token = sessionStorage.getItem(TOKEN_KEY) || "";
-
-/** @type {AnalysisImage[]} */
 let currentImages = [];
-
-/** @type {Analysis[]} */
 let analyses = [];
-
 let busy = false;
 
-$("#current-year").textContent = String(new Date().getFullYear());
+const requiredElements = [
+  loginSection,
+  dashboardSection,
+  loginForm,
+  analysisForm,
+  passwordInput,
+  loginMessage,
+  dashboardMessage,
+  analysisList,
+  imageInput,
+  imageList
+];
 
-/**
- * @param {HTMLElement} element
- * @param {string} message
- * @param {string} [type]
- */
+if (requiredElements.some((element) => !element)) {
+  throw new Error(
+    "DREAMVERSE admin HTML is missing one or more required element IDs."
+  );
+}
+
+const yearElement = $("#current-year");
+if (yearElement) {
+  yearElement.textContent = String(new Date().getFullYear());
+}
+
 function showMessage(element, message, type = "") {
+  if (!element) return;
+
   element.textContent = message;
   element.dataset.type = type;
 }
 
-/**
- * @param {string} path
- * @param {RequestInit} [options]
- * @returns {Promise<any>}
- */
+function setButtonDisabled(selector, disabled) {
+  const button = $(selector);
+  if (button) button.disabled = disabled;
+}
+
+function setBusy(value) {
+  busy = value;
+
+  [
+    "#logout-button",
+    "#new-analysis-button",
+    "#save-draft-button",
+    "#publish-button",
+    "#refresh-button"
+  ].forEach((selector) => setButtonDisabled(selector, value));
+
+  analysisList.querySelectorAll("button").forEach((button) => {
+    button.disabled = value;
+  });
+}
+
 async function apiRequest(path, options = {}) {
   const headers = new Headers(options.headers || {});
   const isLogin = path === "/api/admin/login";
 
-  // Login must not send an old session token.
   if (token && !isLogin) {
     headers.set("Authorization", `Bearer ${token}`);
   }
 
-  // Use text/plain for login to avoid a JSON-triggered preflight.
-  // The request body remains JSON text, which request.json() can parse.
   if (options.body && !(options.body instanceof FormData)) {
     headers.set(
       "Content-Type",
@@ -89,17 +117,10 @@ async function apiRequest(path, options = {}) {
       headers
     });
   } catch (error) {
-    console.error("DREAMVERSE API connection error:", {
-      endpoint: `${API_BASE}${path}`,
-      websiteOrigin: window.location.origin,
-      error
-    });
-
-    const details =
-      error instanceof Error ? error.message : String(error);
+    console.error("DREAMVERSE API connection error:", error);
 
     throw new Error(
-      `API connection failed: ${details}. Check the browser console for details.`
+      "Cannot connect to the backend. Check the Netlify URL, deployment status, and browser console."
     );
   }
 
@@ -107,18 +128,15 @@ async function apiRequest(path, options = {}) {
 
   try {
     data = await response.json();
-  } catch (error) {
-    console.error("DREAMVERSE API response was not valid JSON:", {
-      endpoint: `${API_BASE}${path}`,
-      status: response.status,
-      error
-    });
+  } catch {
+    console.error(
+      "DREAMVERSE API returned a non-JSON response:",
+      response.status
+    );
 
-    if (!response.ok) {
-      throw new Error(`The server returned HTTP ${response.status}.`);
-    }
-
-    throw new Error("The server returned an unexpected response.");
+    throw new Error(
+      `The backend returned an unexpected response (HTTP ${response.status}).`
+    );
   }
 
   if (response.status === 401 && !isLogin) {
@@ -127,46 +145,36 @@ async function apiRequest(path, options = {}) {
   }
 
   if (!response.ok) {
-    throw new Error(data.error || `Request failed (${response.status}).`);
+    throw new Error(
+      data?.error || `Request failed (HTTP ${response.status}).`
+    );
   }
 
   return data;
 }
 
-/** @param {boolean} value */
-function setBusy(value) {
-  busy = value;
-
-  [
-    "#logout-button",
-    "#new-analysis-button",
-    "#save-draft-button",
-    "#publish-button",
-    "#refresh-button"
-  ].forEach((selector) => {
-    const button = $(selector);
-    if (button) button.disabled = value;
-  });
-}
-
 function showLoggedOut() {
   loginSection.hidden = false;
   dashboardSection.hidden = true;
-  $("#logout-button").hidden = true;
+
+  const logoutButton = $("#logout-button");
+  if (logoutButton) logoutButton.hidden = true;
 }
 
 function showLoggedIn() {
   loginSection.hidden = true;
   dashboardSection.hidden = false;
-  $("#logout-button").hidden = false;
+
+  const logoutButton = $("#logout-button");
+  if (logoutButton) logoutButton.hidden = false;
 }
 
-/** @param {boolean} [showNotice] */
 function logout(showNotice = true) {
   token = "";
   sessionStorage.removeItem(TOKEN_KEY);
   currentImages = [];
   analyses = [];
+
   showLoggedOut();
   resetEditor();
 
@@ -175,7 +183,21 @@ function logout(showNotice = true) {
   }
 }
 
-loginForm.addEventListener("submit", async (/** @type {SubmitEvent} */ event) => {
+function resetEditor() {
+  analysisForm.reset();
+
+  $("#analysis-id").value = "";
+  $("#editor-heading").textContent = "Write an analysis";
+  $("#editor-status").textContent = "New draft";
+
+  currentImages = [];
+  imageInput.value = "";
+
+  renderImages();
+  showMessage(dashboardMessage, "");
+}
+
+loginForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   if (busy) return;
@@ -192,7 +214,7 @@ loginForm.addEventListener("submit", async (/** @type {SubmitEvent} */ event) =>
       body: JSON.stringify({ password })
     });
 
-    if (!result.token) {
+    if (!result?.token) {
       throw new Error("The server did not return a login token.");
     }
 
@@ -201,13 +223,16 @@ loginForm.addEventListener("submit", async (/** @type {SubmitEvent} */ event) =>
     passwordInput.value = "";
 
     showLoggedIn();
-    showMessage(loginMessage, "");
+
     await loadAnalyses();
-  } catch (/** @type {any} */ error) {
-    console.error("DREAMVERSE admin login failed:", error);
+
+    showMessage(loginMessage, "");
+  } catch (error) {
+    console.error("DREAMVERSE login failed:", error);
+
     showMessage(
       loginMessage,
-      error.message || "Login failed. Please try again.",
+      error instanceof Error ? error.message : "Login failed.",
       "error"
     );
   } finally {
@@ -215,49 +240,83 @@ loginForm.addEventListener("submit", async (/** @type {SubmitEvent} */ event) =>
   }
 });
 
-function resetEditor() {
-  analysisForm.reset();
-  $("#analysis-id").value = "";
-  $("#editor-heading").textContent = "Write an analysis";
-  $("#editor-status").textContent = "New draft";
-  currentImages = [];
-  renderImages();
-  showMessage(dashboardMessage, "");
+const newButton = $("#new-analysis-button");
+if (newButton) {
+  newButton.addEventListener("click", () => {
+    if (busy) return;
+
+    resetEditor();
+    $("#analysis-title").focus();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
 }
 
-$("#new-analysis-button").addEventListener("click", () => {
-  resetEditor();
-  $("#analysis-title").focus();
-  window.scrollTo({ top: 0, behavior: "smooth" });
-});
+const logoutButton = $("#logout-button");
+if (logoutButton) {
+  logoutButton.addEventListener("click", () => {
+    if (!busy) logout();
+  });
+}
 
-$("#logout-button").addEventListener("click", () => {
-  logout();
-});
+const refreshButton = $("#refresh-button");
+if (refreshButton) {
+  refreshButton.addEventListener("click", async () => {
+    if (busy) return;
 
-$("#refresh-button").addEventListener("click", async () => {
-  if (busy) return;
+    setBusy(true);
 
-  setBusy(true);
+    try {
+      await loadAnalyses();
+      showMessage(dashboardMessage, "Analysis list refreshed.", "success");
+    } catch (error) {
+      showMessage(
+        dashboardMessage,
+        error instanceof Error ? error.message : "Refresh failed.",
+        "error"
+      );
+    } finally {
+      setBusy(false);
+    }
+  });
+}
 
+imageInput.addEventListener("change", () => {
   try {
-    await loadAnalyses();
-    showMessage(dashboardMessage, "Analysis list refreshed.", "success");
-  } catch (/** @type {any} */ error) {
-    showMessage(dashboardMessage, error.message, "error");
-  } finally {
-    setBusy(false);
+    validateSelectedFiles();
+    renderImages();
+  } catch (error) {
+    imageInput.value = "";
+
+    showMessage(
+      dashboardMessage,
+      error instanceof Error ? error.message : "Invalid image selection.",
+      "error"
+    );
+
+    renderImages();
   }
 });
 
-imageInput.addEventListener("change", renderImages);
+function validateSelectedFiles() {
+  const files = Array.from(imageInput.files || []);
+
+  for (const file of files) {
+    if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
+      throw new Error(`${file.name}: only JPG, PNG, and WebP are allowed.`);
+    }
+
+    if (file.size <= 0 || file.size > MAX_IMAGE_SIZE) {
+      throw new Error(`${file.name}: images must be no larger than 8 MB.`);
+    }
+  }
+
+  if (currentImages.length + files.length > MAX_IMAGES) {
+    throw new Error(`You can attach up to ${MAX_IMAGES} images per analysis.`);
+  }
+}
 
 function renderImages() {
   imageList.replaceChildren();
-
-  if (!currentImages.length && !imageInput.files.length) {
-    return;
-  }
 
   currentImages.forEach((image, index) => {
     const item = document.createElement("div");
@@ -274,6 +333,8 @@ function renderImages() {
     remove.setAttribute("aria-label", `Remove ${label.textContent}`);
 
     remove.addEventListener("click", () => {
+      if (busy) return;
+
       currentImages.splice(index, 1);
       renderImages();
     });
@@ -282,44 +343,59 @@ function renderImages() {
     imageList.append(item);
   });
 
-  Array.from(imageInput.files).forEach((/** @type {File} */ file) => {
+  Array.from(imageInput.files || []).forEach((file, index) => {
     const item = document.createElement("div");
     item.className = "image-item";
 
     const label = document.createElement("span");
     label.textContent = `Ready to upload: ${file.name}`;
 
-    item.append(label);
+    const remove = document.createElement("button");
+    remove.type = "button";
+    remove.className = "button button-outline";
+    remove.textContent = "Remove";
+
+    remove.addEventListener("click", () => {
+      if (busy) return;
+
+      const transfer = new DataTransfer();
+      Array.from(imageInput.files || []).forEach((selectedFile, fileIndex) => {
+        if (fileIndex !== index) transfer.items.add(selectedFile);
+      });
+
+      imageInput.files = transfer.files;
+      renderImages();
+    });
+
+    item.append(label, remove);
     imageList.append(item);
   });
 }
 
-/** @param {any} image @returns {AnalysisImage} */
 function normalizeImage(image) {
   return {
-    key: image.key || "",
-    altText: image.altText || image.alt_text || ""
+    key: image?.key || "",
+    altText: image?.altText || image?.alt_text || ""
   };
 }
 
-/** @param {any} analysis @returns {Analysis} */
 function normalizeAnalysis(analysis) {
   return {
-    id: analysis.id || "",
-    title: analysis.title || "",
-    category: analysis.category || "",
-    summary: analysis.summary || "",
-    content: analysis.content || "",
-    videoUrl: analysis.videoUrl || analysis.video_url || "",
-    status: analysis.status || "draft",
-    images: Array.isArray(analysis.images)
+    id: analysis?.id || "",
+    title: analysis?.title || "",
+    category: analysis?.category || analysis?.market || "Forex",
+    summary: analysis?.summary || "",
+    content: analysis?.content || "",
+    videoUrl: analysis?.videoUrl || analysis?.video_url || "",
+    status: analysis?.status || "draft",
+    images: Array.isArray(analysis?.images)
       ? analysis.images
           .map(normalizeImage)
-          .filter((/** @type {AnalysisImage} */ image) => Boolean(image.key))
+          .filter((image) => Boolean(image.key))
       : [],
-    createdAt: analysis.createdAt || analysis.created_at || "",
-    updatedAt: analysis.updatedAt || analysis.updated_at || "",
-    publishedAt: analysis.publishedAt || analysis.published_at || ""
+    createdAt: analysis?.createdAt || analysis?.created_at || "",
+    updatedAt: analysis?.updatedAt || analysis?.updated_at || "",
+    publishedAt: analysis?.publishedAt || analysis?.published_at || ""
   };
 }
 
@@ -339,8 +415,7 @@ function renderAnalyses() {
   if (!analyses.length) {
     const empty = document.createElement("p");
     empty.className = "muted";
-    empty.textContent =
-      "No analyses yet. Create your first analysis above.";
+    empty.textContent = "No analyses yet. Create your first analysis above.";
     analysisList.append(empty);
     return;
   }
@@ -401,13 +476,6 @@ function renderAnalyses() {
   });
 }
 
-/**
- * @param {string} label
- * @param {string} action
- * @param {string} id
- * @param {string} className
- * @returns {HTMLButtonElement}
- */
 function createActionButton(label, action, id, className) {
   const button = document.createElement("button");
   button.type = "button";
@@ -418,7 +486,6 @@ function createActionButton(label, action, id, className) {
   return button;
 }
 
-/** @param {Analysis} analysis */
 function fillEditor(analysis) {
   const item = normalizeAnalysis(analysis);
 
@@ -430,6 +497,7 @@ function fillEditor(analysis) {
   $("#analysis-summary").value = item.summary;
   $("#analysis-content").value = item.content;
   $("#analysis-video").value = item.videoUrl;
+
   $("#editor-heading").textContent = "Edit analysis";
   $("#editor-status").textContent =
     item.status === "published" ? "Published" : "Draft";
@@ -443,15 +511,7 @@ function fillEditor(analysis) {
 async function uploadSelectedImages() {
   const files = Array.from(imageInput.files || []);
 
-  for (const file of files) {
-    if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
-      throw new Error(`${file.name}: use JPG, PNG, or WebP images.`);
-    }
-
-    if (file.size > MAX_IMAGE_SIZE) {
-      throw new Error(`${file.name} is larger than 8 MB.`);
-    }
-  }
+  validateSelectedFiles();
 
   for (const file of files) {
     const formData = new FormData();
@@ -462,10 +522,8 @@ async function uploadSelectedImages() {
       body: formData
     });
 
-    if (!result.key) {
-      throw new Error(
-        `The upload response for ${file.name} was incomplete.`
-      );
+    if (!result?.key) {
+      throw new Error(`The upload response for ${file.name} was incomplete.`);
     }
 
     currentImages.push({
@@ -478,7 +536,6 @@ async function uploadSelectedImages() {
   renderImages();
 }
 
-/** @param {string} status */
 function readEditor(status) {
   return {
     title: $("#analysis-title").value.trim(),
@@ -494,19 +551,23 @@ function readEditor(status) {
   };
 }
 
-/** @param {"draft"|"published"} status */
 async function saveAnalysis(status) {
-  if (busy) return;
-  if (!analysisForm.reportValidity()) return;
+  if (busy || !analysisForm.reportValidity()) return;
 
   setBusy(true);
   showMessage(dashboardMessage, "Saving your analysis...");
 
+  let createdId = "";
+
   try {
     let id = $("#analysis-id").value.trim();
-    let payload = readEditor(status);
+
+    // Validate image selection before creating a new database record.
+    validateSelectedFiles();
 
     if (!id) {
+      const payload = readEditor("draft");
+
       const created = await apiRequest("/api/admin/analyses", {
         method: "POST",
         body: JSON.stringify({
@@ -516,23 +577,30 @@ async function saveAnalysis(status) {
         })
       });
 
-      id = created.id;
+      id = created?.id || "";
 
       if (!id) {
         throw new Error("The server did not return the new analysis ID.");
       }
 
+      createdId = id;
       $("#analysis-id").value = id;
     }
 
     await uploadSelectedImages();
 
-    payload = readEditor(status);
+    const payload = readEditor(status);
 
-    await apiRequest(`/api/admin/analyses/${encodeURIComponent(id)}`, {
-      method: "PUT",
-      body: JSON.stringify(payload)
-    });
+    await apiRequest(
+      `/api/admin/analyses/${encodeURIComponent(id)}`,
+      {
+        method: "PUT",
+        body: JSON.stringify(payload)
+      }
+    );
+
+    $("#editor-status").textContent =
+      status === "published" ? "Published" : "Draft";
 
     showMessage(
       dashboardMessage,
@@ -542,129 +610,151 @@ async function saveAnalysis(status) {
       "success"
     );
 
-    $("#editor-status").textContent =
-      status === "published" ? "Published" : "Draft";
-
     await loadAnalyses();
-  } catch (/** @type {any} */ error) {
+  } catch (error) {
     console.error("DREAMVERSE analysis save failed:", error);
-    showMessage(dashboardMessage, error.message, "error");
+
+    const message =
+      error instanceof Error ? error.message : "Could not save the analysis.";
+
+    showMessage(
+      dashboardMessage,
+      createdId
+        ? `${message} A draft may already have been created. Check the analysis list before retrying.`
+        : message,
+      "error"
+    );
+
+    // Do not clear uploaded images or form data on failure.
   } finally {
     setBusy(false);
   }
 }
 
-$("#save-draft-button").addEventListener("click", () => {
-  saveAnalysis("draft");
-});
+const saveDraftButton = $("#save-draft-button");
+if (saveDraftButton) {
+  saveDraftButton.addEventListener("click", () => {
+    saveAnalysis("draft");
+  });
+}
 
-$("#publish-button").addEventListener("click", () => {
-  saveAnalysis("published");
-});
+const publishButton = $("#publish-button");
+if (publishButton) {
+  publishButton.addEventListener("click", () => {
+    saveAnalysis("published");
+  });
+}
 
-analysisList.addEventListener(
-  "click",
-  async (/** @type {MouseEvent} */ event) => {
-    const target = event.target;
-    if (!(target instanceof Element)) return;
+analysisList.addEventListener("click", async (event) => {
+  const target = event.target;
+  if (!(target instanceof Element)) return;
 
-    const button = target.closest("button[data-action]");
-    if (!button || busy) return;
+  const button = target.closest("button[data-action]");
+  if (!button || busy) return;
 
-    const { action, id } = /** @type {HTMLButtonElement} */ (button).dataset;
-    const analysis = analyses.find((item) => item.id === id);
+  const { action, id } = button.dataset;
+  const analysis = analyses.find((item) => item.id === id);
 
-    if (!analysis || !id || !action) {
+  if (!analysis || !id || !action) {
+    showMessage(
+      dashboardMessage,
+      "That analysis could not be found. Refresh the list.",
+      "error"
+    );
+    return;
+  }
+
+  if (action === "edit") {
+    fillEditor(analysis);
+    return;
+  }
+
+  if (action === "delete") {
+    const confirmed = window.confirm(
+      `Delete "${analysis.title}" permanently? This cannot be undone.`
+    );
+
+    if (!confirmed) return;
+
+    setBusy(true);
+    showMessage(dashboardMessage, "Deleting analysis...");
+
+    try {
+      await apiRequest(
+        `/api/admin/analyses/${encodeURIComponent(id)}`,
+        { method: "DELETE" }
+      );
+
+      if ($("#analysis-id").value === id) {
+        resetEditor();
+      }
+
+      showMessage(dashboardMessage, "Analysis deleted.", "success");
+      await loadAnalyses();
+    } catch (error) {
       showMessage(
         dashboardMessage,
-        "That analysis could not be found. Refresh the list.",
+        error instanceof Error ? error.message : "Deletion failed.",
         "error"
       );
-      return;
+    } finally {
+      setBusy(false);
     }
 
-    if (action === "edit") {
-      fillEditor(analysis);
-      return;
-    }
+    return;
+  }
 
-    if (action === "delete") {
-      const confirmed = window.confirm(
-        `Delete "${analysis.title}" permanently? This cannot be undone.`
+  if (action === "publish" || action === "unpublish") {
+    const nextStatus = action === "publish" ? "published" : "draft";
+
+    const confirmed = window.confirm(
+      nextStatus === "published"
+        ? `Publish "${analysis.title}" so visitors can see it?`
+        : `Unpublish "${analysis.title}" and remove it from the public listing?`
+    );
+
+    if (!confirmed) return;
+
+    setBusy(true);
+    showMessage(dashboardMessage, "Updating publication status...");
+
+    try {
+      await apiRequest(
+        `/api/admin/analyses/${encodeURIComponent(id)}`,
+        {
+          method: "PUT",
+          body: JSON.stringify({
+            title: analysis.title,
+            category: analysis.category,
+            summary: analysis.summary,
+            content: analysis.content,
+            videoUrl: analysis.videoUrl,
+            status: nextStatus,
+            images: analysis.images
+          })
+        }
       );
 
-      if (!confirmed) return;
-
-      setBusy(true);
-      showMessage(dashboardMessage, "Deleting analysis...");
-
-      try {
-        await apiRequest(
-          `/api/admin/analyses/${encodeURIComponent(id)}`,
-          { method: "DELETE" }
-        );
-
-        if ($("#analysis-id").value === id) resetEditor();
-
-        showMessage(dashboardMessage, "Analysis deleted.", "success");
-        await loadAnalyses();
-      } catch (/** @type {any} */ error) {
-        showMessage(dashboardMessage, error.message, "error");
-      } finally {
-        setBusy(false);
-      }
-
-      return;
-    }
-
-    if (action === "publish" || action === "unpublish") {
-      const nextStatus = action === "publish" ? "published" : "draft";
-
-      const confirmed = window.confirm(
+      showMessage(
+        dashboardMessage,
         nextStatus === "published"
-          ? `Publish "${analysis.title}" so visitors can see it?`
-          : `Unpublish "${analysis.title}" and remove it from the public listing?`
+          ? "Analysis published."
+          : "Analysis unpublished.",
+        "success"
       );
 
-      if (!confirmed) return;
-
-      setBusy(true);
-      showMessage(dashboardMessage, "Updating publication status...");
-
-      try {
-        await apiRequest(
-          `/api/admin/analyses/${encodeURIComponent(id)}`,
-          {
-            method: "PUT",
-            body: JSON.stringify({
-              title: analysis.title,
-              category: analysis.category,
-              summary: analysis.summary,
-              content: analysis.content,
-              videoUrl: analysis.videoUrl,
-              status: nextStatus,
-              images: analysis.images
-            })
-          }
-        );
-
-        showMessage(
-          dashboardMessage,
-          nextStatus === "published"
-            ? "Analysis published."
-            : "Analysis unpublished.",
-          "success"
-        );
-
-        await loadAnalyses();
-      } catch (/** @type {any} */ error) {
-        showMessage(dashboardMessage, error.message, "error");
-      } finally {
-        setBusy(false);
-      }
+      await loadAnalyses();
+    } catch (error) {
+      showMessage(
+        dashboardMessage,
+        error instanceof Error ? error.message : "Status update failed.",
+        "error"
+      );
+    } finally {
+      setBusy(false);
     }
   }
-);
+});
 
 async function initialize() {
   if (!token) {
@@ -677,12 +767,20 @@ async function initialize() {
 
   try {
     await loadAnalyses();
-  } catch (/** @type {any} */ error) {
-    showMessage(dashboardMessage, error.message, "error");
+  } catch (error) {
+    logout(false);
+
+    showMessage(
+      loginMessage,
+      error instanceof Error
+        ? error.message
+        : "Your session could not be restored. Please sign in again.",
+      "error"
+    );
   } finally {
     setBusy(false);
   }
 }
 
 initialize();
-      
+  
